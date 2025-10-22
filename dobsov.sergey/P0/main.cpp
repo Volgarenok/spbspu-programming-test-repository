@@ -2,6 +2,5 @@
 
 int main()
 {
-  // :)))))))))
   std::cout << "dobov.sergey\n";
 }
