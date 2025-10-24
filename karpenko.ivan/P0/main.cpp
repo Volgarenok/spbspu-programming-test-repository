@@ -4,4 +4,3 @@ int main()
 {
   std::cout << "karpenko.ivan\n";
 }
-//242
