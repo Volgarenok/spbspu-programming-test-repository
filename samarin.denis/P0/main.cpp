@@ -1,12 +1,12 @@
- #include <iostream>
+#include <iostream>
 
 namespace samarin {
-    void printName() {
-        std::cout << "samarin.denis" << "\n";
-    }
+  void printName() {
+    std::cout << "samarin.denis" << "\n";
+  }
 }
 
 int main() {
-    samarin::printName();
-    return 0;
+  samarin::printName();
+  return 0;
 }
