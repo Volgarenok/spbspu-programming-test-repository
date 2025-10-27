@@ -2,7 +2,7 @@
 
 namespace samarin {
   void printName() {
-    std::cout << "samarin.denis";
+    std::cout << "samarin.denis" << "\n";
   }
 }
 
