@@ -3,6 +3,7 @@
 #include <exception>
 #include <cstdlib>
 #include <climits>
+
 class ITrait {
 public:
     virtual ~ITrait() = default;
