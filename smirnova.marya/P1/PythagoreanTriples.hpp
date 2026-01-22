@@ -12,8 +12,7 @@ public:
     int value() const override;
     bool computable() const override;
 private:
-  int a = 0, b = 0, size = 0;
-  int count;
+  int a = 0, b = 0, count = 0, size = 0;
   bool pyCheck(int x, int y, int z) const;
 };
 
