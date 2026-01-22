@@ -42,7 +42,6 @@ int input(ITrait **traits, int traitCount)
 
 void output(ITrait **traits, int traitCount)
 {
-  bool errorOccurred = false;
   for (int i = 0; i < traitCount; ++i)
   {
     if (traits[i] && traits[i]->computable())
@@ -52,7 +51,6 @@ void output(ITrait **traits, int traitCount)
     else
     {
       std::cout << i + 1 << " characteristic: not enough data\n";
-      errorOccurred = true;
     }
   }
 }
