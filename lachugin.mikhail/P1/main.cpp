@@ -2,14 +2,20 @@
 
 namespace lachugin
 {
-  bool isZero(int n)
+  struct isZero
   {
-    if (n == 0)
+    bool checked = false;
+
+    bool check(int x)
     {
-      return true;
+      if (!checked)
+      {
+        checked = true;
+        return false;
+      }
+      return x == 0;
     }
-    return false;
-  }
+  };
 
   void aftMax(std::istream& in, int& n, int& res)
   {
@@ -26,9 +32,10 @@ namespace lachugin
 
 int main()
 {
-  int n = 0;
+  int n = 1;
 
-  int res1;
-  int res2;
+  int res1 = 0;
+  int res2 = 0;
+
 
 }
