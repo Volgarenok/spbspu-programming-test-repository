@@ -11,6 +11,16 @@ namespace lachugin
     return false;
   }
 
+  void aftMax(std::istream& in, int& n, int& res)
+  {
+    int k = n;
+    in >> n;
+    if (n < k)
+    {
+      ++res;
+      n = k;
+    }
+  }
 
 }
 
