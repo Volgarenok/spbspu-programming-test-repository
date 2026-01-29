@@ -17,14 +17,17 @@ namespace lachugin
     }
   };
 
-  void aftMax(std::istream& in, int& n, int& res)
+  void aftMax(int& n, int& k, int& res)
   {
-    int k = n;
-    in >> n;
-    if (n < k)
+    k = n;
+    if (n < k && k != 0)
     {
       ++res;
       n = k;
+    }
+    else
+    {
+      res = 0;
     }
   }
 
@@ -32,10 +35,18 @@ namespace lachugin
 
 int main()
 {
-  int n = 1;
+  lachugin::isZero z;
+  int n = 0;
+
+  int hlpRes1 = 0;
 
   int res1 = 0;
   int res2 = 0;
 
+  while (!z.check(n)) {
+    lachugin::aftMax(n, hlpRes1, res1);
+
+    std::cin >> n;
+  }
 
 }
