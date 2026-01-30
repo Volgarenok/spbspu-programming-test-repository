@@ -69,4 +69,5 @@ int main()
     std::cin >> n;
   }
 
+  std::cout << res1 << "\n" << res2;
 }
