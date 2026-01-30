@@ -10,7 +10,6 @@ namespace lachugin
     {
       if (!checked)
       {
-        checked = true;
         return false;
       }
       return x == 0;
@@ -19,14 +18,13 @@ namespace lachugin
 
   void aftMax(int& n, int& k, int& res)
   {
-    k = n;
-    if (n < k && k != 0)
+    if (n < k)
     {
       ++res;
-      n = k;
     }
     else
     {
+      k = n;
       res = 0;
     }
   }
@@ -44,6 +42,13 @@ int main()
   int res2 = 0;
 
   while (!z.check(n)) {
+    if (!z.checked)
+    {
+      z.checked = true;
+      std::cin >> n;
+      hlpRes1 = n;
+      continue;
+    }
     lachugin::aftMax(n, hlpRes1, res1);
 
     std::cin >> n;
