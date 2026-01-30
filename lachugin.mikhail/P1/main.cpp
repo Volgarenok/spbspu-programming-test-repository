@@ -55,19 +55,50 @@ int main()
   int res1 = 0;
   int res2 = 0;
 
-  while (!z.check(n)) {
+  int k = 0;
+  bool inputErr = false;
+  bool calcErr = false;
+
+  while (!z.check(n))
+  {
     if (!z.checked)
     {
       z.checked = true;
       std::cin >> n;
+      if (std::cin.fail())
+      {
+        inputErr = true;
+        break;
+      }
       hlpRes1 = n;
       hlpRes2 = n;
+      ++k;
       continue;
     }
+
+
     lachugin::aftMax(n, hlpRes1, res1);
     lachugin::cntMin(n, hlpRes2, res2);
     std::cin >> n;
+    ++k;
+  }
+
+  if (inputErr)
+  {
+    std::cerr << "Error: invalid input sequence\n";
+    return 1;
+  }
+
+  if (k < 2)
+  {
+    std::cout << "Error: insufficient sequence length\n";
+    calcErr = true;
   }
 
   std::cout << res1 << "\n" << res2;
+
+  if (calcErr)
+  {
+    return 2;
+  }
 }
