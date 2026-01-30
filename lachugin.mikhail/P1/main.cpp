@@ -16,7 +16,7 @@ namespace lachugin
     }
   };
 
-  void aftMax(int& n, int& k, int& res)
+  void aftMax(int n, int& k, int& res)
   {
     if (n < k)
     {
@@ -29,6 +29,19 @@ namespace lachugin
     }
   }
 
+  void cntMin(int n, int& k, int& res)
+  {
+    if (n == k)
+    {
+      ++res;
+    }
+    else if (n < k)
+    {
+      res = 0;
+      k = n;
+    }
+  }
+
 }
 
 int main()
@@ -37,6 +50,7 @@ int main()
   int n = 0;
 
   int hlpRes1 = 0;
+  int hlpRes2 = 0;
 
   int res1 = 0;
   int res2 = 0;
@@ -47,10 +61,11 @@ int main()
       z.checked = true;
       std::cin >> n;
       hlpRes1 = n;
+      hlpRes2 = n;
       continue;
     }
     lachugin::aftMax(n, hlpRes1, res1);
-
+    lachugin::cntMin(n, hlpRes2, res2);
     std::cin >> n;
   }
 
