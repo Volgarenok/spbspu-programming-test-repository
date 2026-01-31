@@ -13,8 +13,8 @@ int main()
   }
   int z = x;
   int c = 0;
-  int cm = 0;
-  int m = 0;
+  int cm = 1;
+  int m = x;
   if (!(std::cin >> x)) {
     std::cerr << "not int\n";
     return 1;
