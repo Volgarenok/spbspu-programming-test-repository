@@ -8,11 +8,13 @@ int main()
     return 1;
   }
   if (x == 0) {
-    std::cout << 0 << '\n';
-    return 0;
+    std::cerr << "Error: cannot compute (empty sequence).\n";
+    return 2;
   }
   int z = x;
   int c = 0;
+  int cm = 0;
+  int m = 0;
   if (!(std::cin >> x)) {
     std::cerr << "not int\n";
     return 1;
@@ -22,11 +24,19 @@ int main()
       ++c;
     }
     z = x;
+    if (x > m) {
+      m = x;
+      cm = 1;
+    }
+    else if (x == m) {
+      ++cm;
+    }
     if (!(std::cin >> x)) {
       std::cerr << "not int\n";
       return 1;
     }
   }
   std::cout << c << '\n';
+  std::cout << cm << '\n';
   return 0;
 }
