@@ -28,5 +28,9 @@ int main()
     previousSign = currentSign;
   }
   std::cout << changeCount << '\n';
+  if (countNum == 0) {
+    std::cerr << "Not enough numbers for AFT-MAX" << '\n';
+    return 2;
+  }
   std::cout << afterMax << '\n';
 }
