@@ -12,7 +12,14 @@ int main()
   std::cin >> el;
   while (el != 0)
   {
-    append(seq, el, n);
+    try
+    {
+      append(seq, el, n);
+    }
+    catch (...)
+    {
+      std::cerr << "Caught an exception\n";
+    }
     std::cin >> el;
     if (std::cin.fail())
     {
