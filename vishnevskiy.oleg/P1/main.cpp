@@ -14,11 +14,11 @@ int main()
   {
     append(seq, el, n);
     std::cin >> el;
-  }
-  if (std::cin.fail())
-  {
-    std::cerr << "Input failed\n";
-    return 1;
+    if (std::cin.fail())
+    {
+      std::cerr << "Input failed\n";
+      return 1;
+    }
   }
 }
 
