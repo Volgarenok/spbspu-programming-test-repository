@@ -9,15 +9,15 @@ int main()
   size_t n = 0;
   int * seq = new int[1];
   int el = 0;
-  std::cin>>el;
-  while (el!=0)
+  std::cin >> el;
+  while (el != 0)
   {
     append(seq, el, n);
-    std::cin>>el;
+    std::cin >> el;
   }
   if (std::cin.fail())
   {
-    std::cerr<<"Input failed\n";
+    std::cerr << "Input failed\n";
     return 1;
   }
 }
@@ -25,7 +25,7 @@ int main()
 void append(int *&an, int b, size_t &s)
 {
   int * tempseq = new int[s+1];
-  for (size_t i = 0; i<s; i++)
+  for (size_t i = 0; i < s; i++)
   {
     tempseq[i] = an[i];
   }
@@ -34,4 +34,17 @@ void append(int *&an, int b, size_t &s)
   delete[] an;
   an = tempseq;
   tempseq = nullptr;
+}
+
+int grtLss(int *a, size_t s)
+{
+  int res = 0;
+  for (size_t i = 1; i < (s - 1); i++)
+  {
+    if (a[i] > a[i - 1] && a[i] < a[i + 1])
+    {
+      res++;
+    }
+  }
+  return res;
 }
