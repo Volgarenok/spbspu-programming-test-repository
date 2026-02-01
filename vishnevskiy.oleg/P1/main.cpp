@@ -20,6 +20,20 @@ int main()
       return 1;
     }
   }
+  if (n > 1)
+  {
+    std::cout << grtLss(seq, n) <<  " " << monDec(seq, n) << "\n";
+    return 0;
+  }
+  else
+  {
+    if (n == 1)
+    {
+      std::cout << monDec(seq, n) << "\n";
+    }
+    std::cerr << "Error : sequence too short\n";
+    return 2;
+  }
 }
 
 void append(int *&an, int b, size_t &s)
@@ -41,7 +55,7 @@ int grtLss(int *a, size_t s)
   int res = 0;
   for (size_t i = 1; i < (s - 1); i++)
   {
-    if (a[i] > a[i - 1] && a[i] < a[i + 1])
+    if (a[i] < a[i - 1] && a[i] > a[i + 1])
     {
       res++;
     }
@@ -51,10 +65,10 @@ int grtLss(int *a, size_t s)
 
 int monDec(int *a, size_t s)
 {
-  int res = 0, currRes = 0;
-  for (size_t i = 0; i < (s - 1); i++)
+  int res = 0, currRes = 1;
+  for (size_t i = 1; i < s; i++)
   {
-    if (a[i] >= a[i + 1])
+    if (a[i - 1] >= a[i])
     {
       currRes++;
     }
@@ -64,7 +78,7 @@ int monDec(int *a, size_t s)
       {
         res = currRes;
       }
-      currRes = 0;
+      currRes = 1;
     }
   }
   if (currRes > res)
