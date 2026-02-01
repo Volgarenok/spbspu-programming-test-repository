@@ -48,3 +48,28 @@ int grtLss(int *a, size_t s)
   }
   return res;
 }
+
+int monDec(int *a, size_t s)
+{
+  int res = 0, currRes = 0;
+  for (size_t i = 0; i < (s - 1); i++)
+  {
+    if (a[i] >= a[i + 1])
+    {
+      currRes++;
+    }
+    else
+    {
+      if (currRes > res)
+      {
+        res = currRes;
+      }
+      currRes = 0;
+    }
+  }
+  if (currRes > res)
+  {
+    res = currRes;
+  }
+  return res;
+}
