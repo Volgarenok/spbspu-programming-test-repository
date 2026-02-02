@@ -6,6 +6,11 @@ int main()
 {
   int currEl = 0, secondEl = 0, firstEl = 0, grt = 0, mon = 0, currMon = 1;
   std::cin >> currEl;
+  if (std::cin.fail())
+  {
+    std::cerr << "Input failed\n";
+    return 1;
+  }
   if (currEl == 0)
   {
     std::cerr << "Error : sequence is too short\n";
@@ -13,6 +18,11 @@ int main()
   }
   secondEl = currEl;
   std::cin >> currEl;
+  if (std::cin.fail())
+  {
+    std::cerr << "Input failed\n";
+    return 1;
+  }
   if (currEl == 0)
   {
     std::cout << 1 << "\n";
@@ -22,6 +32,11 @@ int main()
   firstEl = secondEl;
   secondEl = currEl;
   std::cin >> currEl;
+  if (std::cin.fail())
+  {
+    std::cerr << "Input failed\n";
+    return 1;
+  }
   if (currEl == 0)
   {
     if (firstEl >= secondEl)
@@ -37,11 +52,13 @@ int main()
   }
   while (currEl != 0)
   {
-    firstEl = secondEl;
-    secondEl = currEl;
-    std::cin >> currEl;
+    if (std::cin.fail())
+    {
+      std::cerr << "Input failed\n";
+      return 1;
+    }
     grt = grt+grtLss(firstEl, secondEl, currEl);
-    if (secondEl >= currEl)
+    if (firstEl >= secondEl)
     {
       currMon++;
     }
@@ -53,11 +70,13 @@ int main()
       }
       currMon = 1;
     }
-    if (std::cin.fail())
-    {
-      std::cerr << "Input failed\n";
-      return 1;
-    }
+    firstEl = secondEl;
+    secondEl = currEl;
+    std::cin >> currEl;
+  }
+  if (firstEl >= secondEl)
+  {
+    currMon++;
   }
   if (currMon > mon)
   {
@@ -67,3 +86,11 @@ int main()
   return 0;
 }
 
+bool grtLss(int first, int second, int third)
+{
+  if (first > second && second > third)
+  {
+    return 1;
+  }
+  return 0;
+}
