@@ -7,6 +7,24 @@ struct ITrait
   virtual ~ITrait() = default;
 };
 
+struct Size
+{
+  Size()
+  {
+    k_ = 0;
+  }
+  void operator()(int a)
+  {
+    k_++;
+  }
+  int operator()()
+  {
+    return k_;
+  }
+  private:
+    int k_;
+};
+
 struct LocMin : ITrait
 {
   LocMin()
@@ -103,11 +121,14 @@ int main()
   int number = 0;
   LocMin a;
   GrtLss b;
+  Size c;
   while(std::cin >> number)
   {
     a(number);
     b(number);
+    c(number);
   }
-  std::cout << a() << "\n";
-  std::cout << b() << "\n";
+  std::cout << "LOCMIN = " << a() << "\n";
+  std::cout << "GRTLSS = " << b() << "\n";
+  std::cout << "SIZE = " << c() << "\n";
 }
