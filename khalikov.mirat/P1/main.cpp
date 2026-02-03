@@ -7,7 +7,7 @@ struct ITrait
   virtual ~ITrait() = default;
 };
 
-struct Size
+struct Size : ITrait
 {
   Size()
   {
@@ -127,6 +127,16 @@ int main()
     a(number);
     b(number);
     c(number);
+  }
+  if (!(std::cin.eof()))
+  {
+    std::cerr << "Seq is not read. Input Error" << "\n";
+    return 1;
+  }
+  if (c() < 3)
+  {
+    std::cerr << "Seq is not read. Not enough numbers!" << "\n";
+    return 2;
   }
   std::cout << "LOCMIN = " << a() << "\n";
   std::cout << "GRTLSS = " << b() << "\n";
