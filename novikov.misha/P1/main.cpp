@@ -13,11 +13,17 @@ int main()
 {
     using namespace novikov;
 
-    const char* const errorInvalidInput = "Ошибка: Входные данные содержат нечисловые значения";
-    const char* const errorNoZero = "Ошибка: Не было введено число 0 для завершения";
+    const char* const errorInvalidInput = "Ошибка: входные данные содержат нечисловые значения";
+    const char* const errorNoZero = "Ошибка: не было введено число 0 для завершения";
+    const char* const errorIncSeqShort = "Ошибка: последовательность слишком короткая";
+
+    std::size_t biggerCount = 0;
     std::size_t totalNumbers = 0;
+    bool isFirst = true;
+    bool hasError = false;
     bool foundZero = false;
     int currentNumber = 0;
+    int previousNumber = 0;
 
     while (true) {
       if (!tryReadInteger(currentNumber)) {
@@ -31,11 +37,38 @@ int main()
       }
 
       ++totalNumbers;
+
+      if (!isFirst) {
+        if (currentNumber > previousNumber) {
+          ++biggerCount;
+        }
+      } else {
+        isFirst = false;
+      }
+
+      previousNumber = currentNumber;
     }
 
     if (!foundZero) {
       std::cerr << errorNoZero << '\n';
       return 1;
+    }
+
+    if (totalNumbers == 0) {
+      std::cout << "0\n";
+      return 0;
+    }
+
+    if (totalNumbers >= 2) {
+      std::cout << biggerCount << '\n';
+    } else {
+      std::cout << "0\n";
+      printError(errorIncSeqShort);
+      hasError = true;
+    }
+
+    if (hasError) {
+      return 2;
     }
 
     return 0;
