@@ -12,8 +12,9 @@ struct LocMin : ITrait
   LocMin()
   {
     k_ = 0;
-    min_ = 0;
-    temp_ = 0;
+    prev_ = 0;
+    next_ = 0;
+    act_ = 0;
     firstadd_ = true;
   }
 
@@ -21,31 +22,34 @@ struct LocMin : ITrait
   {
     if (firstadd_)
     {
-      min_ = a;
-      k_++;
+      prev_ = a;
+      act_ = a;
+      next_ = a;
       firstadd_ = false;
     }
     else
     {
-      temp_ = a;
-      k_++;
-      if (min_ > temp_)
+      prev_ = act_;
+      act_ = next_;
+      next_ = a;
+      if ((act_ < next_) && (act_ < prev_))
       {
-        min_ = temp_;
+        k_++;
       }
     }
   }
 
   int operator()()
   {
-    return min_;
+    return k_;
   }
 
   private:
     bool firstadd_;
-    size_t k_;
-    int min_;
-    int temp_;
+    int k_;
+    int prev_;
+    int act_;
+    int next_;
 };
 
 struct GrtLss : ITrait
