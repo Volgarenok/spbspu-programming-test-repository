@@ -16,6 +16,7 @@ int main()
     const char* const errorInvalidInput = "Ошибка: входные данные содержат нечисловые значения";
     const char* const errorNoZero = "Ошибка: не было введено число 0 для завершения";
     const char* const errorIncSeqShort = "Ошибка: последовательность слишком короткая";
+    const char* const errorEvnCntShort = "Ошибка: Последовательность слишком короткая";
 
     std::size_t biggerCount = 0;
     std::size_t totalNumbers = 0;
