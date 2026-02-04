@@ -18,10 +18,10 @@ int main()
     const char* const errorIncSeqShort = "Ошибка: последовательность слишком короткая";
     const char* const errorEvnCntShort = "Ошибка: Последовательность слишком короткая";
 
-    std::size_t maxEvenChain = 0;
-    std::size_t currentEvenChain = 0;
-    std::size_t biggerCount = 0;
-    std::size_t totalNumbers = 0;
+    size_t maxEvenChain = 0;
+    size_t currentEvenChain = 0;
+    size_t biggerCount = 0;
+    size_t totalNumbers = 0;
     bool isFirst = true;
     bool hasError = false;
     bool foundZero = false;
@@ -30,7 +30,7 @@ int main()
 
     while (true) {
       if (!tryReadInteger(currentNumber)) {
-        std::cerr << errorInvalidInput << '\n';
+        std::cerr << errorInvalidInput << "\n";
         return 1;
       }
 
@@ -63,7 +63,7 @@ int main()
     }
 
     if (!foundZero) {
-      std::cerr << errorNoZero << '\n';
+      std::cerr << errorNoZero << "\n";
       return 1;
     }
 
@@ -73,7 +73,7 @@ int main()
     }
 
     if (totalNumbers >= 2) {
-      std::cout << biggerCount << '\n';
+      std::cout << biggerCount << "\n";
     } else {
       std::cout << "0\n";
       printError(errorIncSeqShort);
@@ -81,7 +81,7 @@ int main()
     }
 
     if (totalNumbers >= 1) {
-      std::cout << maxEvenChain << '\n';
+      std::cout << maxEvenChain << "\n";
     } else {
       std::cout << "0\n";
       printError(errorEvnCntShort);
