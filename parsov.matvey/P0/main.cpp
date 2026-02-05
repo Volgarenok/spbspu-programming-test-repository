@@ -1,6 +1,6 @@
 #include <iostream>
 
-int main() 
+int main()
 {
   std::cout << "parsov.matvey\n";
 }
