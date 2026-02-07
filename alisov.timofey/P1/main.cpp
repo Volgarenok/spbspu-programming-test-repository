@@ -24,12 +24,12 @@ int main()
       k += 1;
       if (k > maxk)
       {
-        maxk == k;
+        maxk = k;
       }
     }
     else
     {
-      k == 0;
+      k = 0;
     }
     if (total > 1)
     {
