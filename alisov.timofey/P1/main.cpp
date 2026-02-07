@@ -11,11 +11,6 @@ int main()
   int divCount = 0;
   bool divpos = true;
   int prev = 0;
-  if (!(std::cin >> x))
-  {
-    std::cerr << "Not a number\n";
-    return 1;
-  }
   while (x != 0)
   {
     if (!(std::cin >> x))
