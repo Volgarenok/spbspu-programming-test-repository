@@ -15,7 +15,7 @@ namespace khalikov
     {
       k_ = 0;
     }
-    void operator()(int a)
+    void operator()(int)
     {
       k_++;
     }
