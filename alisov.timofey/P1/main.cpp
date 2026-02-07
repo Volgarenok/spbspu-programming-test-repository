@@ -2,7 +2,7 @@
 
 int main()
 {
-  int x = 0;
+  int x = 1;
   int total = 0;
 
   int maxk = 0;
