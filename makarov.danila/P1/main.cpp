@@ -21,8 +21,8 @@ int main()
       mnum = tnum;
     }
   }
-  if (count <= 2) {
-    std::cerr << "Not enough numbers for the task"<< "\n";
+  if (count <= 1) {
+    std::cerr << "Not enough numbers for the task" << "\n";
     return 2;
   }
   std::cout << m2num << "\n";
