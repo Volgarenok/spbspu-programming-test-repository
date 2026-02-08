@@ -7,11 +7,11 @@ int main()
   size_t count = 0;
   while (true)
   {
+    std::cin >> tnum;
     if (std::cin.fail()) {
       std::cerr << "Invalid input" << "\n";
       return 1;
     }
-    std::cin >> tnum;
     count++;
     if (tnum == 0) {
       break;
@@ -26,5 +26,4 @@ int main()
     return 2;
   }
   std::cout << m2num << "\n";
-
 }
