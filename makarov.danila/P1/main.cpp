@@ -2,8 +2,8 @@
 #include <limits>
 
 int main() {
-  int tnum = std::numeric_limits<int>::min(); 
-  int mnum = std::numeric_limits<int>::min(); 
+  int tnum = std::numeric_limits<int>::min();
+  int mnum = std::numeric_limits<int>::min();
   int m2num = std::numeric_limits<int>::min();
   size_t count = 0;
   while (true) {
