@@ -65,16 +65,38 @@ private:
   size_t count = 0;
   bool has_value = false;
 };
+
+struct DivRemProperty : public ISeqProperty
+{
+private:
+  void next(int value) override
+  {
+    if (has_previous && previous != 0 && value % previous == 0)
+    {
+      ++count;
+    }
+    previous = value;
+    has_previous = true;
+  }
+
+  size_t result() const override
+  {
+    return count;
+  }
+
+  int previous = 0;
+  bool has_previous = false;
+  size_t count = 0;
+};
 }
 
 int main()
 {
   int a = 0;
-  int previous = 0;
-  size_t count_rem = 0;
 
   matveev::CntProperty cnt;
   matveev::CntMaxProperty cnt_max;
+  matveev::DivRemProperty div_rem;
 
   std::cin >> a;
   if (std::cin.fail())
@@ -93,12 +115,7 @@ int main()
   {
     cnt(a);
     cnt_max(a);
-
-    if (previous != 0 && a % previous == 0)
-    {
-      ++count_rem;
-    }
-    previous = a;
+    div_rem(a);
 
     std::cin >> a;
     if (std::cin.fail())
@@ -116,6 +133,6 @@ int main()
   }
 
   std::cout << "CNT-MAX " << cnt_max() << std::endl;
-  std::cout << "DIV-REM " << count_rem << std::endl;
+  std::cout << "DIV-REM " << div_rem() << std::endl;
   return 0;
 }
