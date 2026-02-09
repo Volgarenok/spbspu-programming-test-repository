@@ -1,7 +1,42 @@
 #include <iostream>
+#include <cstddef>
+
+namespace matveev
+{
+struct ISeqProperty
+{
+  void operator()(int value)
+  {
+    next(value);
+  }
+  size_t operator()() const
+  {
+    return result();
+  }
+  virtual ~ISeqProperty() = default;
+ private:
+  virtual void next(int value) = 0;
+  virtual size_t result() const = 0;
+  };
+struct CntProperty : public ISeqProperty
+{
+ private:
+  void next(int) override
+  {
+    ++count;
+  }
+  size_t result() const override
+  {
+    return count;
+  }
+  size_t count = 0;
+};
+}
+
 int main()
 {
   int a = 0, count_max = 0, max_num = 0, previous = 0, count_rem = 0, len=0;
+  matveev::CntProperty cnt;
 
   std::cin >> a;
   if (std::cin.fail())
@@ -17,6 +52,7 @@ int main()
   }
   while (a != 0)
   {
+    cnt(a);
     len++;
     if (a == max_num)
     {
