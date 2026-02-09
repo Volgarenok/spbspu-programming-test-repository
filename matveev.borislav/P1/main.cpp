@@ -14,13 +14,14 @@ struct ISeqProperty
     return result();
   }
   virtual ~ISeqProperty() = default;
- private:
+private:
   virtual void next(int value) = 0;
   virtual size_t result() const = 0;
-  };
+};
+
 struct CntProperty : public ISeqProperty
 {
- private:
+private:
   void next(int) override
   {
     ++count;
@@ -31,12 +32,49 @@ struct CntProperty : public ISeqProperty
   }
   size_t count = 0;
 };
+
+struct CntMaxProperty : public ISeqProperty
+{
+private:
+  void next(int value) override
+  {
+    if (!has_value)
+    {
+      max = value;
+      count = 1;
+      has_value = true;
+      return;
+    }
+    if (value > max)
+    {
+      max = value;
+      count = 1;
+    }
+    else if (value == max)
+    {
+      ++count;
+    }
+  }
+
+  size_t result() const override
+  {
+    return count;
+  }
+
+  int max = 0;
+  size_t count = 0;
+  bool has_value = false;
+};
 }
 
 int main()
 {
-  int a = 0, count_max = 0, max_num = 0, previous = 0, count_rem = 0, len=0;
+  int a = 0;
+  int previous = 0;
+  size_t count_rem = 0;
+
   matveev::CntProperty cnt;
+  matveev::CntMaxProperty cnt_max;
 
   std::cin >> a;
   if (std::cin.fail())
@@ -44,31 +82,24 @@ int main()
     std::cerr << "Error input" << std::endl;
     return 1;
   }
-  max_num = a;
+
   if (a == 0)
   {
     std::cerr << "No numbers" << std::endl;
     return 2;
   }
+
   while (a != 0)
   {
     cnt(a);
-    len++;
-    if (a == max_num)
-    {
-      count_max++;
-    }
-    if (a > max_num)
-    {
-      max_num = a;
-      count_max = 1;
-    }
+    cnt_max(a);
 
     if (previous != 0 && a % previous == 0)
     {
-      count_rem++;
+      ++count_rem;
     }
     previous = a;
+
     std::cin >> a;
     if (std::cin.fail())
     {
@@ -76,13 +107,15 @@ int main()
       return 1;
     }
   }
-  if (len < 2)
+
+  if (cnt() < 2)
   {
-    std::cout << "CNT-MAX " << count_max << std::endl;
+    std::cout << "CNT-MAX " << cnt_max() << std::endl;
     std::cerr << "Error numbers" << std::endl;
     return 2;
   }
-  std::cout << "CNT-MAX " << count_max << std::endl;
+
+  std::cout << "CNT-MAX " << cnt_max() << std::endl;
   std::cout << "DIV-REM " << count_rem << std::endl;
   return 0;
 }
