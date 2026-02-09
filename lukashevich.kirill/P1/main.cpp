@@ -9,19 +9,37 @@ namespace lukashevich
 
     while (true)
     {
-      if (!(std::cin >> num)
+      if (!(std::cin >> num))
       {
         std::cerr << "error: input isnt number\n";
         return 1;
       }
+
       if (num == 0)
       {
         break;
       }
+
+      if (!first_num)
+      {
+        if ((prev_num > 0 && num < 0) || ((prev_num < 0 && num > 0)))
+        {
+          ++sgn_chg;
+        }
+      }
+      else
+      {
+        first_num = false;
+      }
+
+      prev_num = num;
     }
+
+    std::cout << sgn_chg << "\n";
+    return 0;
   }
 }
 int main()
 {
-  return 0;
+  return lukashevich::process();
 }
