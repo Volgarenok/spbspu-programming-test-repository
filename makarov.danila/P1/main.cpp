@@ -9,7 +9,7 @@ int main() {
   while (true) {
     std::cin >> tnum;
     if (std::cin.fail()) {
-      std::cerr << "Invalid input" << "\n";
+      std::cerr << "Invalid input" << '\n';
       return 1;
     }
     if (tnum == 0) {
@@ -22,8 +22,8 @@ int main() {
     }
   }
   if (count <= 1) {
-    std::cerr << "Not enough numbers for the task" << "\n";
+    std::cerr << "Not enough numbers for the task" << '\n';
     return 2;
   }
-  std::cout << m2num << "\n";
+  std::cout << m2num << '\n';
 }
