@@ -9,7 +9,7 @@ namespace khalikov
     virtual ~ITrait() = default;
   };
 
-  struct Size : ITrait
+  struct Size: ITrait
   {
     Size()
     {
@@ -21,13 +21,20 @@ namespace khalikov
     }
     int operator()()
     {
-      return k_;
+      if (k_ < 3)
+      {
+        throw std::runtime_error("Not enough numbers!");
+      }
+      else
+      {
+        return k_;
+      }
     }
     private:
       int k_;
   };
 
-  struct LocMin : ITrait
+  struct LocMin: ITrait
   {
     LocMin()
     {
@@ -72,7 +79,7 @@ namespace khalikov
       int next_;
   };
 
-  struct GrtLss : ITrait
+  struct GrtLss: ITrait
   {
     GrtLss()
     {
@@ -120,28 +127,33 @@ namespace khalikov
 
 int main()
 {
-  namespace kh = khalikov;
+  namespace khal = khalikov;
   int number = 0;
-  kh::LocMin a;
-  kh::GrtLss b;
-  kh::Size c;
-  while(std::cin >> number)
+  int size = 0;
+  khal::LocMin a;
+  khal::GrtLss b;
+  khal::Size c;
+  try
   {
-    a(number);
-    b(number);
-    c(number);
+    while((std::cin >> number) && (number != 0))
+    {
+      a(number);
+      b(number);
+      c(number);
+    }
+    size = c();
   }
-  if (!(std::cin.eof()))
-  {
-    std::cerr << "Seq is not read. Input Error" << "\n";
-    return 1;
-  }
-  if (c() < 3)
+  catch (...)
   {
     std::cerr << "Seq is not read. Not enough numbers!" << "\n";
     return 2;
   }
-  std::cout << "LOCMIN = " << a() << "\n";
-  std::cout << "GRTLSS = " << b() << "\n";
-  std::cout << "SIZE = " << c() << "\n";
+  if (std::cin.fail())
+    {
+      std::cerr << "Seq is not read. Input Error" << "\n";
+      return 1;
+    }
+    std::cout << "SIZE = " << size << "\n";
+    std::cout << "LOCMIN = " << a() << "\n";
+    std::cout << "GRTLSS = " << b() << "\n";
 }
