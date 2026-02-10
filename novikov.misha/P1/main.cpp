@@ -1,97 +1,131 @@
 #include <iostream>
-namespace novikov
-{
-bool tryReadInteger(int& output){
-    std::cin >> output;
-    return !std::cin.fail();
+
+namespace novikov {
+
+struct Counter {
+  size_t biggerCount;
+  size_t totalNumbers;
+  int previousNumber;
+  bool isFirst;
+};
+
+struct EvenChain {
+  size_t maxEvenChain;
+  size_t currentEvenChain;
+};
+
+struct ErrorState {
+  bool hasError;
+  bool foundZero;
+};
+
+bool readInteger(int& output) {
+  std::cin >> output;
+  return !std::cin.fail();
 }
-void printError(const char* message){
-    std::cerr << message << "\n";
+
+void printError(const char* message, ErrorState& error) {
+  std::cerr << message << '\n';
+  error.hasError = true;
 }
+
+void updateCounter(Counter& counter, int number) {
+  if (!counter.isFirst) {
+    if (number > counter.previousNumber) {
+      ++counter.biggerCount;
+    }
+  } else {
+    counter.isFirst = false;
+  }
+  ++counter.totalNumbers;
+  counter.previousNumber = number;
 }
-int main()
-{
-    using namespace novikov;
 
-    const char* const errorInvalidInput = "Ошибка: входные данные содержат нечисловые значения";
-    const char* const errorNoZero = "Ошибка: не было введено число 0 для завершения";
-    const char* const errorIncSeqShort = "Ошибка: последовательность слишком короткая";
-    const char* const errorEvnCntShort = "Ошибка: Последовательность слишком короткая";
+void updateEvenChain(EvenChain& evenChain, int number) {
+  if (number % 2 == 0) {
+    ++evenChain.currentEvenChain;
+    if (evenChain.currentEvenChain > evenChain.maxEvenChain) {
+      evenChain.maxEvenChain = evenChain.currentEvenChain;
+    }
+  } else {
+    evenChain.currentEvenChain = 0;
+  }
+}
 
-    size_t maxEvenChain = 0;
-    size_t currentEvenChain = 0;
-    size_t biggerCount = 0;
-    size_t totalNumbers = 0;
-    bool isFirst = true;
-    bool hasError = false;
-    bool foundZero = false;
-    int currentNumber = 0;
-    int previousNumber = 0;
+bool processInput(Counter& counter, EvenChain& evenChain, ErrorState& error) {
+  int currentNumber = 0;
 
-    while (true) {
-      if (!tryReadInteger(currentNumber)) {
-        std::cerr << errorInvalidInput << "\n";
-        return 1;
-      }
-
-      if (currentNumber == 0) {
-        foundZero = true;
-        break;
-      }
-
-      ++totalNumbers;
-
-      if (!isFirst) {
-        if (currentNumber > previousNumber) {
-          ++biggerCount;
-        }
-      } else {
-        isFirst = false;
-      }
-
-      previousNumber = currentNumber;
+  while (true) {
+    if (!readInteger(currentNumber)) {
+      printError("Ошибка: Входные данные содержат нечисловые значения", error);
+      return false;
     }
 
-    if (currentNumber % 2 == 0) {
-        ++currentEvenChain;
-        if (currentEvenChain > maxEvenChain) {
-          maxEvenChain = currentEvenChain;
-        }
-      } else {
-        currentEvenChain = 0;
-      }
+    if (std::cin.eof()) {
+      printError("Ошибка: Не было введено число 0 для завершения", error);
+      return false;
     }
 
-    if (!foundZero) {
-      std::cerr << errorNoZero << "\n";
-      return 1;
+    if (currentNumber == 0) {
+      error.foundZero = true;
+      break;
     }
 
-    if (totalNumbers == 0) {
-      std::cout << "0\n";
-      return 0;
-    }
+    updateCounter(counter, currentNumber);
+    updateEvenChain(evenChain, currentNumber);
+  }
 
-    if (totalNumbers >= 2) {
-      std::cout << biggerCount << "\n";
-    } else {
-      std::cout << "0\n";
-      printError(errorIncSeqShort);
-      hasError = true;
-    }
+  return true;
+}
 
-    if (totalNumbers >= 1) {
-      std::cout << maxEvenChain << "\n";
-    } else {
-      std::cout << "0\n";
-      printError(errorEvnCntShort);
-      hasError = true;
-    }
+void printResults(const Counter& counter, const EvenChain& evenChain, ErrorState& error) {
+  if (counter.totalNumbers == 0) {
+    std::cout << "0\n";
+    std::cout << "0\n";
+    return;
+  }
 
-    if (hasError) {
-      return 2;
-    }
+  if (counter.totalNumbers >= 2) {
+    std::cout << counter.biggerCount << '\n';
+  } else {
+    std::cout << "0\n";
+    printError("Ошибка: последовательность слишком короткая для INC-SEQ", error);
+  }
 
-    return 0;
+  if (counter.totalNumbers >= 1) {
+    std::cout << evenChain.maxEvenChain << '\n';
+  } else {
+    std::cout << "0\n";
+    printError("Ошибка: последовательность слишком короткая для EVN-CNT", error);
+  }
+}
 
+}
+
+int main() {
+  novikov::Counter counter{};
+  counter.biggerCount = 0;
+  counter.totalNumbers = 0;
+  counter.previousNumber = 0;
+  counter.isFirst = true;
+
+  novikov::EvenChain evenChain{};
+  evenChain.maxEvenChain = 0;
+  evenChain.currentEvenChain = 0;
+
+  novikov::ErrorState error{};
+  error.hasError = false;
+  error.foundZero = false;
+
+  if (!novikov::processInput(counter, evenChain, error)) {
+    return 1;
+  }
+
+  novikov::printResults(counter, evenChain, error);
+
+  if (error.hasError) {
+    return 2;
+  }
+
+  return 0;
 }
