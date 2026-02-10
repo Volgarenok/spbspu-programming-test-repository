@@ -141,6 +141,11 @@ int main()
       b(number);
       c(number);
     }
+    if (std::cin.fail())
+    {
+      std::cerr << "Seq is not read. Input Error" << "\n";
+      return 1;
+    }
     size = c();
   }
   catch (...)
@@ -148,11 +153,6 @@ int main()
     std::cerr << "Seq is not read. Not enough numbers!" << "\n";
     return 2;
   }
-  if (std::cin.fail())
-    {
-      std::cerr << "Seq is not read. Input Error" << "\n";
-      return 1;
-    }
     std::cout << "SIZE = " << size << "\n";
     std::cout << "LOCMIN = " << a() << "\n";
     std::cout << "GRTLSS = " << b() << "\n";
