@@ -1,10 +1,12 @@
 #include <iostream>
-//CNT-MAX MON-DEC
+
 namespace nabieva
 {
   struct maxCount {
-    maxCount() : hasElements_(false) {}
-    void upd(int value) {
+    maxCount():
+      hasElements_(false) {}
+    void upd(int value)
+    {
       if (!hasElements_) {
         hasElements_ = true;
         maxValue_ = value;
@@ -18,10 +20,12 @@ namespace nabieva
         ++countMax_;
       }
     }
-    size_t result() const {
+    size_t result() const
+    {
       return countMax_;
     }
-    bool hasElements() const {
+    bool hasElements() const
+    {
       return hasElements_;
     }
   private:
@@ -30,8 +34,11 @@ namespace nabieva
     bool hasElements_;
   };
   struct maxDecreasingSequence {
-    maxDecreasingSequence() : maxLength_(0), hasElements_(false) {}
-    void upd(int value) {
+    maxDecreasingSequence():
+      maxLength_(0),
+      hasElements_(false) {}
+    void upd(int value)
+    {
       if (!hasElements_) {
         hasElements_ = true;
         prevValue_ = value;
@@ -48,7 +55,8 @@ namespace nabieva
         maxLength_ = currLength_;
       }
     }
-    size_t result() const {
+    size_t result() const
+    {
       return maxLength_;
     }
   private:
@@ -60,10 +68,10 @@ namespace nabieva
 }
 int main()
 {
-  int a = 0;
   using namespace nabieva;
   maxCount maxCounter;
   maxDecreasingSequence decLength;
+  int a = 0;
   while (std::cin >> a) {
     if (a == 0) {
       break;
