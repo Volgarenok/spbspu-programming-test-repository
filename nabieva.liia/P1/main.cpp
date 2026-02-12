@@ -20,6 +20,9 @@ struct maxCount {
   size_t result() const {
     return countMax_;
   }
+  bool hasElement() const {
+    return hasElement_;
+  }
 private:
   int maxValue_;
   size_t countMax_;
@@ -39,6 +42,10 @@ int main()
   if (!std::cin.eof() && std::cin.fail()) {
     std::cerr << "Error input";
     return 1;
+  }
+  if (!maxCounter.hasElement()) {
+    std::cerr << "Error too short input" << std::endl;
+    return 2;
   }
   std::cout << maxCounter.result() << "\n";
 }
