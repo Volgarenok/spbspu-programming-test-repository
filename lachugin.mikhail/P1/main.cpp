@@ -28,6 +28,26 @@ namespace lachugin
     }
   };
 
+  class AftMax : Base {
+    void next(int value) override {
+      if (isFrst) {
+        isFrst = false;
+        max = value;
+        return;
+      }
+      if (value < max) {
+        count++;
+      }
+      else {
+        max = value;
+        count = 0;
+      }
+    }
+    size_t count = 0;
+    size_t max = 0;
+    bool isFrst = true;
+  };
+
   struct isZero
   {
     bool checked = false;
@@ -85,7 +105,12 @@ int main()
   bool inputErr = false;
   bool calcErr = false;
 
-  while (!z.check(n))
+  std::cin >> n;
+  if (std::cin.fail())
+  {
+    inputErr = true;
+  }
+  while (n != 0)
   {
     if (!z.checked)
     {
