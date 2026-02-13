@@ -7,6 +7,7 @@ namespace gordejchik
   {
     size_t maxEvenCount;
     size_t currentEvenCount;
+    size_t totalNumbers;
   };
 
   struct ErrorStatus
@@ -66,6 +67,19 @@ namespace gordejchik
       updateEvenCount(evenCount, currentNumber);
     }
     return true;
+  }
+
+  void printResults(const EvenCount& evenCount)
+  {
+    std::cout << "Results:\n";
+    if (evenCount.totalNumbers >= 1)
+    {
+      std::cout << "EVN-CNT: " << evenCount.maxEvenCount << '\n';
+    }
+    else
+    {
+      std::cout << "0\n";
+    }
   }
 }
 
