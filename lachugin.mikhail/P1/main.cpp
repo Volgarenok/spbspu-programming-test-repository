@@ -18,7 +18,7 @@ namespace lachugin
     virtual size_t res() const = 0;
   };
 
-  class Count : Base {
+  class Count : public Base {
     size_t count = 0;
     void next(int) override {
       count++;
@@ -28,7 +28,7 @@ namespace lachugin
     }
   };
 
-  class AftMax : Base {
+  class AftMax : public Base {
     void next(int value) override {
       if (isFrst) {
         isFrst = false;
@@ -51,7 +51,7 @@ namespace lachugin
     bool isFrst = true;
   };
 
-  class CntMin : Base {
+  class CntMin : public Base {
     void next(int value) override {
       if (isFrst) {
         isFrst = false;
@@ -75,60 +75,16 @@ namespace lachugin
     bool isFrst = true;
   };
 
-  struct isZero
-  {
-    bool checked = false;
-
-    bool check(int x)
-    {
-      if (!checked)
-      {
-        return false;
-      }
-      return x == 0;
-    }
-  };
-
-  void aftMax(int n, int& k, int& res)
-  {
-    if (n < k)
-    {
-      ++res;
-    }
-    else
-    {
-      k = n;
-      res = 0;
-    }
-  }
-
-  void cntMin(int n, int& k, int& res)
-  {
-    if (n == k)
-    {
-      ++res;
-    }
-    else if (n < k)
-    {
-      res = 0;
-      k = n;
-    }
-  }
-
 }
 
 int main()
 {
-  lachugin::isZero z;
   int n = 0;
 
-  int hlpRes1 = 0;
-  int hlpRes2 = 0;
+  lachugin::Count k;
+  lachugin::AftMax max;
+  lachugin::CntMin min;
 
-  int res1 = 0;
-  int res2 = 0;
-
-  int k = 0;
   bool inputErr = false;
   bool calcErr = false;
 
@@ -139,26 +95,14 @@ int main()
   }
   while (n != 0)
   {
-    if (!z.checked)
-    {
-      z.checked = true;
-      std::cin >> n;
-      if (std::cin.fail())
-      {
-        inputErr = true;
-        break;
-      }
-      hlpRes1 = n;
-      hlpRes2 = n;
-      ++k;
-      continue;
-    }
-
-
-    lachugin::aftMax(n, hlpRes1, res1);
-    lachugin::cntMin(n, hlpRes2, res2);
+    max(n);
+    min(n);
+    k(n);
     std::cin >> n;
-    ++k;
+    if (std::cin.fail())
+    {
+      inputErr = true;
+    }
   }
 
   if (inputErr)
@@ -167,13 +111,13 @@ int main()
     return 1;
   }
 
-  if (k < 2)
+  if (k() < 2)
   {
     std::cout << "Error: insufficient sequence length\n";
     calcErr = true;
   }
 
-  std::cout << res1 << "\n" << res2;
+  std::cout << max() << "\n" << min();
 
   if (calcErr)
   {
