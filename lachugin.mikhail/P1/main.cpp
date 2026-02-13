@@ -12,9 +12,20 @@ namespace lachugin
       next(value);
     }
     virtual ~Base() = default;
+
   private:
     virtual void next(int value) = 0;
     virtual size_t res() const = 0;
+  };
+
+  class Count : Base {
+    size_t count = 0;
+    void next(int) override {
+      count++;
+    }
+    size_t res() const override {
+      return count;
+    }
   };
 
   struct isZero
