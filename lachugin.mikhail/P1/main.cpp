@@ -2,6 +2,21 @@
 
 namespace lachugin
 {
+  struct Base {
+    size_t operator()() const
+    {
+      return res();
+    }
+    void operator()(int value)
+    {
+      next(value);
+    }
+    virtual ~Base() = default;
+  private:
+    virtual void next(int value) = 0;
+    virtual size_t res() const = 0;
+  };
+
   struct isZero
   {
     bool checked = false;
