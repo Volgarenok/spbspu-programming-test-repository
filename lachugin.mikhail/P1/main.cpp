@@ -43,8 +43,35 @@ namespace lachugin
         count = 0;
       }
     }
+    size_t res() const override {
+      return count;
+    }
     size_t count = 0;
     size_t max = 0;
+    bool isFrst = true;
+  };
+
+  class CntMin : Base {
+    void next(int value) override {
+      if (isFrst) {
+        isFrst = false;
+        min = value;
+        count++;
+        return;
+      }
+      if (value == min) {
+        count++;
+      }
+      else if (value < min){
+        min = value;
+        count = 1;
+      }
+    }
+    size_t res() const override {
+      return count;
+    }
+    size_t count = 0;
+    size_t min = 0;
     bool isFrst = true;
   };
 
