@@ -10,6 +10,17 @@ namespace gordejchik
     size_t totalNumbers;
   };
 
+  struct LocalMax
+  {
+    size_t localMaxCount;
+    int previousNumber;
+    int currentNumber;
+    int nextNumber;
+    size_t totalNumbers;
+    bool hasPrevious;
+    bool hasCurrent;
+  };
+
   struct ErrorStatus
   {
     bool foundError;
@@ -43,6 +54,30 @@ namespace gordejchik
       evenCount.currentEvenCount = 0;
     }
     ++evenCount.totalNumbers;
+  }
+
+  void updateLocalMax(LocalMax& localMax, int number)
+  {
+    if (!localMax.hasPrevious)
+    {
+      localMax.previousNumber = number;
+      localMax.hasPrevious = true;
+    }
+    else if (!localMax.hasCurrent)
+    {
+      localMax.currentNumber = number;
+      localMax.hasCurrent = true;
+    }
+    else
+    {
+      localMax.nextNumber = number;
+      if (localMax.currentNumber > localMax.previousNumber && localMax.currentNumber > localMax.nextNumber)
+      {
+        ++localMax.localMaxCount;
+      }
+      localMax.previousNumber = localMax.currentNumber;
+      localMax.currentNumber = localMax.nextNumber;
+    }
   }
 
   bool processInput(EvenCount& evenCount, ErrorStatus& error)
