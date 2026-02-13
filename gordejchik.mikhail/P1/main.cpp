@@ -42,6 +42,31 @@ namespace gordejchik
       evenCount.currentEvenCount = 0;
     }
   }
+
+  bool processInput(EvenCount& evenCount, ErrorStatus& error)
+  {
+    int currentNumber = 0;
+    while (true)
+    {
+      if (!readInteger(currentNumber))
+      {
+        printError("Error: sequence contains non-numeric characters", error);
+        return false;
+      }
+      if (std::cin.eof())
+      {
+        printError("Error: sequence doesn't end with a zero", error);
+        return false;
+      }
+      if (currentNumber == 0)
+      {
+        error.foundZero = true;
+        break;
+      }
+      updateEvenCount(evenCount, currentNumber);
+    }
+    return true;
+  }
 }
 
 int main()
