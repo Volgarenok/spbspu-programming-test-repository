@@ -42,6 +42,7 @@ namespace gordejchik
     {
       evenCount.currentEvenCount = 0;
     }
+    ++evenCount.totalNumbers;
   }
 
   bool processInput(EvenCount& evenCount, ErrorStatus& error)
@@ -78,16 +79,33 @@ namespace gordejchik
     }
     else
     {
-      std::cout << "0\n";
+      std::cout << "EVN-CNT: " << "0\n";
     }
   }
 }
 
 int main()
 {
+  gordejchik::EvenCount evenCount{};
+  evenCount.maxEvenCount = 0;
+  evenCount.currentEvenCount = 0;
+
   gordejchik::ErrorStatus error{};
   error.foundError = false;
   error.foundZero = false;
+
+  std::cout << "Enter sequence:\n";
+  if (!gordejchik::processInput(evenCount, error))
+  {
+    return 1;
+  }
+
+  gordejchik::printResults(evenCount);
+  
+  if (error.foundError)
+  {
+    return 2;
+  }
 
   return 0;
 }
