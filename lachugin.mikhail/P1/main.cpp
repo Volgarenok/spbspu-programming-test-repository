@@ -47,7 +47,7 @@ namespace lachugin
       return count;
     }
     size_t count = 0;
-    size_t max = 0;
+    int max = 0;
     bool isFrst = true;
   };
 
@@ -71,7 +71,7 @@ namespace lachugin
       return count;
     }
     size_t count = 0;
-    size_t min = 0;
+    int min = 0;
     bool isFrst = true;
   };
 
