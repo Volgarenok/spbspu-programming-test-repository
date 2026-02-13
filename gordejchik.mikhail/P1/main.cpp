@@ -2,6 +2,13 @@
 
 namespace gordejchik
 {
+
+  struct EvenCount
+  {
+    size_t maxEvenCount;
+    size_t currentEvenCount;
+  };
+
   struct ErrorStatus
   {
     bool foundError;
@@ -18,6 +25,22 @@ namespace gordejchik
   {
     std::cerr << message << '\n';
     error.foundError = true;
+  }
+
+  void updateEvenCount(EvenCount& evenCount, int number)
+  {
+    if (number % 2 == 0)
+    {
+      ++evenCount.currentEvenCount;
+      if (evenCount.currentEvenCount > evenCount.maxEvenCount)
+      {
+        evenCount.maxEvenCount = evenCount.currentEvenCount;
+      }
+    }
+    else
+    {
+      evenCount.currentEvenCount = 0;
+    }
   }
 }
 
