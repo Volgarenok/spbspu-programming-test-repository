@@ -78,9 +78,10 @@ namespace gordejchik
       localMax.previousNumber = localMax.currentNumber;
       localMax.currentNumber = localMax.nextNumber;
     }
+    ++localMax.totalNumbers;
   }
 
-  bool processInput(EvenCount& evenCount, ErrorStatus& error)
+  bool processInput(EvenCount& evenCount, LocalMax& localMax, ErrorStatus& error)
   {
     int currentNumber = 0;
     while (true)
@@ -101,20 +102,37 @@ namespace gordejchik
         break;
       }
       updateEvenCount(evenCount, currentNumber);
+      updateLocalMax(localMax, currentNumber);
     }
     return true;
   }
 
-  void printResults(const EvenCount& evenCount)
+  void printResults(const EvenCount& evenCount, const LocalMax& localMax, ErrorStatus& error)
   {
     std::cout << "Results:\n";
+
     if (evenCount.totalNumbers >= 1)
     {
       std::cout << "EVN-CNT: " << evenCount.maxEvenCount << '\n';
     }
     else
     {
-      std::cout << "EVN-CNT: " << "0\n";
+      std::cout << "EVN-CNT: 0\n";
+    }
+
+    if (localMax.totalNumbers == 0)
+    {
+      printError("Error: sequence too short for LOC-MAX", error);
+      return;
+    }
+
+    if (evenCount.totalNumbers >= 3)
+    {
+      std::cout << "LOC-MAX: " << localMax.localMaxCount << '\n';
+    }
+    else
+    {
+      std::cout << "LOC-MAX: 0\n";
     }
   }
 }
@@ -124,19 +142,28 @@ int main()
   gordejchik::EvenCount evenCount{};
   evenCount.maxEvenCount = 0;
   evenCount.currentEvenCount = 0;
+  evenCount.totalNumbers = 0;
+
+  gordejchik::LocalMax localMax{};
+  localMax.localMaxCount = 0;
+  localMax.previousNumber = 0;
+  localMax.currentNumber = 0;
+  localMax.nextNumber = 0;
+  localMax.hasPrevious = false;
+  localMax.hasCurrent = false;
 
   gordejchik::ErrorStatus error{};
   error.foundError = false;
   error.foundZero = false;
 
   std::cout << "Enter sequence:\n";
-  if (!gordejchik::processInput(evenCount, error))
+  if (!gordejchik::processInput(evenCount, localMax, error))
   {
     return 1;
   }
 
-  gordejchik::printResults(evenCount);
-  
+  gordejchik::printResults(evenCount, localMax, error);
+
   if (error.foundError)
   {
     return 2;
