@@ -1,96 +1,40 @@
 #include <iostream>
 
-bool grtLss(int first, int second, int third);
+struct grtLss {
+  grtLss();
+  void push(int);
+  size_t result() const;
+ private:
+  size_t count;
+  int first, second, third;
+};
+
+struct monDec {
+  monDec();
+  void push(int);
+  size_t result() const;
+ private:
+  size_t count;
+  int curr, prev;
+};
 
 int main()
 {
-  int currEl = 0, secondEl = 0, firstEl = 0, grt = 0, mon = 0, currMon = 1;
-  std::cin >> currEl;
-  if (std::cin.fail())
+  int el = 0;
+  grtLss g;
+  monDec m;
+  while (std::cin >> el)
+  {
+    g.push(el);
+    m.push(el);
+  }
+  if (!std::cin.eof())
   {
     std::cerr << "Input failed\n";
     return 1;
   }
-  if (currEl == 0)
-  {
-    std::cerr << "Error : sequence is too short\n";
-    return 2;
-  }
-  secondEl = currEl;
-  std::cin >> currEl;
-  if (std::cin.fail())
-  {
-    std::cerr << "Input failed\n";
-    return 1;
-  }
-  if (currEl == 0)
-  {
-    std::cout << 1 << "\n";
-    std::cerr << "Error : sequence is too short\n";
-    return 2;
-  }
-  firstEl = secondEl;
-  secondEl = currEl;
-  std::cin >> currEl;
-  if (std::cin.fail())
-  {
-    std::cerr << "Input failed\n";
-    return 1;
-  }
-  if (currEl == 0)
-  {
-    if (firstEl >= secondEl)
-    {
-      std::cout << 2 << "\n";
-    }
-    else
-    {
-      std::cout << 1 << "\n";
-    }
-    std::cerr << "Error : sequence is too short\n";
-    return 2;
-  }
-  while (currEl != 0)
-  {
-    if (std::cin.fail())
-    {
-      std::cerr << "Input failed\n";
-      return 1;
-    }
-    grt = grt+grtLss(firstEl, secondEl, currEl);
-    if (firstEl >= secondEl)
-    {
-      currMon++;
-    }
-    else
-    {
-      if (currMon > mon)
-      {
-        mon = currMon;
-      }
-      currMon = 1;
-    }
-    firstEl = secondEl;
-    secondEl = currEl;
-    std::cin >> currEl;
-  }
-  if (firstEl >= secondEl)
-  {
-    currMon++;
-  }
-  if (currMon > mon)
-  {
-    mon = currMon;
-  }
-  std::cout << grt << " " << mon << "\n";
+  std::cout << g.result() << " " << m.result() << "\n";
   return 0;
 }
 
-bool grtLss(int first, int second, int third)
-{
-  if (first > second && second > third)
-  {
-    return 1;
-  }
-  return 0;
-}
+
