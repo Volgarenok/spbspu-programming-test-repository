@@ -80,7 +80,7 @@ struct monDec {
   bool operator()(size_t &error)
   {
     if (f_ != 2)
-    { 
+    {
       if (error == 0){
         error = 2;
       }
@@ -127,5 +127,3 @@ int main()
   std::cout << "\n";
   return error;
 }
-
-
