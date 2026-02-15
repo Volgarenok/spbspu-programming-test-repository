@@ -104,28 +104,17 @@ int main()
   lachugin::CntMin min;
   lachugin::SeqProperty* props[] = {&max, &min, &k};
 
-  bool inputErr = false;
-
   int n = 0;
-  std::cin >> n;
-  if (std::cin.fail())
-  {
-    inputErr = true;
-  }
-  while (n != 0)
+
+  while (std::cin >> n && n != 0)
   {
     for (auto* p: props)
     {
       (*p)(n);
     }
-    std::cin >> n;
-    if (std::cin.fail())
-    {
-      inputErr = true;
-    }
   }
 
-  if (inputErr)
+  if (std::cin.fail())
   {
     std::cerr << "Error: invalid input sequence\n";
     return 1;
