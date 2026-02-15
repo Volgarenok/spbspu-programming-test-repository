@@ -41,12 +41,6 @@ namespace lachugin
   {
     void next(int value) override
     {
-      if (isFrst)
-      {
-        isFrst = false;
-        max = value;
-        return;
-      }
       if (value < max)
       {
         count++;
@@ -63,20 +57,12 @@ namespace lachugin
     }
     size_t count = 0;
     int max = std::numeric_limits<int>::min();
-    bool isFrst = true;
   };
 
   class CntMin: public SeqProperty
   {
     void next(int value) override
     {
-      if (isFrst)
-      {
-        isFrst = false;
-        min = value;
-        count++;
-        return;
-      }
       if (value == min)
       {
         count++;
@@ -93,7 +79,6 @@ namespace lachugin
     }
     size_t count = 0;
     int min = std::numeric_limits<int>::max();
-    bool isFrst = true;
   };
 
 }
