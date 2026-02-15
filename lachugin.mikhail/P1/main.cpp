@@ -2,7 +2,7 @@
 
 namespace lachugin
 {
-  struct Base
+  struct SeqProperty
   {
     size_t operator()() const
     {
@@ -12,14 +12,14 @@ namespace lachugin
     {
       next(value);
     }
-    virtual ~Base() = default;
+    virtual ~SeqProperty() = default;
 
   private:
     virtual void next(int value) = 0;
     virtual size_t res() const = 0;
   };
 
-  class Count: public Base
+  class Count: public SeqProperty
   {
     size_t count = 0;
     void next(int) override
@@ -28,11 +28,15 @@ namespace lachugin
     }
     size_t res() const override
     {
+      if (count < 2)
+      {
+        throw std::logic_error("insufficient sequence length");
+      }
       return count;
     }
   };
 
-  class AftMax: public Base
+  class AftMax: public SeqProperty
   {
     void next(int value) override
     {
@@ -61,7 +65,7 @@ namespace lachugin
     bool isFrst = true;
   };
 
-  class CntMin: public Base
+  class CntMin: public SeqProperty
   {
     void next(int value) override
     {
@@ -98,9 +102,9 @@ int main()
   lachugin::Count k;
   lachugin::AftMax max;
   lachugin::CntMin min;
+  lachugin::SeqProperty* props[] = {&max, &min, &k};
 
   bool inputErr = false;
-  bool calcErr = false;
 
   int n = 0;
   std::cin >> n;
@@ -110,9 +114,10 @@ int main()
   }
   while (n != 0)
   {
-    max(n);
-    min(n);
-    k(n);
+    for (auto* p: props)
+    {
+      (*p)(n);
+    }
     std::cin >> n;
     if (std::cin.fail())
     {
@@ -126,16 +131,15 @@ int main()
     return 1;
   }
 
-  if (k() < 2)
+  try
+  {
+    k();
+    std::cout << max() << "\n" << min();
+  }
+  catch (const std::logic_error&)
   {
     std::cout << "Error: insufficient sequence length\n";
-    calcErr = true;
-  }
-
-  std::cout << max() << "\n" << min();
-
-  if (calcErr)
-  {
     return 2;
   }
+
 }
