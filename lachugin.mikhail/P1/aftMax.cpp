@@ -4,25 +4,25 @@
 namespace lachugin
 {
   AftMax::AftMax():
-    count_(0),
-    max_(std::numeric_limits<int>::min())
+    count(0),
+    max(std::numeric_limits<int>::min())
   {}
 
   void AftMax::next(int value)
   {
-    if (value > max_)
+    if (value > max)
     {
-      max_ = value;
-      count_ = 0;
+      max = value;
+      count = 0;
     }
     else
     {
-      ++count_;
+      ++count;
     }
   }
 
   size_t AftMax::res() const
   {
-    return count_;
+    return count;
   }
 }

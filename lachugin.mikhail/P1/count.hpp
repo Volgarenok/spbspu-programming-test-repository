@@ -10,7 +10,7 @@ namespace lachugin
   private:
     void next(int value) override;
     size_t res() const override;
-    size_t count_;
+    size_t count;
   };
 }
 

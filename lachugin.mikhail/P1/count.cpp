@@ -4,20 +4,20 @@
 namespace lachugin
 {
   Count::Count():
-    count_(0)
+    count(0)
   {}
 
   void Count::next(int)
   {
-    ++count_;
+    ++count;
   }
 
   size_t Count::res() const
   {
-    if (count_ < 2)
+    if (count < 2)
     {
       throw std::logic_error("insufficient sequence length");
     }
-    return count_;
+    return count;
   }
 }
