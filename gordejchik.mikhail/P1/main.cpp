@@ -10,6 +10,13 @@ namespace gordejchik
     size_t currentEvenCount;
     size_t totalNumbers;
 
+    EvenCount()
+    {
+      maxEvenCount = 0;
+      currentEvenCount = 0;
+      totalNumbers = 0;
+    }
+
     void update(int number)
     {
       if (number % 2 == 0)
@@ -40,6 +47,15 @@ namespace gordejchik
     int currentNumber;
     int nextNumber;
     size_t totalNumbers;
+
+    LocalMax()
+    {
+      localMaxCount = 0;
+      previousNumber = std::numeric_limits<int>::min();
+      currentNumber = std::numeric_limits<int>::min();
+      nextNumber = std::numeric_limits<int>::min();
+      totalNumbers = 0;
+    }
 
     void update(int number)
     {
@@ -78,6 +94,12 @@ namespace gordejchik
   {
     bool foundError;
     bool foundZero;
+
+    ErrorStatus()
+    {
+      foundError = false;
+      foundZero = false;
+    }
   };
 
   void printError(const char* message, ErrorStatus& error)
@@ -133,20 +155,11 @@ namespace gordejchik
 
 int main()
 {
-  gordejchik::EvenCount evenCount{};
-  evenCount.maxEvenCount = 0;
-  evenCount.currentEvenCount = 0;
-  evenCount.totalNumbers = 0;
+  gordejchik::EvenCount evenCount;
 
-  gordejchik::LocalMax localMax{};
-  localMax.localMaxCount = 0;
-  localMax.previousNumber = std::numeric_limits<int>::min();
-  localMax.currentNumber = std::numeric_limits<int>::min();
-  localMax.nextNumber = std::numeric_limits<int>::min();
+  gordejchik::LocalMax localMax;
 
-  gordejchik::ErrorStatus error{};
-  error.foundError = false;
-  error.foundZero = false;
+  gordejchik::ErrorStatus error;
 
   std::cout << "Enter sequence:\n";
   if (!gordejchik::processInput(evenCount, localMax, error))
