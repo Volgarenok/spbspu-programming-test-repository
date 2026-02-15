@@ -9,6 +9,23 @@ namespace gordejchik
     size_t maxEvenCount;
     size_t currentEvenCount;
     size_t totalNumbers;
+
+    void update(int number)
+    {
+      if (number % 2 == 0)
+      {
+        ++currentEvenCount;
+        if (currentEvenCount > maxEvenCount)
+        {
+          maxEvenCount = currentEvenCount;
+        }
+      }
+      else
+      {
+        currentEvenCount = 0;
+      }
+      ++totalNumbers;
+    }
   };
 
   struct LocalMax
@@ -18,6 +35,29 @@ namespace gordejchik
     int currentNumber;
     int nextNumber;
     size_t totalNumbers;
+
+    void update(int number)
+    {
+      if (totalNumbers == 0)
+      {
+      	previousNumber = number;
+      }
+      else if (totalNumbers == 1)
+      {
+      	currentNumber = number;
+      }
+      else
+      {
+      	nextNumber = number;
+      	if (currentNumber > previousNumber && currentNumber > nextNumber)
+      	{
+      	  ++localMaxCount;
+      	}
+      	previousNumber = currentNumber;
+      	currentNumber = nextNumber;
+      }
+      ++totalNumbers;
+    }
   };
 
   struct ErrorStatus
@@ -30,46 +70,6 @@ namespace gordejchik
   {
     std::cerr << message << '\n';
     error.foundError = true;
-  }
-
-  void updateEvenCount(EvenCount& evenCount, int number)
-  {
-    if (number % 2 == 0)
-    {
-      ++evenCount.currentEvenCount;
-      if (evenCount.currentEvenCount > evenCount.maxEvenCount)
-      {
-        evenCount.maxEvenCount = evenCount.currentEvenCount;
-      }
-    }
-    else
-    {
-      evenCount.currentEvenCount = 0;
-    }
-    ++evenCount.totalNumbers;
-  }
-
-  void updateLocalMax(LocalMax& localMax, int number)
-  {
-    if (localMax.totalNumbers == 0)
-    {
-      localMax.previousNumber = number;
-    }
-    else if (localMax.totalNumbers == 1)
-    {
-      localMax.currentNumber = number;
-    }
-    else
-    {
-      localMax.nextNumber = number;
-      if (localMax.currentNumber > localMax.previousNumber && localMax.currentNumber > localMax.nextNumber)
-      {
-        ++localMax.localMaxCount;
-      }
-      localMax.previousNumber = localMax.currentNumber;
-      localMax.currentNumber = localMax.nextNumber;
-    }
-    ++localMax.totalNumbers;
   }
 
   bool processInput(EvenCount& evenCount, LocalMax& localMax, ErrorStatus& error)
@@ -93,8 +93,8 @@ namespace gordejchik
         error.foundZero = true;
         break;
       }
-      updateEvenCount(evenCount, currentNumber);
-      updateLocalMax(localMax, currentNumber);
+      evenCount.update(currentNumber);
+      localMax.update(currentNumber);
     }
     return true;
   }
