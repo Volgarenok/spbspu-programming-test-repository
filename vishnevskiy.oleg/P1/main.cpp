@@ -1,15 +1,31 @@
 #include <iostream>
 
 struct grtLss {
-  grtLss() : count_(0), first_(0), second_(0), third_(0) {}
-  void operator()(int);
+  grtLss() : count_(0), first_(0), second_(0), third_(0), f_(0) {}
+  void operator()(int a)
+  {
+    first_ = second_;
+    second_ = third_;
+    third_ = a;
+    if (f < 2)
+    {
+      f++;
+    }
+    else
+    {
+      if (first_ > second_ && second_ > third_)
+      {
+        count_++;
+      }
+    }
+  }
   size_t operator()() const
   {
     return count_;
   }
  private:
   size_t count_;
-  int first_, second_, third_;
+  int first_, second_, third_, f_;
 };
 
 struct monDec {
