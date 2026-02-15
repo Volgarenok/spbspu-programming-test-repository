@@ -1,4 +1,5 @@
 #include <iostream>
+#include <limits>
 
 namespace gordejchik
 {
@@ -17,8 +18,6 @@ namespace gordejchik
     int currentNumber;
     int nextNumber;
     size_t totalNumbers;
-    bool hasPrevious;
-    bool hasCurrent;
   };
 
   struct ErrorStatus
@@ -52,15 +51,13 @@ namespace gordejchik
 
   void updateLocalMax(LocalMax& localMax, int number)
   {
-    if (!localMax.hasPrevious)
+    if (localMax.totalNumbers == 0)
     {
       localMax.previousNumber = number;
-      localMax.hasPrevious = true;
     }
-    else if (!localMax.hasCurrent)
+    else if (localMax.totalNumbers == 1)
     {
       localMax.currentNumber = number;
-      localMax.hasCurrent = true;
     }
     else
     {
@@ -141,11 +138,9 @@ int main()
 
   gordejchik::LocalMax localMax{};
   localMax.localMaxCount = 0;
-  localMax.previousNumber = 0;
-  localMax.currentNumber = 0;
-  localMax.nextNumber = 0;
-  localMax.hasPrevious = false;
-  localMax.hasCurrent = false;
+  localMax.previousNumber = std::numeric_limits<int>::min();
+  localMax.currentNumber = std::numeric_limits<int>::min();
+  localMax.nextNumber = std::numeric_limits<int>::min();
 
   gordejchik::ErrorStatus error{};
   error.foundError = false;
