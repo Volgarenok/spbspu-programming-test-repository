@@ -1,0 +1,22 @@
+#ifndef LACHUGIN_AFT_MAX_HPP
+#define LACHUGIN_AFT_MAX_HPP
+
+#include "property.hpp"
+
+namespace lachugin
+{
+  class AftMax: public SeqProperty
+  {
+  public:
+    AftMax();
+
+  private:
+    void next(int value) override;
+    size_t res() const override;
+
+    size_t count_;
+    int max_;
+  };
+}
+
+#endif
