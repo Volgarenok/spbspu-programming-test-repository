@@ -1,6 +1,5 @@
 #ifndef LACHUGIN_AFT_MAX_HPP
 #define LACHUGIN_AFT_MAX_HPP
-
 #include "property.hpp"
 
 namespace lachugin
