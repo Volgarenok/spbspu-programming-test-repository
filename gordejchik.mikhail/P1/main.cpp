@@ -26,6 +26,11 @@ namespace gordejchik
       }
       ++totalNumbers;
     }
+
+    size_t getRes() const
+    {
+      return maxEvenCount;
+    }
   };
 
   struct LocalMax
@@ -57,6 +62,15 @@ namespace gordejchik
       	currentNumber = nextNumber;
       }
       ++totalNumbers;
+    }
+
+    size_t getRes() const
+    {
+      if (totalNumbers < 3)
+      {
+        throw "Error: sequence too short for LOC-MAX";
+      }
+      return localMaxCount;
     }
   };
 
@@ -103,27 +117,15 @@ namespace gordejchik
   {
     std::cout << "Results:\n";
 
-    if (evenCount.totalNumbers >= 1)
-    {
-      std::cout << "EVN-CNT: " << evenCount.maxEvenCount << '\n';
-    }
-    else
-    {
-      std::cout << "EVN-CNT: 0\n";
-    }
+    std::cout << "EVN-CNT: " << evenCount.getRes() << '\n';
 
-    if (localMax.totalNumbers == 0)
+    try
     {
-      printError("Error: sequence too short for LOC-MAX", error);
-      return;
+      std::cout << "LOC-MAX: " << localMax.getRes() << '\n';
     }
-
-    if (evenCount.totalNumbers >= 3)
+    catch (const char* e)
     {
-      std::cout << "LOC-MAX: " << localMax.localMaxCount << '\n';
-    }
-    else
-    {
+      printError(e, error);
       std::cout << "LOC-MAX: 0\n";
     }
   }
