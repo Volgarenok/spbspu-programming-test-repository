@@ -19,6 +19,7 @@ int count_increasing(const int* numbers, std::size_t size)
     return count;
 }
 
+
 int main() 
 {
     std::vector <int> numbers;
