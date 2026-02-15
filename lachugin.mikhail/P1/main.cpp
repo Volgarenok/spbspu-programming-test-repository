@@ -1,4 +1,5 @@
 #include <iostream>
+#include <limits>
 
 namespace lachugin
 {
@@ -61,7 +62,7 @@ namespace lachugin
       return count;
     }
     size_t count = 0;
-    int max = 0;
+    int max = std::numeric_limits<int>::min();
     bool isFrst = true;
   };
 
@@ -91,7 +92,7 @@ namespace lachugin
       return count;
     }
     size_t count = 0;
-    int min = 0;
+    int min = std::numeric_limits<int>::max();
     bool isFrst = true;
   };
 
