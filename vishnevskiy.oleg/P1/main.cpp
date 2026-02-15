@@ -95,7 +95,7 @@ struct monDec {
     return false;
   }
  private:
-  size_t count_, tempCount_;
+  size_t tempCount_, count_;
   int curr_, prev_, f_;
 };
 
@@ -105,7 +105,6 @@ int main()
   size_t error = 0;
   grtLss g;
   monDec m;
-  int cn = 0;
   while (std::cin >> el && el != 0)
   {
     g(el);
