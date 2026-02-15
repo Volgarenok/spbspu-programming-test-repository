@@ -27,12 +27,6 @@ namespace gordejchik
     bool foundZero;
   };
 
-  bool readInteger(int& output)
-  {
-    std::cin >> output;
-    return !std::cin.fail();
-  }
-
   void printError(const char* message, ErrorStatus& error)
   {
     std::cerr << message << '\n';
@@ -86,7 +80,8 @@ namespace gordejchik
     int currentNumber = 0;
     while (true)
     {
-      if (!readInteger(currentNumber))
+      std::cin >> currentNumber;
+      if (std::cin.fail())
       {
         printError("Error: sequence contains non-numeric characters", error);
         return false;
