@@ -2,6 +2,24 @@
 #include <limits>
 
 namespace yarmolinskaya {
+  bool readNextValue(int &value);
+  void updateMaxValues(int value, int &first, int &second);
+  bool validateSequence(bool has_input, int second);
+  int processSequence(int &first, int &second);
+  void printError(int error_code);
+
+}
+
+namespace yarmolinskaya {
+  bool readNextValue(int &value) {
+    if (!(std::cin >> value)) {
+      return false;
+  }
+    if (value == 0) {
+      return false;
+  }
+  return true;
+}
   int findSecondMax(int &first, int &second) {
     first = std::numeric_limits<int>::min();
     second = std::numeric_limits<int>::min();
