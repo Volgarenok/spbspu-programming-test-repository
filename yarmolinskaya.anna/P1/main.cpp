@@ -34,3 +34,15 @@ namespace yarmolinskaya {
   }
 
 }
+
+int main() {
+  int first = 0;
+  int second = 0;
+
+  int result = yarmolinskaya::findSecondMax(first, second);
+
+  if (result == 1) {
+    std::cerr << "Error: Invalid input sequence" << std::endl;
+    return 1;
+  }
+}
