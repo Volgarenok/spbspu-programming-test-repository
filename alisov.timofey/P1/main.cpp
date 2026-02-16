@@ -7,29 +7,21 @@ struct ITrait
   virtual ~ITrait() = default;
 };
 
-struct DivRem : ITrait
+struct DivRem: ITrait
 {
-  DivRem() : count_(0),
-             total_(0),
-             prev_(0),
-             divPossible_(true)
-  {
-  }
+  DivRem():
+    count_(0),
+    total_(0),
+    prev_(0)
+  {}
 
   void operator()(int a)
   {
     total_++;
 
-    if (total_ > 1)
+    if (prev_ != 0 && a % prev_ == 0)
     {
-      if (prev_ == 0)
-      {
-        divPossible_ = false;
-      }
-      else if (a % prev_ == 0)
-      {
-        count_++;
-      }
+      count_++;
     }
 
     prev_ = a;
@@ -37,10 +29,6 @@ struct DivRem : ITrait
 
   int operator()()
   {
-    if (total_ < 2 || !divPossible_)
-    {
-      throw 1;
-    }
     return count_;
   }
 
@@ -48,15 +36,14 @@ private:
   int count_;
   int total_;
   int prev_;
-  bool divPossible_;
 };
 
-struct EvenCount : ITrait
+struct EvenCount: ITrait
 {
-  EvenCount() : current_(0),
-                max_(0)
-  {
-  }
+  EvenCount():
+    current_(0),
+    max_(0)
+  {}
 
   void operator()(int a)
   {
@@ -64,7 +51,9 @@ struct EvenCount : ITrait
     {
       current_++;
       if (current_ > max_)
+      {
         max_ = current_;
+      }
     }
     else
     {
@@ -88,25 +77,22 @@ int main()
 
   DivRem divrem;
   EvenCount evencnt;
+  while ((std::cin >> number) && (number != 0))
+  {
+    divrem(number);
+    evencnt(number);
+  }
 
+  if (std::cin.fail())
+  {
+    std::cerr << "Input Error\n";
+    return 1;
+  }
   try
   {
-    while ((std::cin >> number) && (number != 0))
-    {
-      divrem(number);
-      evencnt(number);
-    }
-
-    if (std::cin.fail())
-    {
-      std::cerr << "Input Error\n";
-      return 1;
-    }
-
     std::cout << divrem() << '\n';
-    std::cout << evencnt() << '\n';
   }
-  catch (...)
+  catch (std::exception)
   {
     std::cerr << "Cant calculate\n";
     std::cout << 0 << '\n';
@@ -114,4 +100,5 @@ int main()
 
     return 2;
   }
+  std::cout << evencnt() << '\n';
 }
