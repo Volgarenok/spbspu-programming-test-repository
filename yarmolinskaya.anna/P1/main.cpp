@@ -3,16 +3,6 @@
 
 namespace yarmolinskaya {
 
-  bool readNextValue(int &value);
-  void updateMaxValues(int value, int &first, int &second);
-  bool validateSequence(bool has_input);
-  int processSequence(int &first, int &second);
-  void printError(int error_code);
-
-}
-
-namespace yarmolinskaya {
-
   bool readNextValue(int &value) {
     if (!(std::cin >> value)) {
       return false;
@@ -29,10 +19,6 @@ namespace yarmolinskaya {
     return has_input;
   }
 
-}
-
-namespace yarmolinskaya {
-
   void updateMaxValues(int value, int &first, int &second) {
     if (value > first) {
       second = first;
@@ -41,10 +27,6 @@ namespace yarmolinskaya {
       second = value;
     }
   }
-
-}
-
-namespace yarmolinskaya {
 
   int processSequence(int &first, int &second) {
     first = std::numeric_limits<int>::min();
@@ -71,10 +53,6 @@ namespace yarmolinskaya {
     return 0;
   }
 
-}
-
-namespace yarmolinskaya {
-
   void printError(int error_code) {
     if (error_code == 1) {
       std::cerr << "Error: Invalid input sequence" << std::endl;
@@ -88,6 +66,7 @@ namespace yarmolinskaya {
 int main() {
   int first = 0;
   int second = 0;
+
   int result = yarmolinskaya::processSequence(first, second);
 
   if (result != 0) {
