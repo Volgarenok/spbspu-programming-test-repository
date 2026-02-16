@@ -73,3 +73,15 @@ namespace yarmolinskaya {
   }
 
 }
+
+int main() {
+  int first = 0;
+  int second = 0;
+  int result = yarmolinskaya::processSequence(first, second);
+  if (result != 0) {
+    yarmolinskaya::printError(result);
+    return result;
+  }
+  std::cout << second << std::endl;
+  return 0;
+}
