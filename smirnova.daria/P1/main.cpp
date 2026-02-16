@@ -1,5 +1,6 @@
 #include <iostream>
 #include <cstring>
+#include <string>
 
 namespace smirnova {
 
@@ -159,17 +160,26 @@ void solveS9() {
 }
 
 int main(int argc, char *argv[]) {
-  if (argc != 2) {
-    std::cerr << "Usage: " << argv[0] << " <s7|s9>" << std::endl;
-    return 1;
+  std::string mode;
+  
+  if (argc == 2) {
+    mode = argv[1];
+  } else {
+    int mode_int;
+    if (std::cin >> mode_int) {
+      mode = (mode_int == 7) ? "s7" : "s9";
+    } else {
+      std::cerr << "Usage: " << argv[0] << " <s7|s9>" << std::endl;
+      return 1;
+    }
   }
 
-  if (std::strcmp(argv[1], "s7") == 0) {
+  if (mode == "s7") {
     solveS7();
-  } else if (std::strcmp(argv[1], "s9") == 0) {
+  } else if (mode == "s9") {
     solveS9();
   } else {
-    std::cerr << "Error: Unknown task '" << argv[1] << "'" << std::endl;
+    std::cerr << "Error: Unknown task '" << mode << "'" << std::endl;
     std::cerr << "Available tasks: s7, s9" << std::endl;
     return 1;
   }
