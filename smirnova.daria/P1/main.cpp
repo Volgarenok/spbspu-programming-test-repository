@@ -1,4 +1,5 @@
 #include <iostream>
+#include <cstring>
 
 namespace smirnova {
 
@@ -74,9 +75,41 @@ private:
   int length_;
 };
 
+class SignChangeCounter {
+public:
+  SignChangeCounter():
+    prev_value_(0),
+    count_(0),
+    has_prev_(false)
+  {}
+  
+  void addValue(int value) {
+    if (has_prev_) {
+      bool prev_positive = prev_value_ > 0;
+      bool curr_positive = value > 0;
+      
+      if (prev_positive != curr_positive) {
+        count_++;
+      }
+    }
+    
+    prev_value_ = value;
+    has_prev_ = true;
+  }
+  
+  int getCount() const {
+    return count_;
+  }
+  
+private:
+  int prev_value_;
+  int count_;
+  bool has_prev_;
+};
+
 }
 
-int main() {
+void solveS7() {
   smirnova::InputReader reader;
   smirnova::LocalMaxCounter counter;
   
@@ -93,15 +126,53 @@ int main() {
   
   if (reader.hasError()) {
     std::cerr << "Error: Invalid input sequence" << std::endl;
-    return 1;
+    exit(1);
   }
   
   if (!hasElements) {
     std::cerr << "Error: Empty sequence" << std::endl;
-    return 2;
+    exit(2);
   }
   
   std::cout << counter.getCount() << std::endl;
+}
+
+void solveS9() {
+  smirnova::InputReader reader;
+  smirnova::SignChangeCounter counter;
+  
+  int value;
+  
+  while (reader.readNext(value)) {
+    if (value == 0) {
+      break;
+    }
+    counter.addValue(value);
+  }
+  
+  if (reader.hasError()) {
+    std::cerr << "Error: Invalid input sequence" << std::endl;
+    exit(1);
+  }
+  
+  std::cout << counter.getCount() << std::endl;
+}
+
+int main(int argc, char *argv[]) {
+  if (argc != 2) {
+    std::cerr << "Usage: " << argv[0] << " <s7|s9>" << std::endl;
+    return 1;
+  }
+  
+  if (std::strcmp(argv[1], "s7") == 0) {
+    solveS7();
+  } else if (std::strcmp(argv[1], "s9") == 0) {
+    solveS9();
+  } else {
+    std::cerr << "Error: Unknown task '" << argv[1] << "'" << std::endl;
+    std::cerr << "Available tasks: s7, s9" << std::endl;
+    return 1;
+  }
   
   return 0;
 }
