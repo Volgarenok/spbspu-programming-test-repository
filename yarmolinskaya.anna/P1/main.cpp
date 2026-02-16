@@ -45,4 +45,11 @@ int main() {
     std::cerr << "Error: Invalid input sequence" << std::endl;
     return 1;
   }
+  if (result == 2) {
+    std::cerr << "Error: Sequence too short to calculate second maximum" << std::endl;
+    return 2;
+  }
+
+  std::cout << second << std::endl;
+  return 0;
 }
