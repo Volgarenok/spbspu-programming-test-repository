@@ -20,3 +20,14 @@ int findSecondMax(int &first, int &second) {
       second = value;
     }
   }
+
+  if (!std::cin.eof() && std::cin.fail()) {
+    return 1;
+  }
+
+  if (!has_input || second == std::numeric_limits<int>::min()) {
+    return 2;
+  }
+
+  return 0;
+}
