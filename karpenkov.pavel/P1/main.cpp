@@ -1,11 +1,14 @@
 #include <iostream>
-#include <limits>
+#include "aftMax.hpp"
+#include "signChange.hpp"
 
 int main()
 {
-  int number, previousSign = -1;
-  int maxNumber = std::numeric_limits<int>::min();
-  size_t countNum = 0, changeCount = 0, afterMax = 0;
+  karpenkov::AftMax aft;
+  karpenkov::SignChange signChange;
+  karpenkov::ISeqProperty* properties [] = {&aft, &signChange};
+  int number;
+  size_t countNum = 0;
   while (true) {
     std::cin >> number;
     if (std::cin.fail()) {
@@ -16,22 +19,14 @@ int main()
       break;
     }
     countNum++;
-    if (maxNumber < number) {
-      maxNumber = number;
-      afterMax = 0;
-    } else {
-      afterMax++;
+    for (size_t i = 0; i < 2; i++) {
+      if (countNum == 0 && i == 1) {
+        std::cerr << "Not enough numbers for AFT-MAX" << '\n';
+        return 2;
+      }
+      (*properties[i])(number);
     }
-    int currentSign = (number > 0) ? 1 : -1;
-    if (countNum > 1 && currentSign != previousSign) {
-      changeCount++;
-    }
-    previousSign = currentSign;
   }
-  std::cout << changeCount << '\n';
-  if (countNum == 0) {
-    std::cerr << "Not enough numbers for AFT-MAX" << '\n';
-    return 2;
-  }
-  std::cout << afterMax << '\n';
+  std::cout << aft() << '\n';
+  std::cout << signChange() << '\n';
 }
