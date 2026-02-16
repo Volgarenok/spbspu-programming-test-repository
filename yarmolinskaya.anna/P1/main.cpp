@@ -62,5 +62,14 @@ namespace yarmolinskaya {
     }
     return 0;
   }
+}
+namespace yarmolinskaya {
+  void printError(int error_code) {
+    if (error_code == 1) {
+      std::cerr << "Error: Invalid input sequence" << std::endl;
+    } else if (error_code == 2) {
+      std::cerr << "Error: Sequence too short to calculate second maximum" << std::endl;
+    }
+  }
 
 }
