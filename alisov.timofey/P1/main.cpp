@@ -92,7 +92,7 @@ int main()
   {
     std::cout << divrem() << '\n';
   }
-  catch (std::exception)
+  catch (const std::exception &e)
   {
     std::cerr << "Cant calculate\n";
     std::cout << 0 << '\n';
