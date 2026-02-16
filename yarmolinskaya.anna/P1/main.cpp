@@ -4,7 +4,7 @@
 namespace yarmolinskaya {
   bool readNextValue(int &value);
   void updateMaxValues(int value, int &first, int &second);
-  bool validateSequence(bool has_input, int second);
+  bool validateSequence(bool has_input);
   int processSequence(int &first, int &second);
   void printError(int error_code);
 
@@ -14,60 +14,53 @@ namespace yarmolinskaya {
   bool readNextValue(int &value) {
     if (!(std::cin >> value)) {
       return false;
-  }
+    }
     if (value == 0) {
       return false;
+    }
+    return true;
   }
-  return true;
+
+  bool validateSequence(bool has_input) {
+    return has_input;
+  }
+
 }
-  int findSecondMax(int &first, int &second) {
+
+namespace yarmolinskaya {
+  void updateMaxValues(int value, int &first, int &second) {
+    if (value > first) {
+      second = first;
+      first = value;
+    } else if (value >= second) {
+      second = value;
+    }
+  }
+
+}
+
+namespace yarmolinskaya {
+  int processSequence(int &first, int &second) {
     first = std::numeric_limits<int>::min();
     second = std::numeric_limits<int>::min();
-    int value = 0;
+
     bool has_input = false;
+    int value = 0;
+    int count = 0;
 
-    while (std::cin >> value) {
-      if (value == 0) {
-        break;
-      }
+    while (readNextValue(value)) {
       has_input = true;
-
-      if (value > first) {
-        second = first;
-        first = value;
-      } else if (value > second && value != first) {
-        second = value;
-      }
+      count++;
+      updateMaxValues(value, first, second);
     }
 
     if (!std::cin.eof() && std::cin.fail()) {
       return 1;
     }
-
-    if (!has_input || second == std::numeric_limits<int>::min()) {
+    if (!validateSequence(has_input) || count < 2) {
       return 2;
     }
-
     return 0;
   }
 
-}
-
-int main() {
-  int first = 0;
-  int second = 0;
-
-  int result = yarmolinskaya::findSecondMax(first, second);
-
-  if (result == 1) {
-    std::cerr << "Error: Invalid input sequence" << std::endl;
-    return 1;
-  }
-  if (result == 2) {
-    std::cerr << "Error: Sequence too short to calculate second maximum" << std::endl;
-    return 2;
-  }
-
-  std::cout << second << std::endl;
-  return 0;
 }
