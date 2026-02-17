@@ -22,6 +22,17 @@ int main()
       afterMax(a);
     }
 
+    if (!std::cin.eof())
+    {
+      std::cerr << "bad input\n";
+      return 1;
+    }
+
+    if (!hasNumbers)
+    {
+      return 2;
+    }
+
     std::cout << incSeq() << "\n";
     std::cout << afterMax() << "\n";
 
