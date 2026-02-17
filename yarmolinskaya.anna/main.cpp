@@ -1,22 +1,26 @@
+#include "io.hpp"
 #include <iostream>
-#include <limitis>
 
-int findSecondMax(int &first, int &second) {
-  first = std::numeric_limits<int>::min();
-  second = std::numeric_limits<int>::min();
-  int value = 0;
-  bool has_input = false;
+int main() {
+  using namespace yarmolinskaya;
 
-  while (std::cin >> value) {
-    if (value == 0) {
-      break;
-    }
-    has_input = true;
+  const result_t res = compute(std::cin);
 
-    if (value > first) {
-      second = first;
-      first = value;
-    } else if (value > second && value != first) {
-      second = value;
-    }
+  if (!res.inputValid) {
+    std::cerr << "Error: input cannot be identified as a valid integer sequence\n";
+    return 1;
   }
+
+  int exitCode = 0;
+
+  if (res.subMaxValid) {
+    std::cout << "SUB-MAX: " << res.subMax << "\n";
+  } else {
+    std::cerr << "Error: SUB-MAX requires at least 2 distinct elements\n";
+    exitCode = 2;
+  }
+
+  std::cout << "EQL-SEQ: " << res.eqlSeq << "\n";
+
+  return exitCode;
+}
