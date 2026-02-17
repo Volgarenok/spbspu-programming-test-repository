@@ -4,11 +4,10 @@ namespace nabieva
 {
   struct maxCount {
     maxCount():
-      hasElements_(false) {}
+      countMax_(0) {}
     void upd(int value)
     {
-      if (!hasElements_) {
-        hasElements_ = true;
+      if (countMax_ == 0) {
         maxValue_ = value;
         countMax_ = 1;
       }
@@ -26,21 +25,19 @@ namespace nabieva
     }
     bool hasElements() const
     {
-      return hasElements_;
+      return countMax_ > 0;
     }
   private:
     int maxValue_;
     size_t countMax_;
-    bool hasElements_;
   };
   struct maxDecreasingSequence {
     maxDecreasingSequence():
-      maxLength_(0),
-      hasElements_(false) {}
+      currLength_(0),
+      maxLength_(0) {}
     void upd(int value)
     {
-      if (!hasElements_) {
-        hasElements_ = true;
+      if (currLength_ == 0) {
         prevValue_ = value;
         currLength_ = 1;
       }
@@ -63,7 +60,6 @@ namespace nabieva
     size_t currLength_;
     size_t maxLength_;
     int prevValue_;
-    bool hasElements_;
   };
 }
 int main()
