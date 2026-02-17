@@ -21,11 +21,10 @@ namespace nabieva
     }
     size_t result() const
     {
+      if (countMax_ == 0) {
+        throw std::logic_error("Error too short input\n");
+      }
       return countMax_;
-    }
-    bool hasElements() const
-    {
-      return countMax_ > 0;
     }
   private:
     int maxValue_;
@@ -79,10 +78,11 @@ int main()
     std::cerr << "Error input";
     return 1;
   }
-  if (!maxCounter.hasElements()) {
-    std::cerr << "Error too short input" << std::endl;
+  try {
+    std::cout << maxCounter.result() << "\n";
+    std::cout << decLength.result() << "\n";
+  } catch (const std::logic_error& e) {
+    std::cerr << e.what();
     return 2;
   }
-  std::cout << maxCounter.result() << "\n";
-  std::cout << decLength.result() << "\n";
 }
