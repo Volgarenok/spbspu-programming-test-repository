@@ -1,4 +1,5 @@
 #include "sign_change_counter.hpp"
+#include <cstddef>
 
 smirnova::SignChangeCounter::SignChangeCounter():
   prev_value_(0),

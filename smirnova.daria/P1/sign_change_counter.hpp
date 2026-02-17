@@ -1,24 +1,22 @@
-#include "local_max_counter.hpp"
-#include <limits>
+#ifndef SMIRNOVA_SIGN_CHANGE_COUNTER_HPP
+#define SMIRNOVA_SIGN_CHANGE_COUNTER_HPP
 
-smirnova::LocalMaxCounter::LocalMaxCounter():
-  prev_prev_(std::numeric_limits<int>::max()),
-  prev_(std::numeric_limits<int>::max()),
-  current_(std::numeric_limits<int>::max()),
-  count_(0)
-{}
+#include <cstddef>
 
-void smirnova::LocalMaxCounter::addValue(int value)
-{
-  prev_prev_ = prev_;
-  prev_ = current_;
-  current_ = value;
-  if (prev_ > prev_prev_ && prev_ > current_) {
-    count_++;
-  }
-}
+namespace smirnova {
 
-size_t smirnova::LocalMaxCounter::getCount() const
-{
-  return count_;
-}
+class SignChangeCounter {
+public:
+  SignChangeCounter();
+  void addValue(int value);
+  size_t getCount() const;
+
+private:
+  int prev_value_;
+  size_t count_;
+  bool has_prev_;
+};
+
+} // namespace smirnova
+
+#endif
