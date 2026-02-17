@@ -4,7 +4,8 @@
 
 namespace nabieva
 {
-  struct MaxCount {
+  struct MaxCount
+  {
     MaxCount();
     void upd(int value);
     size_t result() const;
@@ -13,7 +14,8 @@ namespace nabieva
     size_t countMax_;
   };
 
-  struct MaxDecreasingSequence {
+  struct MaxDecreasingSequence
+  {
     MaxDecreasingSequence();
     void upd(int value);
     size_t result() const;
