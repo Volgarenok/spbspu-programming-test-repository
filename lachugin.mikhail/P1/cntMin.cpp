@@ -6,7 +6,7 @@ namespace lachugin
 {
   CntMin::CntMin():
     count(0),
-    min(std::numeric_limits<int>::max()),
+    min(std::numeric_limits< int >::max()),
     size_()
   {}
 
