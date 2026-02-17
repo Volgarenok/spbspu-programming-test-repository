@@ -2,130 +2,100 @@
 
 namespace novikov {
 
-struct Counter {
-  size_t biggerCount;
-  size_t totalNumbers;
-  int previousNumber;
-  bool isFirst;
-};
-
-struct EvenChain {
-  size_t maxEvenChain;
-  size_t currentEvenChain;
-};
-
-struct ErrorState {
-  bool hasError;
-  bool foundZero;
-};
-
-bool readInteger(int& output) {
-  std::cin >> output;
-  return !std::cin.fail();
-}
-
-void printError(const char* message, ErrorState& error) {
-  std::cerr << message << '\n';
-  error.hasError = true;
-}
-
-void updateCounter(Counter& counter, int number) {
-  if (!counter.isFirst) {
-    if (number > counter.previousNumber) {
-      ++counter.biggerCount;
-    }
-  } else {
-    counter.isFirst = false;
-  }
-  ++counter.totalNumbers;
-  counter.previousNumber = number;
-}
-
-void updateEvenChain(EvenChain& evenChain, int number) {
-  if (number % 2 == 0) {
-    ++evenChain.currentEvenChain;
-    if (evenChain.currentEvenChain > evenChain.maxEvenChain) {
-      evenChain.maxEvenChain = evenChain.currentEvenChain;
-    }
-  } else {
-    evenChain.currentEvenChain = 0;
-  }
-}
-
-bool processInput(Counter& counter, EvenChain& evenChain, ErrorState& error) {
-  int currentNumber = 0;
-
-  while (true) {
-    if (!readInteger(currentNumber)) {
-      printError("Ошибка: Входные данные содержат нечисловые значения", error);
-      return false;
+  class IncSeq {
+  public:
+    void operator()(int x)
+    {
+      if (!first_ && x > prev_) {
+        ++count_;
+      }
+      ++total_;
+      prev_ = x;
+      first_ = false;
     }
 
-    if (std::cin.eof()) {
-      printError("Ошибка: Не было введено число 0 для завершения", error);
-      return false;
+    size_t operator()() const
+    {
+      return count_;
     }
 
-    if (currentNumber == 0) {
-      error.foundZero = true;
+    size_t total() const
+    {
+      return total_;
+    }
+
+  private:
+    size_t count_ = 0;
+    size_t total_ = 0;
+    int prev_ = 0;
+    bool first_ = true;
+  };
+
+  class EvnCnt {
+  public:
+    void operator()(int x)
+    {
+      if (x % 2 == 0) {
+        ++cur_;
+        if (cur_ > max_) {
+          max_ = cur_;
+        }
+      } else {
+        cur_ = 0;
+      }
+    }
+
+    size_t operator()() const
+    {
+      return max_;
+    }
+
+  private:
+    size_t max_ = 0;
+    size_t cur_ = 0;
+  };
+
+}
+
+int main()
+{
+  using namespace novikov;
+
+  IncSeq inc;
+  EvnCnt evn;
+
+  int x = 0;
+  bool has_zero = false;
+
+  while (std::cin >> x) {
+    if (x == 0) {
+      has_zero = true;
       break;
     }
-
-    updateCounter(counter, currentNumber);
-    updateEvenChain(evenChain, currentNumber);
+    inc(x);
+    evn(x);
   }
 
-  return true;
-}
-
-void printResults(const Counter& counter, const EvenChain& evenChain, ErrorState& error) {
-  if (counter.totalNumbers == 0) {
-    std::cout << "0\n";
-    std::cout << "0\n";
-    return;
-  }
-
-  if (counter.totalNumbers >= 2) {
-    std::cout << counter.biggerCount << '\n';
-  } else {
-    std::cout << "0\n";
-    printError("Ошибка: последовательность слишком короткая для INC-SEQ", error);
-  }
-
-  if (counter.totalNumbers >= 1) {
-    std::cout << evenChain.maxEvenChain << '\n';
-  } else {
-    std::cout << "0\n";
-    printError("Ошибка: последовательность слишком короткая для EVN-CNT", error);
-  }
-}
-
-}
-
-int main() {
-  novikov::Counter counter{};
-  counter.biggerCount = 0;
-  counter.totalNumbers = 0;
-  counter.previousNumber = 0;
-  counter.isFirst = true;
-
-  novikov::EvenChain evenChain{};
-  evenChain.maxEvenChain = 0;
-  evenChain.currentEvenChain = 0;
-
-  novikov::ErrorState error{};
-  error.hasError = false;
-  error.foundZero = false;
-
-  if (!novikov::processInput(counter, evenChain, error)) {
+  if (std::cin.fail() && !std::cin.eof()) {
+    std::cerr << "Error: invalid input\n";
     return 1;
   }
 
-  novikov::printResults(counter, evenChain, error);
+  if (!has_zero) {
+    std::cerr << "Error: no terminating zero\n";
+    return 1;
+  }
 
-  if (error.hasError) {
+  const size_t total = inc.total();
+
+  if (total < 2) {
+    std::cerr << "Error: sequence too short for INC-SEQ\n";
+    std::cout << evn() << '\n';
     return 2;
   }
+
+  std::cout << inc() << '\n';
+  std::cout << evn() << '\n';
 
   return 0;
 }
