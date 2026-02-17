@@ -2,25 +2,23 @@
 
 namespace shevchenko
 {
+  IncSeq::IncSeq() : count_(0), prev_(0), first_(true) {}
 
-IncSeq::IncSeq() : count_(0), prev_(0), first_(true) {}
-
-void IncSeq::operator()(int a)
-{
-  if (!first_)
+  void IncSeq::operator()(int a)
   {
-    if (a > prev_) count_++;
+    if (!first_)
+    {
+      if (a > prev_) count_++;
+    }
+    else
+    {
+      first_ = false;
+    }
+    prev_ = a;
   }
-  else
+
+  size_t IncSeq::operator()() const
   {
-    first_ = false;
+    return count_;
   }
-  prev_ = a;
-}
-
-size_t IncSeq::operator()() const
-{
-  return count_;
-}
-
 }
