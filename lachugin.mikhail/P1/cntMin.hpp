@@ -14,6 +14,7 @@ namespace lachugin
     void next(int value) override;
     size_t res() const override;
 
+    size_t size_;
     size_t count;
     int min;
   };

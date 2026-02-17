@@ -5,11 +5,13 @@ namespace lachugin
 {
   CntMin::CntMin():
     count(0),
-    min(std::numeric_limits<int>::max())
+    min(std::numeric_limits<int>::max()),
+    size_()
   {}
 
   void CntMin::next(int value)
   {
+    size_++;
     if (value < min)
     {
       min = value;
