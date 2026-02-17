@@ -2,7 +2,7 @@
 #include <stdexcept>
 
 nabieva::MaxCount::MaxCount():
-  maxValue_(0),
+  maxValue_(std::numeric_limits<int>::min()),
   countMax_(0)
 {}
 
@@ -55,5 +55,8 @@ void nabieva::MaxDecreasingSequence::upd(int value)
 
 size_t nabieva::MaxDecreasingSequence::result() const
 {
+  if (maxLength_ == 0) {
+    throw std::logic_error("Error too short input\n");
+  }
   return maxLength_;
 }
