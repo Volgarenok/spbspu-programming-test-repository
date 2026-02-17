@@ -1,9 +1,9 @@
 #include <iostream>
 
-namespace nabieva
-{
-  struct maxCount {
+namespace nabieva {
+  struct MaxCount {
     maxCount():
+      maxValue_(0),
       countMax_(0) {}
     void upd(int value)
     {
@@ -30,10 +30,11 @@ namespace nabieva
     int maxValue_;
     size_t countMax_;
   };
-  struct maxDecreasingSequence {
+  struct MaxDecreasingSequence {
     maxDecreasingSequence():
       currLength_(0),
-      maxLength_(0) {}
+      maxLength_(0),
+      prevValue_(0) {}
     void upd(int value)
     {
       if (currLength_ == 0) {
@@ -61,11 +62,12 @@ namespace nabieva
     int prevValue_;
   };
 }
+
 int main()
 {
   using namespace nabieva;
-  maxCount maxCounter;
-  maxDecreasingSequence decLength;
+  MaxCount maxCounter;
+  MaxDecreasingSequence decLength;
   int a = 0;
   while (std::cin >> a && a != 0) {
     maxCounter.upd(a);
