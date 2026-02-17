@@ -67,10 +67,7 @@ int main()
   maxCount maxCounter;
   maxDecreasingSequence decLength;
   int a = 0;
-  while (std::cin >> a) {
-    if (a == 0) {
-      break;
-    }
+  while (std::cin >> a && a != 0) {
     maxCounter.upd(a);
     decLength.upd(a);
   }
