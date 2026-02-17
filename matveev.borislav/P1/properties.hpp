@@ -1,80 +1,42 @@
 #ifndef MATVEEV_PROPERTIES_HPP
 #define MATVEEV_PROPERTIES_HPP
-
 #include <cstddef>
-#include <stdexcept>
+
 namespace matveev
 {
   struct ISeqProperty
   {
-    void operator()(int value)
-    {
-      next(value);
-    }
-    size_t operator()() const
-    {
-      return result();
-    }
+    void operator()(int value);
+    size_t operator()() const;
     virtual ~ISeqProperty() = default;
   private:
     virtual void next(int value) = 0;
     virtual size_t result() const = 0;
   };
 
-  struct CntMaxProperty : public ISeqProperty
+  struct CntMaxProperty final: public ISeqProperty
   {
+    CntMaxProperty();
   private:
-    void next(int value) override
-    {
-      if (count == 0)
-      {
-        max = value;
-        count = 1;
-      }
-      else if (value > max)
-      {
-        max = value;
-        count = 1;
-      }
-      else if (value == max)
-      {
-        ++count;
-      }
-    }
-
-    size_t result() const override
-    {
-      return count;
-    }
-    int max = 0;
-    size_t count = 0;
+    void next(int value) override;
+    size_t result() const override;
+    int max;
+    size_t count;
   };
 
-  struct DivRemProperty : public ISeqProperty
+  struct DivRemProperty final: public ISeqProperty
   {
+    DivRemProperty();
   private:
-    void next(int value) override
-    {
-      if (total > 0 && previous != 0 && value % previous == 0)
-      {
-        ++count;
-      }
+    void next(int value) override;
+    size_t result() const override;
 
-      previous = value;
-      ++total;
-    }
-
-    size_t result() const override
-    {
-      if (total < 2)
-      {
-        throw std::logic_error("Error numbers");
-      }
-      return count;
-    }
-    int previous = 0;
-    size_t count = 0;
-    size_t total = 0;
+    int previous;
+    size_t count;
+    size_t total;
   };
+  const size_t property = 2;
+  void properties(ISeqProperty* props[property], CntMaxProperty& max, DivRemProperty& div);
 }
+
 #endif

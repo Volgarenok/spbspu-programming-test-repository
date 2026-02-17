@@ -5,16 +5,15 @@ int main()
 {
   matveev::CntMaxProperty cnt_max;
   matveev::DivRemProperty div_rem;
-  matveev::ISeqProperty* bim[2];
-  bim[0] = &cnt_max;
-  bim[1] = &div_rem;
+  matveev::ISeqProperty* bim[matveev::property];
+  matveev::properties(bim, cnt_max, div_rem);
 
   int a = 0;
   while (std::cin >> a && a != 0)
   {
-    for (size_t i = 0; i < 2; ++i)
+    for (size_t i = 0; i < matveev::property; ++i)
     {
-      (*bim[i])(a);
+      bim[i]->operator()(a);
     }
   }
 
@@ -29,7 +28,7 @@ int main()
     std::cout << "CNT-MAX " << bim[0]->operator()() << '\n';
     std::cout << "DIV-REM " << bim[1]->operator()() << '\n';
   }
-  catch (...)
+  catch (const std::logic_error& e)
   {
     std::cerr << "Error" << '\n';
     return 2;
