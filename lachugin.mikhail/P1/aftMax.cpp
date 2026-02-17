@@ -5,9 +5,9 @@
 namespace lachugin
 {
   AftMax::AftMax():
+    size_(),
     count(0),
-    max(std::numeric_limits< int >::min()),
-    size_()
+    max(std::numeric_limits< int >::min())
   {}
 
   void AftMax::next(int value)
