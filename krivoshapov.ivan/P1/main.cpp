@@ -17,6 +17,27 @@ private:
     virtual const char *name() const = 0;
 };
 
+struct IncSeq : ITrait {
+    IncSeq(): k_(0), prev_(0), n_(0) {}
+private:
+    void upd(int a) {
+        if (n_ > 0 && a > prev_){
+            ++k_;
+        }
+        prev_ = a;
+        ++n_;
+    }
+    size_t result() const {
+        return k_;
+    }
+    const char *name() const {
+        return "inc-seq";
+    }
+    size_t k_;
+    int prev_;
+    size_t n_;
+};
+
 int main(){
     int error = 0;
     int a = 0;
