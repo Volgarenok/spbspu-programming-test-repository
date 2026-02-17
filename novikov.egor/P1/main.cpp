@@ -2,41 +2,6 @@
 #include "divRem.hpp"
 #include "cntMax.hpp"
 
-// namespace novikov
-// {
-//   class ITrait
-//   {
-//   public:
-//     virtual ~ITrait() = default;
-//     virtual size_t operator()() const = 0;
-//     virtual void operator()(int) = 0;
-//   };
-
-//   class div_rem: public ITrait
-//   {
-//   private:
-//     bool is_first_try = true;
-//     int late_num = 0;
-//     size_t res = 0;
-
-//   public:
-//     size_t operator()() const override;
-//     void operator()(int num) override;
-//   };
-
-//   class cnt_max: public ITrait
-//   {
-//   private:
-//     size_t counter = 0;
-//     int biggest = 0;
-//     size_t res = 0;
-
-//   public:
-//     size_t operator()() const override;
-//     void operator()(int num) override;
-//   };
-// }
-
 int main()
 {
   novikov::div_rem d;
@@ -73,39 +38,3 @@ int main()
     }
   }
 }
-
-// size_t novikov::div_rem::operator()() const
-// {
-//   return res;
-// }
-
-// void novikov::div_rem::operator()(int num)
-// {
-//   if (is_first_try) {
-//     late_num = num;
-//     is_first_try = false;
-//   } else {
-//     if (num % late_num == 0) {
-//       res++;
-//     }
-//   }
-//   late_num = num;
-// }
-
-// size_t novikov::cnt_max::operator()() const
-// {
-//   return res;
-// };
-
-// void novikov::cnt_max::operator()(int num)
-// {
-//   if (counter == 0) {
-//     biggest = num;
-//     counter++;
-//   } else if (biggest < num) {
-//     biggest = num;
-//     res = 1;
-//   } else if (biggest == num) {
-//     res++;
-//   }
-// }
