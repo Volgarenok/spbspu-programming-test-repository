@@ -15,11 +15,17 @@ int main()
     std::cerr << "Error input";
     return 1;
   }
-  try {
-    std::cout << maxCounter.result() << "\n";
-    std::cout << decLength.result() << "\n";
-  } catch (const std::logic_error& e) {
-    std::cerr << e.what();
+  size_t maxCountResult = maxCounter.result();
+  size_t decLengthResult = decLength.result();
+  if (maxCountResult != 0) {
+    std::cout << maxCountResult << "\n";
+  }
+  if (decLengthResult != 0) {
+    std::cout << decLengthResult << "\n";
+  }
+  if (maxCountResult == 0 || decLengthResult == 0) {
+    std::cerr << "Error too short input\n";
     return 2;
   }
+  return 0;
 }

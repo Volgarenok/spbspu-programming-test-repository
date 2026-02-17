@@ -1,5 +1,6 @@
 #include "sequence.hpp"
 #include <stdexcept>
+#include <limits>
 
 nabieva::MaxCount::MaxCount():
   maxValue_(std::numeric_limits<int>::min()),
@@ -23,16 +24,13 @@ void nabieva::MaxCount::upd(int value)
 
 size_t nabieva::MaxCount::result() const
 {
-  if (countMax_ == 0) {
-    throw std::logic_error("Error too short input\n");
-  }
   return countMax_;
 }
 
 nabieva::MaxDecreasingSequence::MaxDecreasingSequence():
   currLength_(0),
   maxLength_(0),
-  prevValue_(0)
+  prevValue_(std::numeric_limits<int>::min())
 {}
 
 void nabieva::MaxDecreasingSequence::upd(int value)
@@ -55,8 +53,5 @@ void nabieva::MaxDecreasingSequence::upd(int value)
 
 size_t nabieva::MaxDecreasingSequence::result() const
 {
-  if (maxLength_ == 0) {
-    throw std::logic_error("Error too short input\n");
-  }
   return maxLength_;
 }
