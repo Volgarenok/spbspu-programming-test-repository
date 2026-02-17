@@ -79,11 +79,11 @@ SequenceResults processSequence(std::istream& input)
     }
 
     if (aftMaxInitialized && index > firstMaxIndex)
-      {
-        ++countAfterMax;
-      }
+    {
+      ++countAfterMax;
+    }
 
-      ++index;
+    ++index;
   }
 
   SequenceResults res;
@@ -118,28 +118,65 @@ int main()
   {
     sadovnik::SequenceResults res = sadovnik::processSequence(std::cin);
 
-    if (!res.subMaxValid && !res.aftMaxValid)
+    bool outputAnything = false;
+
+#ifdef SUB_MAX
+    if (res.subMaxValid)
+    {
+      std::cout << res.subMaxValue << '\n';
+      outputAnything = true;
+    }
+#endif
+
+#ifdef AFT_MAX
+    if (res.aftMaxValid)
+    {
+      std::cout << res.aftMaxValue << '\n';
+      outputAnything = true;
+    }
+#endif
+
+#ifndef SUB_MAX
+#ifndef AFT_MAX
+    if (res.subMaxValid)
+    {
+      std::cout << res.subMaxValue << '\n';
+      outputAnything = true;
+    }
+    if (res.aftMaxValid)
+    {
+      std::cout << res.aftMaxValue << '\n';
+      outputAnything = true;
+    }
+#endif
+#endif
+
+    if (!outputAnything)
     {
       std::cerr << "Empty sequence\n";
       return 2;
     }
 
-    if (res.subMaxValid)
-    {
-      std::cout << res.subMaxValue << '\n';
-    }
-    if (res.aftMaxValid)
-    {
-      std::cout << res.aftMaxValue << '\n';
-    }
+    bool allValid = true;
+#ifdef SUB_MAX
+    if (!res.subMaxValid) allValid = false;
+#endif
+#ifdef AFT_MAX
+    if (!res.aftMaxValid) allValid = false;
+#endif
+#ifndef SUB_MAX
+#ifndef AFT_MAX
+    if (!res.subMaxValid || !res.aftMaxValid) allValid = false;
+#endif
+#endif
 
-    if (!res.subMaxValid || !res.aftMaxValid)
+    if (!allValid)
     {
       std::cerr << "Not enough elements for some characteristics\n";
       return 2;
     }
 
-      return 0;
+    return 0;
   }
   catch (const std::runtime_error& e)
   {
