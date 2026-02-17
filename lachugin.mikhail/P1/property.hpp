@@ -4,6 +4,7 @@
 
 namespace lachugin
 {
+  const size_t property = 2;
   struct SeqProperty
   {
     size_t operator()() const

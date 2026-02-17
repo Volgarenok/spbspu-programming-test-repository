@@ -1,22 +1,21 @@
 #include <iostream>
-#include "count.hpp"
 #include "aftMax.hpp"
 #include "cntMin.hpp"
+#include "props.hpp"
 
 int main()
 {
-  lachugin::Count k;
   lachugin::AftMax max;
   lachugin::CntMin min;
-  lachugin::SeqProperty* props[] = { &max, &min, &k };
+  lachugin::SeqProperty* propertys[lachugin::property];
+  lachugin::props(propertys, max, min);
 
   int n = 0;
-
   while (std::cin >> n && n != 0)
   {
-    for (auto* p : props)
+    for (size_t i = 0; i < lachugin::property; ++i)
     {
-      (*p)(n);
+      propertys[i]->operator()(n);
     }
   }
 
@@ -28,10 +27,12 @@ int main()
 
   try
   {
-    k();
-    std::cout << max() << "\n" << min();
+    for (size_t i = 0; i < lachugin::property; ++i)
+    {
+      std::cout << propertys[i]->operator()() << "\n";
+    }
   }
-  catch (...)
+  catch (const std::logic_error&)
   {
     std::cout << "Error: insufficient sequence length\n";
     return 2;
