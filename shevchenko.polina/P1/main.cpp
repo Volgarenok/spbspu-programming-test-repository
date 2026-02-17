@@ -22,11 +22,10 @@ int main()
       afterMax(a);
     }
 
-    if (!std::cin.eof())
+    if (!std::cin.eof() && std::cin.fail())
     {
-      std::cerr << "bad input\n";
-      return 1;
-    }
+      throw std::runtime_error("bad input");
+    }  
 
     if (!hasNumbers)
     {
