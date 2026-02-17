@@ -65,4 +65,27 @@ private:
 int main(){
     int error = 0;
     int a = 0;
+    IncSeq inc_seq;
+    DivRem div_rem;
+    while (std::cin >> a) {
+        if (a==0) {
+            break;
+        }
+        inc_seq(a);
+        div_rem(a);
+    }
+    if (!std::cin.eof() && std::cin.fail()){
+        std::cerr << "Bad input\n";
+        return 1;
+    }
+    if (!div_rem.valid()) {
+        std::cerr << div_rem.trait() << ": sequences is too short\n";
+        error = 2;
+    }
+    using std::cout;
+    cout << inc_seq.trait() << ": " << inc_seq() << "\n";
+    if (div_rem.valid()) {
+        cout << div_rem.trait() << ": " << div_rem() << "\n";
+    }
+    return error;
 }
