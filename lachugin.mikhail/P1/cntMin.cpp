@@ -1,5 +1,6 @@
 #include "cntMin.hpp"
 #include <limits>
+#include <stdexcept>
 
 namespace lachugin
 {
@@ -25,6 +26,10 @@ namespace lachugin
 
   size_t CntMin::res() const
   {
+    if (size_ < 2)
+    {
+      throw std::logic_error("Error numbs");
+    }
     return count;
   }
 }

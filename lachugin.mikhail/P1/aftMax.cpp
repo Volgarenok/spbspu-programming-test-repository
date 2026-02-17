@@ -1,5 +1,6 @@
 #include "aftMax.hpp"
 #include <limits>
+#include <stdexcept>
 
 namespace lachugin
 {
@@ -25,6 +26,10 @@ namespace lachugin
 
   size_t AftMax::res() const
   {
+    if (size_ < 2)
+    {
+      throw std::logic_error("Error numbs");
+    }
     return count;
   }
 }
