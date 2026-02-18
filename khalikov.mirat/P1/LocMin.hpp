@@ -2,20 +2,21 @@
 #define LOCMIN_HPP
 
 #include "ITrait.hpp"
+#include <iostream>
 
 namespace khalikov
 {
-  struct LocMin: ITrait
+  struct LocMin
   {
     LocMin();
     void operator()(int a);
     int operator()();
-    private:
-      bool firstadd_;
-      int k_;
-      int prev_;
-      int act_;
-      int next_;
+  private:
+    size_t c_;
+    int k_;
+    int prev_;
+    int act_;
+    int next_;
   };
 }
 
