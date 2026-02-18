@@ -2,6 +2,7 @@
 #include <cstddef>
 #include <cstdio>
 #include <cstdlib>
+#include <iostream>
 
 namespace shigarev {
 
@@ -52,36 +53,4 @@ namespace shigarev {
 
     class DivRem {
     public:
-        void process(const int val)
-        {
-            if (hasPrev_ && prev_ != 0 && val % prev_ == 0) {
-                count_++;
-            }
-            prev_ = val;
-            hasPrev_ = true;
-            seqLen_++;
-        }
-
-        bool canCompute() const
-        {
-            return seqLen_ >= 2;
-        }
-
-        size_t count() const
-        {
-            return count_;
-        }
-
-    private:
-        int prev_ = 0;
-        bool hasPrev_ = false;
-        size_t count_ = 0;
-        size_t seqLen_ = 0;
-    };
-
-}
-
-int main()
-{
-    return 0;
-}
+        void process
