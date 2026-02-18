@@ -38,7 +38,6 @@ namespace gordejchik
   };
 
   void printError(const char* message, ErrorStatus& error);
-  bool processInput(EvenCount& evenCount, LocalMax& localMax, ErrorStatus& error);
   void printResults(const EvenCount& evenCount, const LocalMax& localMax, ErrorStatus& error);
 }
 

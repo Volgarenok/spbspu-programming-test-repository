@@ -73,31 +73,6 @@ void gordejchik::printError(const char* message, gordejchik::ErrorStatus& error)
   error.foundError = true;
 }
 
-bool gordejchik::processInput(gordejchik::EvenCount& evenCount, gordejchik::LocalMax& localMax, gordejchik::ErrorStatus& error)
-{
-  int currentNumber = 0;
-
-  while (std::cin >> currentNumber && currentNumber != 0)
-  {
-    evenCount.update(currentNumber);
-    localMax.update(currentNumber);
-  }
-
-  if (std::cin.fail())
-      {
-        printError("Error: sequence contains non-numeric characters", error);
-        return false;
-      }
-      if (std::cin.eof() && currentNumber != 0)
-      {
-        printError("Error: sequence doesn't end with a zero", error);
-        return false;
-      }
-
-  error.foundZero = true;
-  return true;
-}
-
 void gordejchik::printResults(const gordejchik::EvenCount& evenCount, const gordejchik::LocalMax& localMax, gordejchik::ErrorStatus& error)
 {
   std::cout << "Results:\n";
