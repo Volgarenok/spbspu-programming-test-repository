@@ -20,7 +20,7 @@ int main()
     std::cerr << "Error: sequence contains non-numeric characters\n";
     return 1;
   }
-  
+
   if (std::cin.eof() && currentNumber != 0)
   {
     std::cerr << "Error: sequence doesn't end with a zero\n";
