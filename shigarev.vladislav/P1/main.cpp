@@ -21,6 +21,11 @@ namespace shigarev {
         return true;
     }
 
+    int sign(const int val)
+    {
+        return (val > 0) - (val < 0);
+    }
+
 }
 
 int main()
