@@ -1,4 +1,5 @@
 #include <cerrno>
+#include <cstddef>
 #include <cstdio>
 #include <cstdlib>
 
@@ -25,6 +26,29 @@ namespace shigarev {
     {
         return (val > 0) - (val < 0);
     }
+
+    class SgnChg {
+    public:
+        void process(const int val)
+        {
+            const int cur = sign(val);
+            if (prevSign_ != 0 && cur != 0 && cur != prevSign_) {
+                count_++;
+            }
+            if (cur != 0) {
+                prevSign_ = cur;
+            }
+        }
+
+        size_t count() const
+        {
+            return count_;
+        }
+
+    private:
+        int prevSign_ = 0;
+        size_t count_ = 0;
+    };
 
 }
 
