@@ -29,16 +29,7 @@ namespace gordejchik
     size_t getResult() const;
   };
 
-  struct ErrorStatus
-  {
-    bool foundError;
-    bool foundZero;
-
-    ErrorStatus();
-  };
-
-  void printError(const char* message, ErrorStatus& error);
-  void printResults(const EvenCount& evenCount, const LocalMax& localMax, ErrorStatus& error);
+  void printResults(const EvenCount& evenCount, const LocalMax& localMax);
 }
 
 #endif

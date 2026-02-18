@@ -61,19 +61,7 @@ size_t gordejchik::LocalMax::getResult() const
   return localMaxCount;
 }
 
-gordejchik::ErrorStatus::ErrorStatus()
-{
-  foundError = false;
-  foundZero = false;
-}
-
-void gordejchik::printError(const char* message, gordejchik::ErrorStatus& error)
-{
-  std::cerr << message << '\n';
-  error.foundError = true;
-}
-
-void gordejchik::printResults(const gordejchik::EvenCount& evenCount, const gordejchik::LocalMax& localMax, gordejchik::ErrorStatus& error)
+void gordejchik::printResults(const gordejchik::EvenCount& evenCount, const gordejchik::LocalMax& localMax)
 {
   std::cout << "Results:\n";
 
@@ -85,6 +73,6 @@ void gordejchik::printResults(const gordejchik::EvenCount& evenCount, const gord
   }
   catch (const char* e)
   {
-    printError(e, error);
+    std::cerr << e << '\n';
   }
 }

@@ -5,7 +5,6 @@ int main()
 {
   gordejchik::EvenCount evenCount;
   gordejchik::LocalMax localMax;
-  gordejchik::ErrorStatus error;
 
   std::cout << "Enter sequence:\n";
 
@@ -28,12 +27,7 @@ int main()
     return 1;
   }
 
-  gordejchik::printResults(evenCount, localMax, error);
-
-  if (error.foundError)
-  {
-    return 2;
-  }
+  gordejchik::printResults(evenCount, localMax);
 
   return 0;
 }
