@@ -4,7 +4,7 @@
 
 namespace lachugin
 {
-  class AftMax: public SeqProperty
+  class AftMax final: public SeqProperty
   {
   public:
     AftMax();

@@ -5,7 +5,7 @@
 
 namespace lachugin
 {
-  class CntMin: public SeqProperty
+  class CntMin final: public SeqProperty
   {
   public:
     CntMin();
