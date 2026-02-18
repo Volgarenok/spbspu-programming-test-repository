@@ -113,5 +113,12 @@ namespace shigarev {
 
 int main()
 {
-    return 0;
+    shigarev::SgnChg sgnChg;
+    shigarev::DivRem divRem;
+
+    if (!shigarev::processInput(sgnChg, divRem)) {
+        return 1;
+    }
+
+    return shigarev::printResults(sgnChg, divRem);
 }
