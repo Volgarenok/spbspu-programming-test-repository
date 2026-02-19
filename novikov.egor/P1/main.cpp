@@ -1,12 +1,26 @@
 #include <iostream>
 #include "divRem.hpp"
 #include "cntMax.hpp"
-#include <memory>
+
+void destroy(novikov::ITrait *traits[])
+{
+  delete traits[0];
+  delete traits[1];
+}
 
 int main()
 {
-  std::unique_ptr< novikov::ITrait > traits[2] = {std::make_unique< novikov::div_rem >(),
-                                                  std::make_unique< novikov::cnt_max >()};
+  novikov::ITrait *traits[2] = {nullptr, nullptr};
+  try {
+    traits[0] = new novikov::div_rem();
+    traits[1] = new novikov::cnt_max();
+
+  } catch (std::bad_alloc) {
+    std::cerr << "Bad alloc\n";
+    destroy(traits);
+    return 2;
+  }
+
   int num = 0;
   size_t counter = 0;
 
@@ -15,6 +29,7 @@ int main()
 
     if (std::cin.fail()) {
       std::cerr << "Bad sequence\n";
+      destroy(traits);
       return 1;
     }
 
@@ -30,18 +45,20 @@ int main()
 
   if (counter == 0) {
     std::cerr << "Can't calculate traits. Sequence too short\n";
+    destroy(traits);
     return 2;
   }
 
   if (counter == 1) {
     std::cerr << "Can't calculate div_rem. Sequence too short\n";
     std::cout << "cnt_max: " << (*traits[1])() << "\n";
+    destroy(traits);
     return 2;
   }
 
   for (int i = 0; i < 2; ++i) {
     std::cout << (*traits[i])() << "\n";
   }
-
+  destroy(traits);
   return 0;
 }
