@@ -7,7 +7,16 @@ int main()
   lachugin::SeqProperty* propertys[2];
 
   propertys[0] = new lachugin::AftMax();
-  propertys[1] = new lachugin::CntMin();
+  propertys[1] = nullptr;
+  try
+  {
+    propertys[1] = new lachugin::CntMin();
+  }
+  catch (const std::bad_alloc&)
+  {
+    delete propertys[0];
+    return 1;
+  }
 
   int n = 0;
   while (std::cin >> n && n != 0)
