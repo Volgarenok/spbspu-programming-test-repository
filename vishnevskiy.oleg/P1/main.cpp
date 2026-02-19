@@ -107,8 +107,8 @@ int main()
   traits::traitCreate(traitArray);
   while (std::cin >> el && el != 0)
   {
-    traitArray[0]->operator()(el);
     traitArray[1]->operator()(el);
+    traitArray[0]->operator()(el);
   }
   if (std::cin.fail())
   {
