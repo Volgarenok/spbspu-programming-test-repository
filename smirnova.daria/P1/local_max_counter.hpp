@@ -18,6 +18,6 @@ private:
   size_t count_;
 };
 
-} // namespace smirnova
+}
 
 #endif
