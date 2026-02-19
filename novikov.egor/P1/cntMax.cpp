@@ -3,7 +3,7 @@
 size_t novikov::cnt_max::operator()() const
 {
   return res;
-};
+}
 
 void novikov::cnt_max::operator()(int num)
 {

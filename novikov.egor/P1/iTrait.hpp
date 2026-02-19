@@ -1,7 +1,7 @@
 #ifndef NOVIKOV_ITRAIT_HPP
 #define NOVIKOV_ITRAIT_HPP
 
-#include <iostream>
+#include <cstddef>
 
 namespace novikov
 {

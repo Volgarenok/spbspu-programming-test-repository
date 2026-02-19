@@ -8,11 +8,12 @@ namespace novikov
   class div_rem: public ITrait
   {
   private:
-    bool is_first_try = true;
-    int late_num = 0;
-    size_t res = 0;
+    bool is_first_try;
+    int late_num;
+    size_t res;
 
   public:
+    div_rem();
     size_t operator()() const override;
     void operator()(int num) override;
   };

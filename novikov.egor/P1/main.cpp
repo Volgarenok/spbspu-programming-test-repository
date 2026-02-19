@@ -4,37 +4,59 @@
 
 int main()
 {
-  novikov::div_rem d;
-  novikov::cnt_max c;
   novikov::ITrait *traits[2];
-  traits[0] = &d;
-  traits[1] = &c;
-  int num = 1;
-  std::cin >> num;
+  traits[0] = new novikov::div_rem();
+  traits[1] = new novikov::cnt_max();
+
+  int num = 0;
   size_t counter = 0;
-  while (!std::cin.fail()) {
+
+  while (true) {
+    std::cin >> num;
+
+    if (std::cin.fail()) {
+      std::cerr << "Bad sequence\n";
+      for (int i = 0; i < 2; ++i) {
+        delete traits[i];
+      }
+      return 1;
+    }
+
     if (num == 0) {
       break;
     }
+
     counter++;
-    d(num);
-    c(num);
-    std::cin >> num;
-    if (std::cin.fail()) {
-      std::cerr << "Bad sequence\n";
-      return 1;
+    for (int i = 0; i < 2; ++i) {
+      (*traits[i])(num);
     }
   }
+
+  if (counter == 0) {
+    std::cerr << "Can't calculate traits. Sequence too short\n";
+    for (int i = 0; i < 2; ++i) {
+      delete traits[i];
+    }
+    return 2;
+  }
+
   if (counter == 1) {
     std::cerr << "Can't calculate div_rem. Sequence too short\n";
-    std::cout << "cnt_max: " << c() << "\n";
-    return 2;
-  } else if (counter == 0) {
-    std::cerr << "Can't calculate traits. Sequence too short\n";
-    return 2;
-  } else {
+    std::cout << "cnt_max: " << (*traits[1])() << "\n";
+
     for (int i = 0; i < 2; ++i) {
-      std::cout << (*traits[i])() << "\n";
+      delete traits[i];
     }
+    return 2;
   }
+
+  for (int i = 0; i < 2; ++i) {
+    std::cout << (*traits[i])() << "\n";
+  }
+
+  for (int i = 0; i < 2; ++i) {
+    delete traits[i];
+  }
+
+  return 0;
 }

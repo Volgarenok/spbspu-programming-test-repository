@@ -1,5 +1,11 @@
 #include "divRem.hpp"
 
+novikov::div_rem::div_rem():
+  is_first_try(true),
+  late_num(0),
+  res(0)
+{}
+
 size_t novikov::div_rem::operator()() const
 {
   return res;
