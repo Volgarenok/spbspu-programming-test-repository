@@ -91,7 +91,7 @@ namespace traits
     int curr_ = 0, prev_ = 0, f_ = 0;
   };
 
-  void traitCreate(ITrait *p[2]) 
+  void traitCreate(ITrait *p[2])
   {
     grtLss *g = new grtLss;
     monDec *m = new monDec;
