@@ -93,8 +93,8 @@ namespace traits
 
   void traitCreate(ITrait *p[2])
   {
-    grtLss *g;
-    monDec *m;
+    grtLss *g = nullptr;
+    monDec *m = nullptr;
     try
     {
       g = new grtLss;
