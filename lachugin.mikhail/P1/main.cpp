@@ -23,7 +23,7 @@ int main()
     std::cerr << "Error: invalid input sequence\n";
     for (size_t i = 0; i < 2; ++i)
     {
-      delete[] propertys[i];
+      delete propertys[i];;
     }
     return 1;
   }
@@ -40,12 +40,12 @@ int main()
     std::cout << "Error: insufficient sequence length\n";
     for (size_t i = 0; i < 2; ++i)
     {
-      delete[] propertys[i];
+      delete propertys[i];
     }
     return 2;
   }
   for (size_t i = 0; i < 2; ++i)
   {
-    delete[] propertys[i];
+    delete propertys[i];
   }
 }
