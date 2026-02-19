@@ -15,7 +15,7 @@ int main()
     traits[0] = new novikov::div_rem();
     traits[1] = new novikov::cnt_max();
 
-  } catch (std::bad_alloc) {
+  } catch (const std::bad_alloc&) {
     std::cerr << "Bad alloc\n";
     destroy(traits);
     return 2;
