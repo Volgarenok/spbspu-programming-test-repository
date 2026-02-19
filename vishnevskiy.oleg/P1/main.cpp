@@ -1,128 +1,129 @@
 #include <iostream>
 
-struct grtLss {
-  grtLss() : count_(0), first_(0), second_(0), third_(0), f_(0) {}
-  void operator()(int a)
+namespace traits
+{
+  struct ITrait
   {
-    first_ = second_;
-    second_ = third_;
-    third_ = a;
-    if (f_ < 2)
+    virtual ~ITrait() = default;
+    virtual void operator()(int a)
     {
-      f_++;
+      process(a);
     }
-    else
+    virtual size_t operator()() const
     {
-      if (first_ > second_ && second_ > third_)
-      {
-        count_++;
-      }
+      return result();
     }
-  }
-  size_t operator()() const
-  {
-    return count_;
-  }
-  bool operator()(size_t &error)
-  {
-    if (f_ < 2)
-    {
-      if (error == 0) {
-        error = 2;
-      }
-      std::cerr << "Error : sequence is too short\n";
-      return true;
-    }
-    else
-    {
-      error = 0;
-      return false;
-    }
-    return false;
-  }
- private:
-  size_t count_;
-  int first_, second_, third_, f_;
-};
+   private:
+    virtual void process(int a) = 0;
+    virtual size_t result() const = 0;
+  };
 
-struct monDec {
-  monDec() : tempCount_(0), count_(0), curr_(0), prev_(0), f_(0) {}
-  void operator()(int a)
+  struct grtLss : public ITrait
   {
-    prev_ = curr_;
-    curr_ = a;
-    if (f_ == 0)
+   private:
+    void process(int a)
     {
-      tempCount_ = 1;
-      f_ = 1;
-    }
-    else
-    {
-      f_ = 2;
-      if (prev_ >= curr_)
+      first_ = second_;
+      second_ = third_;
+      third_ = a;
+      if (f_ < 2)
       {
-        tempCount_++;
+        f_++;
       }
       else
       {
-        tempCount_ = 1;
+        if (first_ > second_ && second_ > third_)
+        {
+          count_++;
+        }
       }
-      if (tempCount_ > count_)
+    }
+    size_t result() const
+    {
+      if (f_ < 2)
       {
-        count_ = tempCount_;
+        throw std::logic_error("Error : sequence is too short");
+      }
+      return count_;
+    }
+    size_t count_ = 0;
+    int first_ = 0, second_ = 0, third_ = 0, f_ = 0;
+  };
+
+  struct monDec : public ITrait
+  {
+   private:
+    void process(int a)
+    {
+      prev_ = curr_;
+      curr_ = a;
+      if (f_ == 0)
+      {
+        tempCount_ = 1;
+        f_ = 1;
+      }
+      else
+      {
+        f_ = 2;
+        if (prev_ >= curr_)
+        {
+          tempCount_++;
+        }
+        else
+        {
+          tempCount_ = 1;
+        }
+        if (tempCount_ > mcount_)
+        {
+          mcount_ = tempCount_;
+        }
       }
     }
-  }
-  size_t operator()() const
-  {
-    return count_;
-  }
-  bool operator()(size_t &error)
-  {
-    if (f_ != 2)
+    size_t result() const
     {
-      if (error == 0){
-        error = 2;
+      if (f_ != 2)
+      {
+        throw std::logic_error("Error : sequence is too short");
       }
-      std::cerr << "Error : sequence is too short\n";
-      return true;
+      return mcount_;
     }
-    else
-    {
-      error = 0;
-      return false;
-    }
-    return false;
+    size_t tempCount_ = 0, mcount_ = 0;
+    int curr_ = 0, prev_ = 0, f_ = 0;
+  };
+
+  void traitCreate(ITrait *p[2]) 
+  {
+    grtLss *g = new grtLss;
+    monDec *m = new monDec;
+    p[0] = g;
+    p[1] = m;
   }
- private:
-  size_t tempCount_, count_;
-  int curr_, prev_, f_;
-};
+}
 
 int main()
 {
   int el = 0;
-  size_t error = 0;
-  grtLss g;
-  monDec m;
+  traits::ITrait *traitArray[2];
+  traits::traitCreate(traitArray);
   while (std::cin >> el && el != 0)
   {
-    g(el);
-    m(el);
+    traitArray[0]->operator()(el);
+    traitArray[1]->operator()(el);
   }
   if (std::cin.fail())
   {
     std::cerr << "Input failed\n";
     return 1;
   }
-  if (!g(error))
+  try
   {
-    std::cout << g() << " ";
+    std::cout << traitArray[0]->operator()() << "\n";
+    std::cout << traitArray[1]->operator()() << "\n";
+    return 0;
   }
-  if (!m(error))
+  catch (std::logic_error &error)
   {
-    std::cout << m() << "a";
+    std::cout << error.what() << "\n";
+    return 2;
   }
-  std::cout << "\n";
-  return error;
 }
