@@ -4,10 +4,12 @@
 namespace karpenkov {
   struct ISeqProperty {
     virtual ~ISeqProperty() = default;
-    size_t operator()() const {
+    size_t operator()() const
+    {
       return res();
     }
-    void operator()(int num) {
+    void operator()(int num)
+    {
       process(num);
     }
 

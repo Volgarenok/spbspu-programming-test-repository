@@ -1,12 +1,14 @@
 #include "aftMax.hpp"
 #include <iostream>
 #include <limits>
-namespace karpenkov {
-  AftMax::AftMax():
+
+  karpenkov::AftMax::AftMax():
   afterMax(0),
-  maxNumber(std::numeric_limits<int>::min())
+  maxNumber(std::numeric_limits<int>::min()),
+  count(0)
   {}
-  void AftMax::process(int num){
+  void karpenkov::AftMax::process(int num){
+    count++;
     if (maxNumber < num) {
       maxNumber = num;
       afterMax = 0;
@@ -14,7 +16,9 @@ namespace karpenkov {
       afterMax++;
     }
   }
-  size_t AftMax::res() const{
+  size_t karpenkov::AftMax::res() const{
+    if (count < 2) {
+      throw std::logic_error("Not enough arguments for aftMax");
+    }
     return afterMax;
   }
-}

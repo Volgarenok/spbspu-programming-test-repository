@@ -9,12 +9,8 @@ int main()
   karpenkov::ISeqProperty* properties [] = {&aft, &signChange};
   int number;
   size_t countNum = 0;
-  while (true) {
+  while (std::cin >> number && number != 0){
     std::cin >> number;
-    if (std::cin.fail()) {
-      std::cerr << "Invalid input" << '\n';
-      return 1;
-    }
     if (number == 0) {
       break;
     }
@@ -27,6 +23,16 @@ int main()
       (*properties[i])(number);
     }
   }
-  std::cout << aft() << '\n';
+  if (!std::cin && !std::cin.eof()) {
+    std::cerr << "Invalid input" << '\n';
+    return 1;
+  }
+  try {
+    std::cout << aft() << '\n';
+  }
+  catch (const std::logic_error& e) {
+    std::cerr << e.what() << '\n';
+    return 2;
+  }
   std::cout << signChange() << '\n';
 }

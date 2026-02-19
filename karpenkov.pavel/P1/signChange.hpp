@@ -4,10 +4,7 @@
 #include <iostream>
 
 namespace karpenkov {
-  class SignChange : public ISeqProperty {
-  public:
-    SignChange();
-  private:
+  class SignChange final : public ISeqProperty {
     size_t count;
     int currentSign, previousSign;
     bool isFirstNum;
