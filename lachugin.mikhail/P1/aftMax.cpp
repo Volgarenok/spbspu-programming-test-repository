@@ -2,32 +2,31 @@
 #include <limits>
 #include <stdexcept>
 
+lachugin::AftMax::AftMax():
+  size_(),
+  count(0),
+  max(std::numeric_limits< int >::min())
+{}
 
-  lachugin::AftMax::AftMax():
-    size_(),
-    count(0),
-    max(std::numeric_limits< int >::min())
-  {}
-
-  void lachugin::AftMax::next(int value)
+void lachugin::AftMax::next(int value)
+{
+  size_++;
+  if (value > max)
   {
-    size_++;
-    if (value > max)
-    {
-      max = value;
-      count = 0;
-    }
-    else
-    {
-      ++count;
-    }
+    max = value;
+    count = 0;
   }
-
-  size_t lachugin::AftMax::res() const
+  else
   {
-    if (size_ < 2)
-    {
-      throw std::logic_error("Error numbs");
-    }
-    return count;
+    ++count;
   }
+}
+
+size_t lachugin::AftMax::res() const
+{
+  if (size_ < 2)
+  {
+    throw std::logic_error("Error numbs");
+  }
+  return count;
+}
