@@ -3,9 +3,11 @@
 
 #include <cstddef>
 
-namespace smirnova {
+namespace smirnova
+{
 
-class LocalMaxCounter {
+class LocalMaxCounter
+{
 public:
   LocalMaxCounter();
   void addValue(int value);
