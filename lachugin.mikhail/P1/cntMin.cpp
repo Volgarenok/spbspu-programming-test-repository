@@ -2,15 +2,13 @@
 #include <limits>
 #include <stdexcept>
 
-namespace lachugin
-{
-  CntMin::CntMin():
+  lachugin::CntMin::CntMin():
     size_(),
     count(0),
     min(std::numeric_limits< int >::max())
   {}
 
-  void CntMin::next(int value)
+  void lachugin::CntMin::next(int value)
   {
     size_++;
     if (value < min)
@@ -24,7 +22,7 @@ namespace lachugin
     }
   }
 
-  size_t CntMin::res() const
+  size_t lachugin::CntMin::res() const
   {
     if (size_ < 2)
     {

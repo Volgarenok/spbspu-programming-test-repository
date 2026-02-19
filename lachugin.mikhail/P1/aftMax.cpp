@@ -2,15 +2,14 @@
 #include <limits>
 #include <stdexcept>
 
-namespace lachugin
-{
-  AftMax::AftMax():
+
+  lachugin::AftMax::AftMax():
     size_(),
     count(0),
     max(std::numeric_limits< int >::min())
   {}
 
-  void AftMax::next(int value)
+  void lachugin::AftMax::next(int value)
   {
     size_++;
     if (value > max)
@@ -24,7 +23,7 @@ namespace lachugin
     }
   }
 
-  size_t AftMax::res() const
+  size_t lachugin::AftMax::res() const
   {
     if (size_ < 2)
     {
@@ -32,4 +31,3 @@ namespace lachugin
     }
     return count;
   }
-}
