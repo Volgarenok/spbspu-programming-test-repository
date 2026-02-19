@@ -21,10 +21,7 @@ int main()
   if (!std::cin && !std::cin.eof())
   {
     std::cerr << "Error: invalid input sequence\n";
-    for (size_t i = 0; i < 2; ++i)
-    {
-      delete propertys[i];;
-    }
+    lachugin::deletePropertys(propertys, 2);
     return 1;
   }
 
@@ -38,14 +35,8 @@ int main()
   catch (const std::logic_error&)
   {
     std::cout << "Error: insufficient sequence length\n";
-    for (size_t i = 0; i < 2; ++i)
-    {
-      delete propertys[i];
-    }
+    lachugin::deletePropertys(propertys, 2);
     return 2;
   }
-  for (size_t i = 0; i < 2; ++i)
-  {
-    delete propertys[i];
-  }
+  lachugin::deletePropertys(propertys, 2);
 }
