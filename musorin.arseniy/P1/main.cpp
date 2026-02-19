@@ -1,77 +1,92 @@
 #include <iostream>
-
 namespace musorin {
-  struct cnt_max {
-    void mx(int a) {
+  struct CountMax
+  {
+  public:
+    void setMax(int a)
+    {
       max_ = a;
     }
-    void upd(int a) {
-      if (a > max_) {
+    void update(int a)
+    {
+      if (a > max_)
+      {
         max_ = a;
-        km_ = 1;
+        count_ = 1;
       }
-      else if (a == max_) {
-        ++km_;
+      else if (a == max_)
+      {
+        ++count_;
       }
     }
-    size_t result() const {
-      return km_;
+    size_t getResult() const
+    {
+      return count_;
     }
   private:
     int max_ = 0;
-    size_t km_ = 1;
+    size_t count_ = 1;
   };
-  struct sub_max {
-    void mx(int a) {
+  struct SubMax
+  {
+  public:
+    void setMax(int a)
+    {
       max_ = a;
     }
-    void upd(int a) {
-      if (a >= max_) {
-        smax_ = max_;
+    void update(int a)
+    {
+      if (a >= max_)
+      {
+        secondMax_ = max_;
         max_ = a;
       }
     }
-    int result() const {
-      return smax_;
+    int getResult() const
+    {
+      return secondMax_;
     }
   private:
     int max_ = 0;
-    int smax_ = 0;
+    int secondMax_ = 0;
   };
 }
-int main() {
+int main()
+{
   using namespace musorin;
-  int a;
-  cnt_max w;
-  sub_max e;
-
+  int a = 0;
+  CountMax w;
+  SubMax e;
   std::cin >> a;
-  if (a == 0) {
+  if (a == 0)
+  {
     std::cerr << "Error: sequence is too small\n";
     return 2;
   }
-  w.mx(a);
-  e.mx(a);
-  while (std::cin >> a) {
-    if (a == 0) {
+  w.setMax(a);
+  e.setMax(a);
+  while (std::cin >> a)
+  {
+    if (a == 0)
+    {
       break;
     }
-    w.upd(a);
-    e.upd(a);
-
+    w.update(a);
+    e.update(a);
   }
-  if (std::cin.fail() && !std::cin.eof()) {
+  if (std::cin.fail() && !std::cin.eof())
+  {
     std::cerr << "Error: invalid input\n";
     return 1;
   }
-
-  if (e.result() == 0) {
-    std::cerr << "Error: sequence is too small(sub_max)" << "\n";
-    std::cout << "number of local max: " << w.result() << "\n";
+  if (e.getResult() == 0)
+  {
+    std::cerr << "Error: sequence is too small(sub_max)\n";
+    std::cout << "number of local max: " << w.getResult() << "\n";
     return 2;
   }
-  using std::cout;
-  cout << "number of local max: " << w.result() << "\n";
-  cout << "second max (max if you remove max): " << e.result() << "\n";
+  std::cout << "number of local max: " << w.getResult() << "\n";
+  std::cout << "second max (max if you remove max): "
+      << e.getResult() << "\n";
   return 0;
 }
