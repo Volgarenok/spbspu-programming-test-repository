@@ -1,25 +1,25 @@
-#include <iostream>
-#include "properties.hpp"
-
 int main()
 {
-  matveev::CntMaxProperty cnt_max;
-  matveev::DivRemProperty div_rem;
-  matveev::ISeqProperty* bim[matveev::property];
-  matveev::properties(bim, cnt_max, div_rem);
+  matveev::ISeqProperty* bim[2];
+  bim[0] = new matveev::CntMaxProperty();
+  bim[1] = new matveev::DivRemProperty();
 
-  int a = 0;
+  int a;
   while (std::cin >> a && a != 0)
   {
-    for (size_t i = 0; i < matveev::property; ++i)
+    for (size_t i = 0; i < 2; ++i)
     {
-      bim[i]->operator()(a);
+      (*bim[i])(a);
     }
   }
 
   if (std::cin.fail())
   {
     std::cerr << "Error input\n";
+    for (size_t i = 0; i < 2; ++i)
+    {
+      delete bim[i];
+    }
     return 1;
   }
 
@@ -31,7 +31,16 @@ int main()
   catch (const std::logic_error& e)
   {
     std::cerr << "Error" << '\n';
+    for (size_t i = 0; i < 2; ++i)
+    {
+      delete bim[i];
+    }
     return 2;
+  }
+
+  for (size_t i = 0; i < 2; ++i)
+  {
+    delete bim[i];
   }
 
   return 0;
