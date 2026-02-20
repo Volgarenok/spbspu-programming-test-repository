@@ -1,7 +1,7 @@
 #ifndef INC_SEQ_HPP
 #define INC_SEQ_HPP
 
-#include "Itrait.hpp"
+#include "itrait.hpp"
 
 namespace novikov
 {
@@ -10,9 +10,9 @@ namespace novikov
   {
   public:
     IncSeq();
-    virtual ~IncSeq() = default;
-    virtual void operator()(int x);
-    virtual size_t operator()() const;
+    virtual ~IncSeq() override = default;
+    virtual void operator()(int x) override;
+    virtual size_t operator()() const override;
     size_t total() const;
 
   private:
