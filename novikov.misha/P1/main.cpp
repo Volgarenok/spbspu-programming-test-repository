@@ -1,77 +1,14 @@
 #include <iostream>
-
-namespace novikov {
-
-  class IncSeq {
-  public:
-    void operator()(int x)
-    {
-      if (!first_ && x > prev_) {
-        ++count_;
-      }
-      ++total_;
-      prev_ = x;
-      first_ = false;
-    }
-
-    size_t operator()() const
-    {
-      return count_;
-    }
-
-    size_t total() const
-    {
-      return total_;
-    }
-
-  private:
-    size_t count_ = 0;
-    size_t total_ = 0;
-    int prev_ = 0;
-    bool first_ = true;
-  };
-
-  class EvnCnt {
-  public:
-    void operator()(int x)
-    {
-      if (x % 2 == 0) {
-        ++cur_;
-        if (cur_ > max_) {
-          max_ = cur_;
-        }
-      } else {
-        cur_ = 0;
-      }
-    }
-
-    size_t operator()() const
-    {
-      return max_;
-    }
-
-  private:
-    size_t max_ = 0;
-    size_t cur_ = 0;
-  };
-
-}
+#include "inc_seq.hpp"
+#include "evn_cnt.hpp"
 
 int main()
 {
-  using namespace novikov;
-
-  IncSeq inc;
-  EvnCnt evn;
+  novikov::IncSeq inc;
+  novikov::EvnCnt evn;
 
   int x = 0;
-  bool has_zero = false;
-
-  while (std::cin >> x) {
-    if (x == 0) {
-      has_zero = true;
-      break;
-    }
+  while (std::cin >> x && x != 0) {
     inc(x);
     evn(x);
   }
@@ -81,7 +18,7 @@ int main()
     return 1;
   }
 
-  if (!has_zero) {
+  if (x != 0) {
     std::cerr << "Error: no terminating zero\n";
     return 1;
   }
@@ -89,6 +26,11 @@ int main()
   const size_t total = inc.total();
 
   if (total < 2) {
+    std::cout << "0\n";
+    if (total == 0) {
+      std::cout << "0\n";
+      return 0;
+    }
     std::cerr << "Error: sequence too short for INC-SEQ\n";
     std::cout << evn() << '\n';
     return 2;
