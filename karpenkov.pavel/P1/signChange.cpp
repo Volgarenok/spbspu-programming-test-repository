@@ -5,13 +5,13 @@ karpenkov::SignChange::SignChange():
   currentSign(0),
   previousSign(0),
   isFirstNum(true)
- {}
-void karpenkov::SignChange::process(int num){
-  if(isFirstNum) {
+{}
+void karpenkov::SignChange::process(int num)
+{
+  if (isFirstNum) {
     isFirstNum = false;
     previousSign = (num > 0) ? 1 : -1;
-  }
-  else{
+  } else {
     currentSign = (num > 0) ? 1 : -1;
     if (!isFirstNum && currentSign != previousSign) {
       count++;
@@ -19,6 +19,7 @@ void karpenkov::SignChange::process(int num){
     previousSign = currentSign;
   }
 }
-size_t karpenkov::SignChange::res() const{
+size_t karpenkov::SignChange::res() const
+{
   return count;
 }
