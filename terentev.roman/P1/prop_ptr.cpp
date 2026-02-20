@@ -1,4 +1,4 @@
-#include "prop_ptr.hpp "
+#include "prop_ptr.hpp"
 
 terentev::PropPtr::PropPtr(ISeqProperty* ptr) : p(ptr)
 {
