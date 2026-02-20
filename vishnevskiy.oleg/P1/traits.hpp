@@ -7,7 +7,7 @@ namespace traits
 {
   struct grtLss : public ITrait
   {
-    grtLss() = default;
+    grtLss() : count_(0), first_(0), second_(0), third_(0), f_(0) {}
    private:
     void process(int a);
     size_t result() const;
@@ -17,7 +17,7 @@ namespace traits
 
   struct monDec : public ITrait
   {
-    monDec() = default;
+    monDec() : tempCount_(0), mcount_(0), curr_(0), prev_(0), f_(0) {}
    private:
     void process(int a);
     size_t result() const;
