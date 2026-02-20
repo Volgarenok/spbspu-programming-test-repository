@@ -1,7 +1,7 @@
 #ifndef INC_SEQ_HPP
 #define INC_SEQ_HPP
 
-#include "itrait.hpp"
+#include "Itrait.hpp"
 
 namespace novikov
 {

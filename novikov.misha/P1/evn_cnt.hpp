@@ -1,7 +1,7 @@
 #ifndef EVN_CNT_HPP
 #define EVN_CNT_HPP
 
-#include "itrait.hpp"
+#include "Itrait.hpp"
 
 namespace novikov
 {
