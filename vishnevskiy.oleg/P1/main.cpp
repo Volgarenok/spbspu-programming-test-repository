@@ -102,8 +102,8 @@ namespace traits
     }
     catch(...)
     {
-      delete[] g;
-      delete[] m;
+      delete g;
+      delete m;
       throw;
     }
     p[0] = g;
