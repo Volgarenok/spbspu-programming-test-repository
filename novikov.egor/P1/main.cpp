@@ -56,7 +56,7 @@ int main()
     return 2;
   }
 
-  for (int i = 0; i < 2; ++i) {
+  for (size_t i = 0; i < 2; ++i) {
     std::cout << (*traits[i])() << "\n";
   }
   destroy(traits);
