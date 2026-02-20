@@ -1,17 +1,18 @@
 #ifndef EVN_CNT_HPP
 #define EVN_CNT_HPP
 
-#include <cstddef>
+#include "itrait.hpp"
 
 namespace novikov
 {
 
-  class EvnCnt
+  class EvnCnt: public ITrait
   {
   public:
     EvnCnt();
-    void operator()(int x);
-    size_t operator()() const;
+    virtual ~EvnCnt() = default;
+    virtual void operator()(int x);
+    virtual size_t operator()() const;
 
   private:
     int max_;
