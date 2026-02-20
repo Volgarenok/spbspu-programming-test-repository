@@ -6,11 +6,11 @@ namespace khalikov
 {
   GrtLss::GrtLss()
   {
-    c_ = 0;
-    k_ = 0;
-    prev_ = std::numeric_limits<int>::max();;
-    next_ = std::numeric_limits<int>::min();;
-    act_ = 0;
+    count_ = 0;
+    res_ = 0;
+    prev_ = std::numeric_limits< int >::min();
+    next_ = std::numeric_limits< int >::min();
+    act_ = std::numeric_limits< int >::min();
   }
 
   void GrtLss::operator()(int a)
@@ -18,22 +18,19 @@ namespace khalikov
     prev_ = act_;
     act_ = next_;
     next_ = a;
-    c_++;
+    count_++;
     if ((act_ > next_) && (act_ < prev_))
     {
-      k_++;
+      res_++;
     }
   }
 
   int GrtLss::operator()()
   {
-    if (c_ < 3)
+    if (count_ < 3)
     {
       throw std::runtime_error("Not enough numbers!");
     }
-    else
-    {
-      return k_;
-    }
+    return res_;
   }
 }

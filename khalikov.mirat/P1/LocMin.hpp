@@ -6,14 +6,14 @@
 
 namespace khalikov
 {
-  struct LocMin
+  struct LocMin final : ITrait
   {
     LocMin();
-    void operator()(int a);
-    int operator()();
+    void operator()(int a) override;
+    int operator()() override;
   private:
-    size_t c_;
-    int k_;
+    size_t count_;
+    int res_;
     int prev_;
     int act_;
     int next_;
