@@ -35,8 +35,6 @@ namespace matveev
     size_t count;
     size_t total;
   };
-  const size_t property = 2;
-  void properties(ISeqProperty* props[property], CntMaxProperty& max, DivRemProperty& div);
 }
 
 #endif
