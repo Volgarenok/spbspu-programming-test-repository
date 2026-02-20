@@ -1,6 +1,7 @@
 #include "numeric_sequence.hpp"
 #include <iostream>
 #include <limits>
+#include <stdexcept>
 
 gordejchik::EvenCount::EvenCount()
 {
@@ -54,9 +55,9 @@ void gordejchik::LocalMax::update(int number)
 
 size_t gordejchik::LocalMax::getResult() const
 {
-  if (totalNumbers == 0)
+  if (totalNumbers < 1)
   {
-    throw "Error: sequence too short for LOC-MAX";
+    throw std::logic_error("Error: sequence too short for LOC-MAX");
   }
   return localMaxCount;
 }
@@ -71,8 +72,8 @@ void gordejchik::printResults(const gordejchik::EvenCount& evenCount, const gord
   {
     std::cout << "LOC-MAX: " << localMax.getResult() << '\n';
   }
-  catch (const char* e)
+  catch (const std::exception& e)
   {
-    std::cerr << e << '\n';
+    std::cerr << e.what() << '\n';
   }
 }
