@@ -1,17 +1,18 @@
 #ifndef INC_SEQ_HPP
 #define INC_SEQ_HPP
 
-#include <cstddef>
+#include "itrait.hpp"
 
 namespace novikov
 {
 
-  class IncSeq
+  class IncSeq: public ITrait
   {
   public:
     IncSeq();
-    void operator()(int x);
-    size_t operator()() const;
+    virtual ~IncSeq() = default;
+    virtual void operator()(int x);
+    virtual size_t operator()() const;
     size_t total() const;
 
   private:
