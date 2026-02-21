@@ -1,5 +1,11 @@
 #include "cntMax.hpp"
 
+novikov::cnt_max::cnt_max():
+  counter(0),
+  biggest(0),
+  res(0)
+{}
+
 size_t novikov::cnt_max::operator()() const
 {
   return res;
