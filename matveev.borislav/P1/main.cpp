@@ -1,3 +1,4 @@
+#include "properties.hpp"
 int main()
 {
   matveev::ISeqProperty* bim[2];
