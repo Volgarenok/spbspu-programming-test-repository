@@ -1,50 +1,46 @@
-#include "inc_seq.h"
-#include "div_rem.h"
+#include "inc_seq.hpp"
+#include "div_rem.hpp"
+
+#include <iostream>
+#include <stdexcept>
 
 int main()
 {
-  int error = 0;
-  int a = 0;
-
-  ITrait *traits[2] = {new IncSeq, new DivRem};
-  ITrait &inc_seq = *(traits[0]);
-  ITrait &div_rem = *(traits[1]);
-
-  while (std::cin >> a)
-  {
-    if (a == 0)
-    {
-      break;
-    }
-    inc_seq(a);
-    div_rem(a);
-  }
-
-  if (!std::cin.eof() && std::cin.fail())
-  {
-    std::cerr << "Bad input\n";
-    delete traits[0];
-    delete traits[1];
-    return 1;
-  }
-
-  using std::cout;
+  krivoshapov::IncSeq inc_seq;
+  krivoshapov::DivRem div_rem;
 
   try
   {
-    size_t inc_result = inc_seq();
-    size_t div_result = div_rem();
-    cout << inc_seq.trait() << ": " << inc_result << "\n";
-    cout << div_rem.trait() << ": " << div_result << "\n";
+    int a = 0;
+    while (std::cin >> a)
+    {
+      if (a == 0)
+      {
+        break;
+      }
+      inc_seq(a);
+      div_rem(a);
+    }
+
+    if (!std::cin.eof() && std::cin.fail())
+    {
+      throw std::invalid_argument("Bad input");
+    }
+
+    std::cout << inc_seq.trait() << ": " << inc_seq() << "\n";
+    std::cout << div_rem.trait() << ": " << div_rem() << "\n";
   }
-  catch (const char *msg)
+  catch (const std::invalid_argument &e)
   {
-    std::cerr << div_rem.trait() << ": " << msg << "\n";
-    cout << inc_seq.trait() << ": " << inc_seq() << "\n";
-    error = 2;
+    std::cerr << e.what() << "\n";
+    return 1;
+  }
+  catch (const std::runtime_error &e)
+  {
+    std::cerr << div_rem.trait() << ": " << e.what() << "\n";
+    std::cout << inc_seq.trait() << ": " << inc_seq() << "\n";
+    return 2;
   }
 
-  delete traits[0];
-  delete traits[1];
-  return error;
+  return 0;
 }

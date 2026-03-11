@@ -1,25 +1,27 @@
-#include "div_rem.h"
+#include "div_rem.hpp"
 
-void DivRem::upd(int a)
+#include <stdexcept>
+
+void krivoshapov::DivRem::upd(int a)
 {
   if (n_ > 0 && prev_ != 0 && a % prev_ == 0)
   {
-    ++k_;
+    ++count_;
   }
   prev_ = a;
   ++n_;
 }
 
-size_t DivRem::result() const
+size_t krivoshapov::DivRem::result() const
 {
   if (!valid())
   {
-    throw "sequence is too short";
+    throw std::runtime_error("sequence is too short");
   }
-  return k_;
+  return count_;
 }
 
-const char *DivRem::name() const
+const char *krivoshapov::DivRem::name() const
 {
   return "div-rem";
 }

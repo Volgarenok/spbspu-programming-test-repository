@@ -1,21 +1,21 @@
-#include "inc_seq.h"
+#include "inc_seq.hpp"
 
-void IncSeq::upd(int a)
+void krivoshapov::IncSeq::upd(int a)
 {
   if (n_ > 0 && a > prev_)
   {
-    ++k_;
+    ++count_;
   }
   prev_ = a;
   ++n_;
 }
 
-size_t IncSeq::result() const
+size_t krivoshapov::IncSeq::result() const
 {
-  return k_;
+  return count_;
 }
 
-const char *IncSeq::name() const
+const char *krivoshapov::IncSeq::name() const
 {
   return "inc-seq";
 }
