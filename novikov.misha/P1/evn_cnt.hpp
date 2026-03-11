@@ -15,8 +15,8 @@ namespace novikov
     virtual size_t operator()() const override;
 
   private:
-    int max_;
-    int cur_;
+    size_t max_;
+    size_t cur_;
   };
 
 }

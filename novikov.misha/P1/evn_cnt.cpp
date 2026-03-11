@@ -22,7 +22,7 @@ namespace novikov
 
   size_t EvnCnt::operator()() const
   {
-    return static_cast< size_t >(max_);
+    return max_;
   }
 
 }
