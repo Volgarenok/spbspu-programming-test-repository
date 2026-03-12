@@ -27,8 +27,8 @@ size_t stepanov::DivPrevSeq::result() const
 }
 
 stepanov::SubMaxSeq::SubMaxSeq():
-  max_(std::numeric_limits<int>::min()),
-  sub_max_(std::numeric_limits<int>::min()),
+  max_(std::numeric_limits< int >::min()),
+  sub_max_(std::numeric_limits< int >::min()),
   inputs_(0)
 {}
 
