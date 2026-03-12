@@ -1,37 +1,37 @@
-#include "aft_max.h"
+#include "aft_max.hpp"
 
 namespace sadovnik
 {
 
-AftMaxCount::AftMaxCount()
-  : max_(0)
-  , found_(false)
-  , after_(0)
-{
-}
+  AftMaxCount::AftMaxCount()
+    : max(0)
+    , found(false)
+    , after(0)
+  {
+  }
 
-void AftMaxCount::operator()(int x)
-{
-  if (!found_)
+  void AftMaxCount::operator()(int x)
   {
-    max_ = x;
-    found_ = true;
-    after_ = 0;
+    if (!found)
+    {
+      max = x;
+      found = true;
+      after = 0;
+    }
+    else if (x > max)
+    {
+      max = x;
+      after = 0;
+    }
+    else
+    {
+      ++after;
+    }
   }
-  else if (x > max_)
-  {
-    max_ = x;
-    after_ = 0;
-  }
-  else
-  {
-    ++after_;
-  }
-}
 
-size_t AftMaxCount::operator()() const
-{
-  return after_;
-}
+  size_t AftMaxCount::operator()() const
+  {
+    return after;
+  }
 
 }
