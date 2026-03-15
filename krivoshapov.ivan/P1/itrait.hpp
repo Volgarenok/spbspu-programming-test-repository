@@ -3,10 +3,8 @@
 
 #include <cstddef>
 
-namespace krivoshapov
-{
-  struct ITrait
-  {
+namespace krivoshapov {
+  struct ITrait {
     void operator()(int a)
     {
       upd(a);
@@ -17,7 +15,7 @@ namespace krivoshapov
       return result();
     }
 
-    const char *trait() const
+    const char* trait() const
     {
       return name();
     }
@@ -27,7 +25,7 @@ namespace krivoshapov
   private:
     virtual void upd(int a) = 0;
     virtual size_t result() const = 0;
-    virtual const char *name() const = 0;
+    virtual const char* name() const = 0;
   };
 }
 
