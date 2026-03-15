@@ -3,19 +3,21 @@
 
 namespace lukashevich
 {
-  class signChangeCount
+  class SignChangeCount
   {
-  private:
+    private:
     int count;
-    int prev_val;
-    bool has_prev;
+    int prevVal;
+    bool hasPrev;
 
-  public:
-    signChangeCount(): count(0), prev_val(0), has_prev(false)
+    public:
+    SignChangeCount(): count(0),
+      prevVal(0),
+      hasPrev(false)
     {}
 
-    void countSGN(int curr_val);
-    int get_count() const;
+    void countSGN(int currVal);
+    int getCount() const;
   };
 
 }

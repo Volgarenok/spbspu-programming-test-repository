@@ -2,19 +2,19 @@
 
 namespace lukashevich
 {
-  void signChangeCount::countSGN(int curr_val)
+  void SignChangeCount::countSGN(int currVal)
   {
-    if (has_prev) {
-      if ((prev_val > 0 && curr_val < 0) || (prev_val < 0 && curr_val > 0)) {
+    if (hasPrev) {
+      if ((prevVal > 0 && currVal < 0) || (prevVal < 0 && currVal > 0)) {
         count++;
       }
     }
 
-    prev_val = curr_val;
-    has_prev = true;
+    prevVal = currVal;
+    hasPrev = true;
   }
 
-  int signChangeCount::get_count() const
+  int SignChangeCount::getCount() const
   {
     return count;
   }
