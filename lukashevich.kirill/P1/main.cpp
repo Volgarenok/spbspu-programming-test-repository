@@ -9,7 +9,7 @@ int main()
 
   int num = 0;
   bool firstNum = true;
-  
+
   while (std::cin >> num) {
     if (num == 0) {
       break;
