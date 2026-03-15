@@ -8,7 +8,6 @@ int main()
   lukashevich::AfterMaxCount aft_max;
 
   int num = 0;
-  bool firstNum = true;
 
   while (std::cin >> num) {
     if (num == 0) {
