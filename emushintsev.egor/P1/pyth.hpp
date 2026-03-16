@@ -4,20 +4,20 @@
 
 namespace emushintsev
 {
-    class PythCount
-    {
+  class PythCount
+  {
     private:
-        int a;
-        int b;
-        int c;
-        size_t count;
-        size_t numReceived;
-        bool isPyth(int x, int y, int z) const;
+    int a;
+    int b;
+    int c;
+    size_t count;
+    size_t numReceived;
+    bool isPyth(int x, int y, int z) const;
 
     public:
-        PythCount();
-        void processNext(int val);
-        size_t getCount() const;
-    };
+    PythCount();
+    void processNext(int val);
+    size_t getCount() const;
+  };
 }
 #endif
