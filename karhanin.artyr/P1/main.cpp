@@ -1,37 +1,69 @@
-#include <vector>
 #include <iostream>
+#include "evenseqcounter.h"
+#include "incseqcounter.h"
+#define SIZE 2
 
-int count_increasing(const int* numbers, std::size_t size)
+void free_memory(karhanin::ITrait** ptrArray)
 {
-  if (size <= 1)
-  {
-    return 0;
-  }
-  int count = 0;
-  for (std::size_t i = 1; i < size; i++)
-  {
-    if (numbers[i] > numbers[i - 1])
-    {
-      count++;
-    }
-  }
-  return count;
-}
+  std::cout << "Clearing memory\n";
 
+  for (int i = 0; i < SIZE; i++)
+  {
+    delete ptrArray[i];
+  }
+
+  delete[] ptrArray;
+}
 
 int main()
 {
-  std::vector <int> numbers;
+
   int num;
-  while (std::cin >> num && num != 0)
-  {
-    numbers.push_back(num);
+  int length = 0;
+
+  karhanin::ITrait** ptrArray = nullptr;
+  
+  try{
+    ptrArray = new karhanin::ITrait * [2];
+    ptrArray[0] = new karhanin::IncSeqCounter;
+    ptrArray[1] = new karhanin::EvenSeqCounter;
+  }catch(const std::bad_alloc& e){
+    std::cerr << "Bad_alloc\n";
+    free_memory(ptrArray);
+    return 2;
   }
-  if (std::cin.fail() && !std::cin.eof())
+
+  while (std::cin >> num)
   {
-    std::cerr << "Input error";
+
+    for (int i = 0; i < SIZE; i++)
+    {
+      (*ptrArray[i])(num);
+    }
+
+    if (num == 0) { break; }
+      length++;
+  }
+
+  if (std::cin.fail())
+  {
+    std::cerr << "Bad sequence\n";
+    free_memory(ptrArray);
     return 1;
   }
-  std::cout << count_increasing(numbers.data(), numbers.size());
+
+  if (length == 0 || length == 1)
+  {
+    std::cerr << "The sequence is too short\n";
+    free_memory(ptrArray);
+    return 2;
+  }
+
+  for (int i = 0; i < SIZE; i++)
+  {
+    std::cout << (*ptrArray[i]).getName() << (*ptrArray[i])() << "\n";
+  }
+
+  free_memory(ptrArray);
   return 0;
 }
