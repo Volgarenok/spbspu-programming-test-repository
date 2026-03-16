@@ -1,5 +1,5 @@
 #include <iostream>
-#include "itrait.hpp"
+#include "Itrait.hpp"
 #include "inc_seq.hpp"
 #include "evn_cnt.hpp"
 
