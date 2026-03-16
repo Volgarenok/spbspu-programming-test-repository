@@ -1,27 +1,25 @@
 #include "div_rem.hpp"
 
-#include <stdexcept>
+krivoshapov::DivRem::DivRem():
+  count_(0),
+  prev_(0),
+  is_first_(true)
+{}
 
-void krivoshapov::DivRem::upd(int a)
+size_t krivoshapov::DivRem::operator()() const
 {
-  if (a % prev_ == 0)
+  return count_;
+}
+
+void krivoshapov::DivRem::operator()(int a)
+{
+  if (is_first_)
+  {
+    is_first_ = false;
+  }
+  else if (a % prev_ == 0)
   {
     ++count_;
   }
   prev_ = a;
-  ++n_;
-}
-
-size_t krivoshapov::DivRem::result() const
-{
-  if (n_ < 2)
-  {
-    throw std::runtime_error("sequence is too short");
-  }
-  return count_;
-}
-
-const char* krivoshapov::DivRem::name() const
-{
-  return "div-rem";
 }

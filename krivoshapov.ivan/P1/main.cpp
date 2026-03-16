@@ -1,38 +1,58 @@
 #include <iostream>
-#include <stdexcept>
 
 #include "inc_seq.hpp"
 #include "div_rem.hpp"
 
+void destroy(krivoshapov::ITrait* traits[])
+{
+  delete traits[0];
+  delete traits[1];
+}
+
 int main()
 {
-  krivoshapov::IncSeq inc_seq;
-  krivoshapov::DivRem div_rem;
+  krivoshapov::ITrait* traits[2] = {nullptr, nullptr};
+  try
+  {
+    traits[0] = new krivoshapov::IncSeq();
+    traits[1] = new krivoshapov::DivRem();
+  }
+  catch (const std::bad_alloc&)
+  {
+    std::cerr << "Bad alloc\n";
+    destroy(traits);
+    return 2;
+  }
 
   int a = 0;
+  size_t counter = 0;
   while (std::cin >> a && a != 0)
   {
-    inc_seq(a);
-    div_rem(a);
+    ++counter;
+    for (size_t i = 0; i < 2; ++i)
+    {
+      (*traits[i])(a);
+    }
   }
 
   if (!std::cin.eof() && std::cin.fail())
   {
     std::cerr << "Bad input\n";
+    destroy(traits);
     return 1;
   }
 
-  std::cout << inc_seq.trait() << ": " << inc_seq() << "\n";
-
-  try
+  if (counter < 2)
   {
-    std::cout << div_rem.trait() << ": " << div_rem() << "\n";
-  }
-  catch (const std::runtime_error& e)
-  {
-    std::cerr << div_rem.trait() << ": " << e.what() << "\n";
+    std::cerr << "div-rem: sequence is too short\n";
+    std::cout << "inc-seq: " << (*traits[0])() << "\n";
+    destroy(traits);
     return 2;
   }
 
+  std::cout << "inc-seq: " << (*traits[0])() << "\n";
+  std::cout << "div-rem: " << (*traits[1])() << "\n";
+
+  destroy(traits);
   return 0;
 }
