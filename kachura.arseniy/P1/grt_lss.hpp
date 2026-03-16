@@ -1,0 +1,29 @@
+#ifndef KACHURA_QRT_LSS_HPP
+#define KACHURA_QRT_LSS_HPP
+
+#include <limits>
+
+#include "itrait.hpp"
+
+namespace kachura {
+  struct GrtLss: ITrait {
+    GrtLss():
+      count_(0),
+      last_(std::numeric_limits< int >::max()),
+      central_(std::numeric_limits< int >::max()),
+      n_(0)
+    {}
+
+  private:
+    size_t count_;
+    int last_;
+    int central_;
+    size_t n_;
+
+    void upd(int a) override;
+    size_t result() const override;
+    const char* name() const override;
+  };
+}
+
+#endif
