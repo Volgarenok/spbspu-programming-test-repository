@@ -22,15 +22,7 @@ int main()
     return 1;
   }
 
-  try
-  {
-    std::cout << grt_lss.trait() << ": " << grt_lss() << "\n";
-  }
-  catch (const std::runtime_error& e)
-  {
-    std::cerr << grt_lss.trait() << ": " << e.what() << "\n";
-    return 2;
-  }
+  std::cout << grt_lss.trait() << ": " << grt_lss() << "\n";
 
   try
   {
