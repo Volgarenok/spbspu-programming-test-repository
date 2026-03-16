@@ -1,5 +1,6 @@
 #include "traits.hpp"
 #include <stdexcept>
+#include <iostream>
 
 namespace traits
 {
@@ -8,21 +9,14 @@ namespace traits
     first_ = second_;
     second_ = third_;
     third_ = a;
-    if (f_ < 2)
+    if (first_ > second_ && second_ > third_)
     {
-      f_++;
-    }
-    else
-    {
-      if (first_ > second_ && second_ > third_)
-      {
-        count_++;
-      }
+      count_++;
     }
   }
   size_t grtLss::result() const
   {
-    if (f_ < 2)
+    if (count_ == 0)
     {
       throw std::logic_error("Error : sequence is too short");
     }
@@ -33,31 +27,22 @@ namespace traits
   {
     prev_ = curr_;
     curr_ = a;
-    if (f_ == 0)
+    if (prev_ >= curr_)
     {
-      tempCount_ = 1;
-      f_ = 1;
+      tempCount_++;
     }
     else
     {
-      f_ = 2;
-      if (prev_ >= curr_)
-      {
-        tempCount_++;
-      }
-      else
-      {
-        tempCount_ = 1;
-      }
-      if (tempCount_ > mcount_)
-      {
-        mcount_ = tempCount_;
-      }
+      tempCount_ = 1;
+    }
+    if (tempCount_ > mcount_)
+    {
+      mcount_ = tempCount_;
     }
   }
   size_t monDec::result() const
   {
-    if (f_ != 2)
+    if (mcount_ == 0)
     {
       throw std::logic_error("Error : sequence is too short");
     }
@@ -73,8 +58,9 @@ namespace traits
       g = new grtLss;
       m = new monDec;
     }
-    catch(...)
+    catch(const std::bad_alloc &e)
     {
+      std::cerr << e.what() << "\n";
       delete g;
       delete m;
       throw;
