@@ -1,6 +1,5 @@
 #include "grt_lss.hpp"
 
-#include <stdexcept>
 
 void kachura::GrtLss::upd(int a)
 {
@@ -10,15 +9,10 @@ void kachura::GrtLss::upd(int a)
   }
   last_ = central_;
   central_ = a;
-  n_++;
 }
 
 size_t kachura::GrtLss::result() const
 {
-  if (n_ < 3)
-  {
-    throw std::runtime_error("sequence is too short");
-  }
   return count_;
 }
 

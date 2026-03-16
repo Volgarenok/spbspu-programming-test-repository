@@ -18,7 +18,7 @@ void kachura::AftMax::upd(int a)
 
 size_t kachura::AftMax::result() const
 {
-  if (n_ < 2)
+  if (n_ == 0)
   {
     throw std::runtime_error("sequence is too short");
   }

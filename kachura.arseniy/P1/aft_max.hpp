@@ -9,7 +9,7 @@ namespace kachura {
   struct AftMax: ITrait {
     AftMax():
       count_(0),
-      max_(std::numeric_limits< int >::max()),
+      max_(0),
       n_(0)
     {}
 
