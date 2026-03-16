@@ -99,7 +99,7 @@ namespace yarmolinskaya
   }
 }
 
-int main(int argc, char *argv[])
+int main(int argc, char * /* argv */[])
 {
   if (argc != 1) {
     std::cerr << "Error: program does not accept command line arguments\n";
