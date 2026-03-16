@@ -9,8 +9,8 @@ namespace kachura {
   struct GrtLss: ITrait {
     GrtLss():
       count_(0),
-      last_(std::numeric_limits< int >::max()),
-      central_(std::numeric_limits< int >::max())
+      last_(0),
+      central_(0)
     {}
 
   private:

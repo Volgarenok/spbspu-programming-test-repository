@@ -3,7 +3,7 @@
 
 void kachura::GrtLss::upd(int a)
 {
-  if (central_ < last_ && central_ > a)
+  if (central_ < last_ && central_ > a && last_ != 0 && central_ != 0)
   {
     ++count_;
   }
