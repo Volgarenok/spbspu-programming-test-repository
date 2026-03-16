@@ -2,9 +2,11 @@
 #define PYTH_HPP
 #include <cstddef>
 
-namespace emushintsev {
-    class PythCount {
-        private:
+namespace emushintsev
+{
+    class PythCount
+    {
+    private:
         int a;
         int b;
         int c;
@@ -12,7 +14,7 @@ namespace emushintsev {
         size_t numReceived;
         bool isPyth(int x, int y, int z) const;
 
-        public:
+    public:
         PythCount();
         void processNext(int val);
         size_t getCount() const;
