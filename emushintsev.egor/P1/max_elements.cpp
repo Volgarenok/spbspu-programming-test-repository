@@ -2,7 +2,7 @@
 
 namespace emushintsev
 {
-  MaxElements::MaxElements(): 
+  MaxElements::MaxElements():
   max1(INT_MIN),
   max2(INT_MIN),
   hasMax1(false),
