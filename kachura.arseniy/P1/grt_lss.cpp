@@ -1,17 +1,19 @@
-#include "qrt_lss.hpp"
+#include "grt_lss.hpp"
 
-void kachura::QrtLss::upd(int a)
+#include <stdexcept>
+
+void kachura::GrtLss::upd(int a)
 {
-  if (central_ < prev_ && central_ > a)
+  if (central_ < last_ && central_ > a)
   {
     ++count_;
   }
-  prev_ = central_;
+  last_ = central_;
   central_ = a;
   n_++;
 }
 
-size_t kachura::QrtLss::result() const
+size_t kachura::GrtLss::result() const
 {
   if (n_ < 3)
   {
@@ -20,7 +22,7 @@ size_t kachura::QrtLss::result() const
   return count_;
 }
 
-const char* kachura::QrtLss::name() const
+const char* kachura::GrtLss::name() const
 {
-  return "inc-seq";
+  return "grt-lss";
 }

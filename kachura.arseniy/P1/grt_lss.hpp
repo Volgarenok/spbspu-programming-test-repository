@@ -1,5 +1,5 @@
-#ifndef KACHURA_QRT_LSS_HPP
-#define KACHURA_QRT_LSS_HPP
+#ifndef KACHURA_GRT_LSS_HPP
+#define KACHURA_GRT_LSS_HPP
 
 #include <limits>
 

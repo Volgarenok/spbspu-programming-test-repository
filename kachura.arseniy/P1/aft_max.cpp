@@ -27,5 +27,5 @@ size_t kachura::AftMax::result() const
 
 const char* kachura::AftMax::name() const
 {
-  return "div-rem";
+  return "aft-max";
 }
