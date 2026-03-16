@@ -12,21 +12,22 @@ namespace novikov
 
   void IncSeq::operator()(int x)
   {
-    if (x > prev_) {
-      ++count_;
+    if (x == 0) {
+      if (total_ < 2) {
+        throw SequenceTooShortError(total_);
+      }
+    } else {
+      if (x > prev_) {
+        ++count_;
+      }
+      ++total_;
+      prev_ = x;
     }
-    ++total_;
-    prev_ = x;
   }
 
   size_t IncSeq::operator()() const
   {
     return count_;
-  }
-
-  size_t IncSeq::total() const
-  {
-    return total_;
   }
 
 }
