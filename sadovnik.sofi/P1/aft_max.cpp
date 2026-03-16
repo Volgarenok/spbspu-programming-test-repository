@@ -1,37 +1,26 @@
 #include "aft_max.hpp"
 
-namespace sadovnik
+namespace sadovnik {
+
+AftMaxCount::AftMaxCount()
+  : max_(std::numeric_limits<int>::min()),
+    after_(0)
 {
+}
 
-  AftMaxCount::AftMaxCount()
-    : max(0)
-    , found(false)
-    , after(0)
-  {
+void AftMaxCount::operator()(int x)
+{
+  if (x > max_) {
+    max_ = x;
+    after_ = 0;
+  } else {
+    ++after_;
   }
+}
 
-  void AftMaxCount::operator()(int x)
-  {
-    if (!found)
-    {
-      max = x;
-      found = true;
-      after = 0;
-    }
-    else if (x > max)
-    {
-      max = x;
-      after = 0;
-    }
-    else
-    {
-      ++after;
-    }
-  }
-
-  size_t AftMaxCount::operator()() const
-  {
-    return after;
-  }
+size_t AftMaxCount::operator()() const
+{
+  return after_;
+}
 
 }

@@ -1,4 +1,5 @@
 #include <iostream>
+#include <stdexcept>
 #include "sub_max.hpp"
 #include "aft_max.hpp"
 
@@ -10,40 +11,29 @@ int main()
 
   int err = 0;
   int x;
-  bool zero = false;
 
   sadovnik::SubMaxCount sub;
   sadovnik::AftMaxCount aft;
 
-  while (cin >> x)
-  {
-    if (x == 0)
-    {
-      zero = true;
-      break;
-    }
+  while (cin >> x) {
+    if (x == 0) break;
     sub(x);
     aft(x);
   }
 
-  if (cin.fail() && !cin.eof())
-  {
-    cerr << "Bad input\n";
+  if (cin.fail() && !cin.eof()) {
+    cerr << "bad input\n";
     return 1;
   }
-  if (!zero)
-  {
-    cerr << "No zero\n";
+  if (cin.eof()) {
+    cerr << "no zero\n";
     return 1;
   }
 
-  if (sub.valid())
-  {
+  try {
     cout << sub() << '\n';
-  }
-  else
-  {
-    cerr << "Not enough numbers\n";
+  } catch (const std::exception&) {
+    cerr << "not enough numbers\n";
     err = 2;
   }
 
@@ -51,3 +41,4 @@ int main()
 
   return err;
 }
+
