@@ -1,26 +1,29 @@
 #include "aft_max.hpp"
 
-namespace lukashevich
+lukashevich::AfterMaxCount::AfterMaxCount():
+  maxVal_(INT_MIN),
+  maxPos_(-1),
+  currPos_(0)
+{}
+
+void lukashevich::AfterMaxCount::processNext(int val)
 {
-  void AfterMaxCount::processNext(int val)
-  {
-    if (currPos == 0 || val > maxVal) {
-      maxVal = val;
-      maxPos = currPos;
-    }
-    currPos++;
+  if (currPos_ == 0 || val > maxVal_) {
+    maxVal_ = val;
+    maxPos_ = currPos_;
   }
+  currPos_++;
+}
 
-  int AfterMaxCount::getCountAftMax() const
-  {
-    if (!hasMax()) {
-      return 2;
-    }
-    return currPos - maxPos - 1;
+int lukashevich::AfterMaxCount::getCountAftMax() const
+{
+  if (!hasMax()) {
+    return 2;
   }
+  return currPos_ - maxPos_ - 1;
+}
 
-  bool AfterMaxCount::hasMax() const
-  {
-    return maxPos >= 0;
-  }
+bool lukashevich::AfterMaxCount::hasMax() const
+{
+  return maxPos_ >= 0;
 }

@@ -6,21 +6,17 @@ namespace lukashevich
 {
   class AfterMaxCount
   {
-    private:
-      int maxVal;
-      int maxPos;
-      int currPos;
-
     public:
-      AfterMaxCount():
-        maxVal(INT_MIN),
-        maxPos(-1),
-        currPos(0)
-      {}
+      AfterMaxCount();
 
       void processNext(int value);
       int getCountAftMax() const;
       bool hasMax() const;
+
+    private:
+      int maxVal_;
+      int maxPos_;
+      int currPos_;
   };
 }
 

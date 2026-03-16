@@ -5,20 +5,16 @@ namespace lukashevich
 {
   class SignChangeCount
   {
-    private:
-    int count;
-    int prevVal;
-    bool hasPrev;
-
     public:
-    SignChangeCount(): count(0),
-      prevVal(0),
-      hasPrev(false)
-    {}
+      SignChangeCount();
 
-    void countSGN(int currVal);
-    int getCount() const;
+      void countSGN(int currVal);
+      int getCount() const;
+
+    private:
+      int count_;
+      int prevVal_;
+      bool hasPrev_;
   };
-
 }
 #endif

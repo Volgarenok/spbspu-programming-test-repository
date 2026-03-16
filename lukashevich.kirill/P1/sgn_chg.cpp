@@ -1,21 +1,24 @@
 #include "sgn_chg.hpp"
 
-namespace lukashevich
+lukashevich::SignChangeCount::SignChangeCount():
+  count_(0),
+  prevVal_(0),
+  hasPrev_(false)
+{}
+
+void lukashevich::SignChangeCount::countSGN(int currVal)
 {
-  void SignChangeCount::countSGN(int currVal)
-  {
-    if (hasPrev) {
-      if ((prevVal > 0 && currVal < 0) || (prevVal < 0 && currVal > 0)) {
-        count++;
-      }
+  if (hasPrev_) {
+    if ((prevVal_ > 0 && currVal < 0) || (prevVal_ < 0 && currVal > 0)) {
+      count_++;
     }
-
-    prevVal = currVal;
-    hasPrev = true;
   }
 
-  int SignChangeCount::getCount() const
-  {
-    return count;
-  }
+  prevVal_ = currVal;
+  hasPrev_ = true;
+}
+
+int lukashevich::SignChangeCount::getCount() const
+{
+  return count_;
 }
