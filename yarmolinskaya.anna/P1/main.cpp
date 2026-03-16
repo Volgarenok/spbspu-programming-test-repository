@@ -1,4 +1,4 @@
-#include "sequence.hpp"
+#include "seq.hpp"
 
 #include <climits>
 #include <iostream>
