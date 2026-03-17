@@ -1,5 +1,5 @@
 #include <iostream>
-#include "grt_lss.hpp"
+#include "aft_max.hpp"
 
 int main()
 {
