@@ -1,15 +1,12 @@
 #include "evn_cnt.hpp"
 #include <cmath>
 
-namespace novikov
-{
-
-EvnCnt::EvnCnt():
+novikov::EvnCnt::EvnCnt():
   max_(0),
   cur_(0)
 {}
 
-void EvnCnt::operator()(int x)
+void novikov::EvnCnt::operator()(int x)
 {
   if (std::abs(x) % 2 == 0) {
     ++cur_;
@@ -21,9 +18,7 @@ void EvnCnt::operator()(int x)
   }
 }
 
-size_t EvnCnt::operator()() const
+size_t novikov::EvnCnt::operator()() const
 {
   return max_;
-}
-
 }
