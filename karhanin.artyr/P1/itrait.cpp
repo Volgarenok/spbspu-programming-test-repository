@@ -1,4 +1,4 @@
-#include "itrait.h"
+#include "itrait.hpp"
 
 const char* karhanin::ITrait::getName() const
 {
