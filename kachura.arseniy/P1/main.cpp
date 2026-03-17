@@ -14,8 +14,14 @@ int main()
     info_lss.step(&num);
   }
 
-  std::cout << info_max.get_count() << '\n';
-  std::cout << info_lss.get_count() << '\n';
+  if(std::cin.fail() && !std::cin.eof())
+  {
+    std::cout << "Bad input!" << '\n';
+    return 1;
+  }
+
+  std::cout << "Aft_Max: " << info_max.get_count() << '\n';
+  std::cout << "Grt_Lss: " << info_lss.get_count() << '\n';
 
   return 0;
 }

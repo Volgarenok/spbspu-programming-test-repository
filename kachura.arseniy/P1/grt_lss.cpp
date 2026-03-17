@@ -2,7 +2,7 @@
 
 void kachura::GrtLss::step(int * num)
 {
-  if(central_ < last_ && *num > central_ && central_ != 0 && last_ != 0)
+  if(central_ < last_ && *num < central_ && central_ != 0 && last_ != 0)
   {
     count_++;
   }
