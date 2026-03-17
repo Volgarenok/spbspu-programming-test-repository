@@ -57,35 +57,6 @@ namespace shigarev {
         size_t seqLen_ = 0;
     };
 
-    bool processInput(SgnChg & sgnChg, DivRem & divRem)
-    {
-        char buf[300];
-        while (readToken(buf)) {
-            int val = 0;
-            if (!parseInteger(buf, val)) {
-                std::cerr << "Error: invalid input\n";
-                return false;
-            }
-            if (val == 0) {
-                break;
-            }
-            sgnChg.process(val);
-            divRem.process(val);
-        }
-        return true;
-    }
-
-    int printResults(const SgnChg & sgnChg, const DivRem & divRem)
-    {
-        std::cout << sgnChg.count() << "\n";
-        if (!divRem.canCompute()) {
-            std::cerr << "Error: sequence too short for DIV-REM\n";
-            return 2;
-        }
-        std::cout << divRem.count() << "\n";
-        return 0;
-    }
-
 }
 
 int main()
