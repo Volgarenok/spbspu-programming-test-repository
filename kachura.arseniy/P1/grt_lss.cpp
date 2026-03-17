@@ -16,8 +16,7 @@ int kachura::GrtLss::get_count()
 {
   if(lenght_ < 3)
   {
-    throw std::runtime_error("Sequence is too short!");
-    return 2;
+    throw "Sequence is too short!";
   }
   return count_;
 }

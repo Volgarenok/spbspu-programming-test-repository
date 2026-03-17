@@ -20,8 +20,25 @@ int main()
     return 1;
   }
 
-  std::cout << "Aft_Max: " << info_max.get_count() << '\n';
-  std::cout << "Grt_Lss: " << info_lss.get_count() << '\n';
+  try
+  {
+    std::cout << "Aft_Max: " << info_max.get_count() << '\n';
+  }
+  catch(const char * error)
+  {
+    std::cout << error << '\n';
+    return 2;
+  }
+  
+  try
+  {
+    std::cout << "Grt_Lss: " << info_lss.get_count() << '\n';
+  }
+  catch(const char * error)
+  {
+    std::cout << error << '\n';
+    return 2;
+  }
 
   return 0;
 }
