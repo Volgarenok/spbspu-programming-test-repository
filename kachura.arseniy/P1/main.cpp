@@ -29,7 +29,7 @@ int main()
     std::cout << error << '\n';
     return 2;
   }
-  
+
   try
   {
     std::cout << "Grt_Lss: " << info_lss.get_count() << '\n';
