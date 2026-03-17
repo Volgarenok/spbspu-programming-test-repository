@@ -9,13 +9,15 @@ void kachura::GrtLss::step(int * num)
   }
   last_ = central_;
   central_ = *num;
+  lenght_++;
 }
 
-int kachura::GrtLss::get_count(int * num)
+int kachura::GrtLss::get_count()
 {
-  if(central_ == 0 && last_ == 0 && *num == 0)
+  if(lenght_ < 3)
   {
     throw std::runtime_error("Sequence is too short!");
+    return 2;
   }
   return count_;
 }

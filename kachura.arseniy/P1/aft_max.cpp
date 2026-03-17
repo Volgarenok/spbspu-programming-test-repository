@@ -1,4 +1,5 @@
 #include "aft_max.hpp"
+#include <stdexcept>
 
 void kachura::AftMax::step(int * num)
 {
@@ -15,5 +16,10 @@ void kachura::AftMax::step(int * num)
 
 int kachura::AftMax::get_count()
 {
+  if(lenght_ < 2)
+  {
+    throw std::runtime_error("Sequence is too short!");
+    return 2;
+  }
   return count_;
 }
