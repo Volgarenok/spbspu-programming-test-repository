@@ -10,7 +10,7 @@ namespace kachura
     }
 
     void step(int * num);
-    int get_count();
+    int get_count(int * num);
 
     private:
       int last_, central_, count_;

@@ -21,7 +21,7 @@ int main()
   }
 
   std::cout << "Aft_Max: " << info_max.get_count() << '\n';
-  std::cout << "Grt_Lss: " << info_lss.get_count() << '\n';
+  std::cout << "Grt_Lss: " << info_lss.get_count(&num) << '\n';
 
   return 0;
 }

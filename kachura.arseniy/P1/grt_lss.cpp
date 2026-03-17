@@ -1,4 +1,5 @@
-# include "grt_lss.hpp"
+#include "grt_lss.hpp"
+#include <stdexcept>
 
 void kachura::GrtLss::step(int * num)
 {
@@ -10,7 +11,11 @@ void kachura::GrtLss::step(int * num)
   central_ = *num;
 }
 
-int kachura::GrtLss::get_count()
+int kachura::GrtLss::get_count(int * num)
 {
+  if(central_ == 0 && last_ == 0 && *num == 0)
+  {
+    throw std::runtime_error("Sequence is too short!");
+  }
   return count_;
 }
