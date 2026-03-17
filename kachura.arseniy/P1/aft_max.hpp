@@ -1,17 +1,17 @@
 namespace kachura
 {
-  class AftMax
+  struct AftMax
   {
-    int count_, max_;
+    AftMax()
+    {
+      max_ = 0;
+      count_ = 0;
+    }
 
     void step(int * num);
     int get_count();
 
-    public:
-      AftMax()
-      {
-        max_ = 0;
-        count_ = 0;
-      }
+    private:
+      int max_, count_;
   };
 }
