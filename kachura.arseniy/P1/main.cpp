@@ -3,7 +3,7 @@
 
 int main()
 {
-  kachura::GrtLss info_max;
+  kachura::AftMax info_max;
 
   return 0;
 }

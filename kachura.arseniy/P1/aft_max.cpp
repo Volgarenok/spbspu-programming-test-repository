@@ -1,6 +1,6 @@
 #include "aft_max.hpp"
 
-void kachura::GrtLss::step(int * num)
+void kachura::AftMax::step(int * num)
 {
   if(*num <= max_)
   {
@@ -13,7 +13,7 @@ void kachura::GrtLss::step(int * num)
   }
 }
 
-int kachura::GrtLss::get_count()
+int kachura::AftMax::get_count()
 {
   return count_;
 }

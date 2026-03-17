@@ -1,6 +1,6 @@
 namespace kachura
 {
-  class GrtLss
+  class AftMax
   {
     int count_, max_;
 
@@ -8,7 +8,7 @@ namespace kachura
     int get_count();
 
     public:
-      GrtLss()
+      AftMax()
       {
         max_ = 0;
         count_ = 0;
