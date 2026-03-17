@@ -4,7 +4,7 @@ void kachura::AftMax::step(int * num)
 {
   if(*num <= max_)
   {
-    count_ += 1;
+    count_++;
   }
   else
   {
