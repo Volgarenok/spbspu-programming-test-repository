@@ -5,29 +5,6 @@
 #include <iostream>
 
 namespace shigarev {
-
-    bool readToken(char * buf)
-    {
-        return std::scanf("%299s", buf) == 1;
-    }
-
-    bool parseInteger(const char * buf, int & val)
-    {
-        char * end = nullptr;
-        errno = 0;
-        const long parsed = std::strtol(buf, &end, 10);
-        if (end == buf || *end != '\0' || errno == ERANGE) {
-            return false;
-        }
-        val = static_cast< int >(parsed);
-        return true;
-    }
-
-    int sign(const int val)
-    {
-        return (val > 0) - (val < 0);
-    }
-
     class SgnChg {
     public:
         void process(const int val)
