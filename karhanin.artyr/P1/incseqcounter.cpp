@@ -1,10 +1,9 @@
-#include "incseqcounter.h"
+#include "incseqcounter.hpp"
 
 karhanin::IncSeqCounter::IncSeqCounter()
 {
   name = "The maximum number of numbers greater than the previous one: ";
 }
-
 void karhanin::IncSeqCounter::operator()(int value)
 {
   int temp = curValue;
@@ -14,7 +13,6 @@ void karhanin::IncSeqCounter::operator()(int value)
   count++;
   }
 }
-
 int karhanin::IncSeqCounter::operator()() const
 {
   return count;

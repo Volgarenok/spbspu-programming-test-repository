@@ -1,4 +1,5 @@
-#pragma once
+#ifndef KARHANIN_ITRAIT_HPP
+#define KARHANIN_ITRAIT_HPP
 
 namespace karhanin
 {
@@ -15,3 +16,4 @@ namespace karhanin
     const char* getName() const;
   };
 }
+#endif

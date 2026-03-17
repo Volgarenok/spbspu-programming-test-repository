@@ -1,4 +1,4 @@
-#include "evenseqcounter.h"
+#include "evenseqcounter.hpp"
 
 karhanin::EvenSeqCounter::EvenSeqCounter() :curCount(0)
 {

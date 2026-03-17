@@ -1,5 +1,6 @@
-#ifdef KARHANIN_EVENSEQCOUNTER_HPP
+#ifndef KARHANIN_EVENSEQCOUNTER_HPP
 #define KARHANIN_EVENSEQCOUNTER_HPP
+
 #include "itrait.hpp"
 
 namespace karhanin

@@ -1,6 +1,6 @@
 #include <iostream>
-#include "evenseqcounter.h"
-#include "incseqcounter.h"
+#include "evenseqcounter.hpp"
+#include "incseqcounter.hpp"
 #define SIZE 2
 
 void free_memory(karhanin::ITrait** ptrArray)

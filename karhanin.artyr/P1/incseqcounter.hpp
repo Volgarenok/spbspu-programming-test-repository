@@ -1,5 +1,7 @@
-#pragma once
-#include "itrait.h"
+#ifndef KARHANIN_INSEQCOUNTER_HPP
+#define KARHANIN_INSEQCOUNTER_HPP
+
+#include "itrait.hpp"
 
 namespace karhanin
 {
@@ -11,3 +13,4 @@ namespace karhanin
     int operator()() const override ;
   };
 }
+#endif
