@@ -5,8 +5,8 @@
 
 int main()
 {
-  int err = 0;
   int value = 0;
+  int err = 0;
   parsov::IProperty * props[2] = {nullptr, nullptr};
 
   try {
@@ -26,18 +26,13 @@ int main()
 
   if (!std::cin.eof() && std::cin.fail()) {
     std::cerr << "Bad input\n";
+    err = 1;
+  } else {
     for (size_t i = 0; i < 2; ++i) {
-      delete props[i];
-    }
-    return 1;
-  }
-
-  for (size_t i = 0; i < 2; ++i) {
-    try {
-      std::cout << (*props[i])() << "\n";
-    } catch (const std::exception & e) {
-      std::cerr << e.what() << "\n";
-      if (err == 0) {
+      try {
+        std::cout << (*props[i])() << "\n";
+      } catch (const std::exception & e) {
+        std::cerr << e.what() << "\n";
         err = 2;
       }
     }
@@ -46,6 +41,5 @@ int main()
   for (size_t i = 0; i < 2; ++i) {
     delete props[i];
   }
-
   return err;
 }
