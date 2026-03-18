@@ -1,6 +1,6 @@
 #include "SgnChg.hpp"
 
-namespace {
+namespace shigarev {
 
   int sign(int val)
   {
