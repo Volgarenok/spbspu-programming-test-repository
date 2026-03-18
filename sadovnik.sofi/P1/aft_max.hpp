@@ -1,23 +1,21 @@
-#ifndef AFT_MAX_hpp
-#define AFT_MAX_hpp
+#ifndef AFT_MAX_HPP
+#define AFT_MAX_HPP
 
 #include <cstddef>
 #include <limits>
 
-namespace sadovnik {
+namespace sadovnik
+{
+  class AftMaxCount {
+  public:
+    AftMaxCount();
+    void operator()(int x);
+    size_t operator()() const;
 
-class AftMaxCount {
-public:
-  AftMaxCount();
-  void operator()(int x);
-  size_t operator()() const;
-
-private:
-  int max_;
-  size_t after_;
-};
-
+  private:
+    int max_;
+    size_t after_;
+  };
 }
 
 #endif
-
