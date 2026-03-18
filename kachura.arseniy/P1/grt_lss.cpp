@@ -11,7 +11,7 @@ void kachura::GrtLss::step(int * const num)
   lenght_++;
 }
 
-int kachura::GrtLss::getCount()
+int kachura::GrtLss::getCount() const
 {
   if (lenght_ < 3)
   {

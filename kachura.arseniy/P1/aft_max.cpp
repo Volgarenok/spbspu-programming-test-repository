@@ -14,7 +14,7 @@ void kachura::AftMax::step(int * const num)
   lenght_++;
 }
 
-int kachura::AftMax::getCount()
+int kachura::AftMax::getCount() const
 {
   if (lenght_ < 2)
   {

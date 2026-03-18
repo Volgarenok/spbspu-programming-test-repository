@@ -9,7 +9,7 @@ namespace kachura
     {}
 
     void step(int * const num);
-    int getCount();
+    int getCount() const;
 
     private:
       int max_, count_, lenght_;
