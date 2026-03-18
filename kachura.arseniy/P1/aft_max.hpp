@@ -2,15 +2,14 @@ namespace kachura
 {
   struct AftMax
   {
-    AftMax()
-    {
-      max_ = 0;
-      count_ = 0;
-      lenght_ = 0;
-    }
+    AftMax():
+     max_ (0),
+     count_ (0),
+     lenght_ (0)
+    {}
 
-    void step(int * num);
-    int get_count();
+    void step(int * const num);
+    int getCount();
 
     private:
       int max_, count_, lenght_;
