@@ -36,7 +36,7 @@ int main()
   try
   {
     std::cout << sub() << '\n';
-  } 
+  }
   catch (const std::exception&)
   {
     std::cerr << "not enough numbers\n";
