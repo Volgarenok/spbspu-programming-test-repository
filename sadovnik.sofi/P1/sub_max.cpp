@@ -2,7 +2,7 @@
 #include <stdexcept>
 
 sadovnik::SubMaxCount::SubMaxCount():
-  cnt_(0), 
+  cnt_(0),
   max1_(std::numeric_limits<int>::min()),
   max2_(std::numeric_limits<int>::min())
 {}
