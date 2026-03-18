@@ -22,4 +22,3 @@ size_t sadovnik::AftMaxCount::operator()() const
 {
   return after_;
 }
-

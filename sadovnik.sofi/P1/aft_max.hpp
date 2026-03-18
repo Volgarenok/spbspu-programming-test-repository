@@ -6,7 +6,8 @@
 
 namespace sadovnik
 {
-  class AftMaxCount {
+  class AftMaxCount
+  {
   public:
     AftMaxCount();
     void operator()(int x);

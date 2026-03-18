@@ -3,8 +3,8 @@
 
 sadovnik::SubMaxCount::SubMaxCount():
   cnt_(0),
-  max1_(std::numeric_limits<int>::min()),
-  max2_(std::numeric_limits<int>::min())
+  max1_(std::numeric_limits< int >::min()),
+  max2_(std::numeric_limits< int >::min())
 {}
 
 void sadovnik::SubMaxCount::operator()(int x)
