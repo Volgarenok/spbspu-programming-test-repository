@@ -38,4 +38,3 @@ bool sadovnik::SubMaxCount::valid() const
 {
   return cnt_ >= 2;
 }
-

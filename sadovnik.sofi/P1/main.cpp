@@ -14,8 +14,8 @@ int main()
   {
     if (x == 0)
   {
-      break;
-    }
+    break;
+  }
     sub(x);
     aft(x);
   }
@@ -36,7 +36,8 @@ int main()
   try
   {
     std::cout << sub() << '\n';
-  } catch (const std::exception&)
+  } 
+  catch (const std::exception&)
   {
     std::cerr << "not enough numbers\n";
     err = 2;
