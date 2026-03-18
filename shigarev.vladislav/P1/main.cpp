@@ -5,29 +5,6 @@
 #include <iostream>
 
 namespace shigarev {
-    class SgnChg {
-    public:
-        void process(const int val)
-        {
-            const int cur = sign(val);
-            if (prevSign_ != 0 && cur != 0 && cur != prevSign_) {
-                count_++;
-            }
-            if (cur != 0) {
-                prevSign_ = cur;
-            }
-        }
-
-        size_t count() const
-        {
-            return count_;
-        }
-
-    private:
-        int prevSign_ = 0;
-        size_t count_ = 0;
-    };
-
     class DivRem {
     public:
         void process(const int val)
