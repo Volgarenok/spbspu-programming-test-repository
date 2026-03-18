@@ -8,12 +8,7 @@ namespace traits
 {
   struct grtLss: public ITrait
   {
-    grtLss():
-      count_(0),
-      first_(std::numeric_limits<int>::min()),
-      second_(std::numeric_limits<int>::min()),
-      third_(std::numeric_limits<int>::min())
-    {}
+    grtLss();
    private:
     void process(int a);
     size_t result() const;
@@ -23,12 +18,7 @@ namespace traits
 
   struct monDec: public ITrait
   {
-    monDec():
-      tempCount_(1),
-      mcount_(0),
-      curr_(std::numeric_limits<int>::min()),
-      prev_(std::numeric_limits<int>::min())
-    {}
+    monDec();
    private:
     void process(int a);
     size_t result() const;

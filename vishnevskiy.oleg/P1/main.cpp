@@ -22,7 +22,7 @@ int main()
     std::cout << (*traitArray[0])() << "\n";
     std::cout << (*traitArray[1])() << "\n";
   }
-  catch (std::logic_error &error)
+  catch (const std::logic_error &error)
   {
     std::cout << error.what() << "\n";
     err = 2;

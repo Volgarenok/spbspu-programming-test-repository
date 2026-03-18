@@ -1,9 +1,17 @@
 #include "traits.hpp"
 #include <stdexcept>
 #include <iostream>
+#include <limits>
 
 namespace traits
 {
+  grtLss::grtLss():
+    count_(0),
+    first_(std::numeric_limits<int>::min()),
+    second_(std::numeric_limits<int>::min()),
+    third_(std::numeric_limits<int>::min())
+  {}
+
   void grtLss::process(int a)
   {
     first_ = second_;
@@ -22,6 +30,13 @@ namespace traits
     }
     return count_;
   }
+
+  monDec::monDec():
+    tempCount_(1),
+    mcount_(0),
+    curr_(std::numeric_limits<int>::min()),
+    prev_(std::numeric_limits<int>::min())
+  {}
 
   void monDec::process(int a)
   {
