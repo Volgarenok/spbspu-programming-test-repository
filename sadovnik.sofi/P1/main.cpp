@@ -13,9 +13,9 @@ int main()
   while (std::cin >> x)
   {
     if (x == 0)
-  {
-    break;
-  }
+    {
+      break;
+    }
     sub(x);
     aft(x);
   }
