@@ -1,4 +1,4 @@
-k#ifndef SUB_MAX_HPP
+#ifndef SUB_MAX_HPP
 #define SUB_MAX_HPP
 
 #include <cstddef>
@@ -22,4 +22,3 @@ namespace sadovnik
 }
 
 #endif
-
