@@ -8,12 +8,13 @@ int main()
   sadovnik::SubMaxCount sub;
   sadovnik::AftMaxCount aft;
 
-    int x;
+  int x;
 
   while (std::cin >> x)
   {
-    if (x == 0) {
-        break;
+    if (x == 0)
+    {
+      break;
     }
     sub(x);
     aft(x);
@@ -30,12 +31,14 @@ int main()
     return 1;
   }
 
-    int err = 0;
+  int err = 0;
 
   try
   {
     std::cout << sub() << '\n';
-  } catch (const std::exception&) {
+  }
+  catch (const std::exception&)
+  {
     std::cerr << "not enough numbers\n";
     err = 2;
   }
@@ -44,4 +47,3 @@ int main()
 
   return err;
 }
-

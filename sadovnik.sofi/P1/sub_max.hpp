@@ -6,7 +6,8 @@
 
 namespace sadovnik
 {
-  class SubMaxCount {
+  class SubMaxCount 
+  {
   public:
     SubMaxCount();
     void operator()(int x);
@@ -21,4 +22,3 @@ namespace sadovnik
 }
 
 #endif
-
