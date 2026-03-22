@@ -5,9 +5,17 @@
 
 int main()
 {
+  using std::cin;
+  using std::cout;
+  using std::cerr;
+
+  int err = 0;
+  int x;
+
   sadovnik::SubMaxCount sub;
   sadovnik::AftMaxCount aft;
 
+<<<<<<< HEAD
   int x;
 
   while (std::cin >> x)
@@ -16,21 +24,24 @@ int main()
     {
       break;
     }
+=======
+  while (cin >> x) {
+    if (x == 0) break;
+>>>>>>> parent of 3ef5ed9 (CG 7, 8, 3; changes as per comments)
     sub(x);
     aft(x);
   }
 
-  if (std::cin.fail() && !std::cin.eof())
-  {
-    std::cerr << "bad input\n";
+  if (cin.fail() && !cin.eof()) {
+    cerr << "bad input\n";
     return 1;
   }
-  if (std::cin.eof())
-  {
-    std::cerr << "no zero\n";
+  if (cin.eof()) {
+    cerr << "no zero\n";
     return 1;
   }
 
+<<<<<<< HEAD
   int err = 0;
 
   try
@@ -40,10 +51,16 @@ int main()
   catch (const std::exception&)
   {
     std::cerr << "not enough numbers\n";
+=======
+  try {
+    cout << sub() << '\n';
+  } catch (const std::exception&) {
+    cerr << "not enough numbers\n";
+>>>>>>> parent of 3ef5ed9 (CG 7, 8, 3; changes as per comments)
     err = 2;
   }
 
-  std::cout << aft() << '\n';
+  cout << aft() << '\n';
 
   return err;
 }
