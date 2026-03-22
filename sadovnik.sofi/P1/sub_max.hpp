@@ -6,7 +6,7 @@
 
 namespace sadovnik
 {
-  class SubMaxCount
+  class SubMaxCount 
   {
   public:
     SubMaxCount();
